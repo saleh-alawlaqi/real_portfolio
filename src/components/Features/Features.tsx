@@ -2,7 +2,7 @@ import FeatureBox from "../FeatureBox/FeatureBox";
 
 const Features = () => {
     return (
-        <div className="flex flex-col mt-28 p-8 w-full lg:p-12 items-center space-y-14 lg:max-w-[1100px]">
+        <div className="flex flex-col mt-28 p-8 w-full lg:p-12 items-center space-y-14 lg:max-w-[1300px]">
             <div className="heading_and_description flex md:w-[40em] items-center flex-col space-y-4">
                 <hr className="line border-b w-[4em] border-slate-300" />
                 <h2 className="text-[34px] lg:text-[46px] font-gt capitalize text-gray-900 font-semibold">

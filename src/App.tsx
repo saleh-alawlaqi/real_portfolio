@@ -6,7 +6,14 @@ import About from "./routes/About";
 import Contact from "./routes/Contact";
 import Project from "./routes/Project";
 import ScrollToTop from "./components/ScrollToTop";
-
+import PortfolioProvider from "./routes/Portfolio/PortfolioContext";
+import { ProjectProvider } from "./routes/Project/ProjectContext";
+import Footer from "./components/Footer/Footer";
+import Header from "./components/Header";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
 function App() {
     return (
         <div className="flex mx-0 flex-col overflow-visible">
@@ -22,34 +29,42 @@ function App() {
                     ))}
                 </div>
             </div> */}
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route
-                    path="/portfolio"
-                    element={
-                        <ScrollToTop>
-                            <Portfolio />
-                        </ScrollToTop>
-                    }
-                />
-                <Route
-                    path="/about"
-                    element={
-                        <ScrollToTop>
-                            <About />
-                        </ScrollToTop>
-                    }
-                />
-                <Route
-                    path="/project/:projectId"
-                    element={
-                        <ScrollToTop>
-                            <Project />
-                        </ScrollToTop>
-                    }
-                />
-                <Route path="/contact" element={<Contact />} />
-            </Routes>
+            <div className="flex flex-col items-center self-stretch">
+                <Header />
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route
+                        path="/portfolio"
+                        element={
+                            <ScrollToTop>
+                                <PortfolioProvider>
+                                    <Portfolio />
+                                </PortfolioProvider>
+                            </ScrollToTop>
+                        }
+                    />
+                    <Route
+                        path="/about"
+                        element={
+                            <ScrollToTop>
+                                <About />
+                            </ScrollToTop>
+                        }
+                    />
+                    <Route
+                        path="/project/:projectId"
+                        element={
+                            <ScrollToTop>
+                                <ProjectProvider>
+                                    <Project />
+                                </ProjectProvider>
+                            </ScrollToTop>
+                        }
+                    />
+                    <Route path="/contact" element={<Contact />} />
+                </Routes>
+                <Footer />
+            </div>
         </div>
     );
 }

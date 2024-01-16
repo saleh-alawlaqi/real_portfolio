@@ -1,17 +1,87 @@
 import { IProject } from "../types";
 
-export const projects: IProject[] = [
+export const projectsList: IProject[] = [
     {
         id: "1",
         name: "Burger Builder",
-        bigDescription: "A burger building web app using React, Redux, and Firebase.",
+        bigDescription: `
+    <p class=" text-slate-600">
+        Welcome to our ambitious project, where we are dedicated to
+        reshaping the future of technological innovation. Our goal
+        is to create solutions that are not only efficient and
+        effective but also sustainable and forward-thinking. This
+        project stands at the intersection of advanced technology
+        and practical application, aiming to set new standards in
+        the industry.
+    </p>
+
+    <h3 class="text-[24px] text-slate-800 font-bold font-gt mt-4">
+        Key Features and Innovations
+    </h3>
+    <ul class="list-disc list-inside mt-1 text-slate-600">
+        <li>State-of-the-art Algorithmic Approaches</li>
+        <li>Intuitive and User-Friendly Interface Design</li>
+        <li>Scalable Architecture for Growing Demands</li>
+        <li>Seamless Integration with Existing Technologies</li>
+        <li>Focus on Eco-Friendly and Sustainable Practices</li>
+    </ul>
+
+    <h3 class="text-[24px] text-slate-800 font-bold font-gt mt-4">
+        Core Benefits
+    </h3>
+    <ul class="list-disc list-inside mt-1 text-slate-600">
+        <li>Enhanced Operational Efficiency</li>
+        <li>Unmatched Accuracy and Precision in Performance</li>
+        <li>Exceptional User Experience and Accessibility</li>
+        <li>Reduced Environmental Impact</li>
+        <li>Long-Term Cost Savings and ROI</li>
+    </ul>
+
+    <h3 class="text-[24px] text-slate-800 font-bold font-gt mt-4">
+        Target Audience and Market Potential
+    </h3>
+    <p class="mt-1 text-slate-600">
+        Our project is designed to cater to a wide range of
+        industries, including but not limited to, technology,
+        finance, healthcare, and education. The versatility and
+        adaptability of our solutions make them ideal for various
+        market segments, offering tremendous potential for growth
+        and expansion.
+    </p>
+
+    <h3 class="text-[24px] text-slate-800 font-bold font-gt mt-4">
+        Future Roadmap and Development Plans
+    </h3>
+    <p class="mt-1 text-slate-600">
+        Looking ahead, we are committed to continuous innovation and
+        development. Our roadmap includes advanced research, regular
+        updates, and new feature rollouts, ensuring that our project
+        remains at the cutting edge of technology. We are also
+        focused on building a community around our project,
+        encouraging collaboration, feedback, and shared growth.
+    </p>
+
+    <h3 class="text-[24px] text-slate-800 font-bold font-gt mt-4">
+        Invitation for Collaboration and Support
+    </h3>
+    <p class="mt-1 text-slate-600">
+        We warmly invite industry experts, investors, and
+        enthusiasts to join us in this exciting journey. Your
+        support and collaboration are crucial in helping us bring
+        this vision to life. Together, we can create something truly
+        remarkable and make a lasting impact in the world of
+        technology.
+    </p>
+
+        `,
         tools: ["react", "sass", "svelte", "angular"],
         gradient: "gradient-1",
         mainImage: "burger-builder.png",
         type: "software",
         demo: "https://react-my-burger-6a2d3.web.app/",
         github: "",
-        smallDescription: "A burger building web app using React, Redux, and Firebase.",
+        smallDescription:
+            "Welcome to our ambitious project, where we are dedicated to reshaping the future",
         highlights: [
             "React",
             "Redux",
@@ -20,7 +90,13 @@ export const projects: IProject[] = [
             "Authentication",
             "Real-time Database",
         ],
-        screenshots: ["burger-builder.png"],
+        screenshots: [
+            "burger-builder.png",
+            "burger-builder.png",
+            "burger-builder.png",
+            "burger-builder.png",
+            "burger-builder.png",
+        ],
     },
     {
         id: "2",
@@ -29,7 +105,7 @@ export const projects: IProject[] = [
         tools: ["react", "nodejs", "mongodb", "express"],
         gradient: "gradient-2",
         mainImage: "e-commerce-store.png",
-        type: "frontEnd",
+        type: "frontend",
         demo: "https://example-store.com",
         github: "https://github.com/example-store",
         smallDescription: "An online store built with React, Node.js, and MongoDB.",
@@ -122,7 +198,7 @@ export const projects: IProject[] = [
         tools: ["react", "typescript"],
         gradient: "gradient-8",
         mainImage: "music-player.png",
-        type: "frontEnd",
+        type: "frontend",
         demo: "https://example-music-player.com",
         github: "https://github.com/example-music-player",
         smallDescription: "A music player application with playlist and audio controls.",
@@ -170,7 +246,7 @@ export const projects: IProject[] = [
         tools: ["react", "typescript"],
         gradient: "gradient-11",
         mainImage: "portfolio-website.png",
-        type: "frontEnd",
+        type: "frontend",
         demo: "https://example-portfolio-website.com",
         github: "https://github.com/example-portfolio-website",
         smallDescription: "A personal portfolio website built with React and TypeScript.",
@@ -190,5 +266,19 @@ export const projects: IProject[] = [
         smallDescription: "A simple todo application built with React and Redux.",
         highlights: ["React", "Redux", "State Management", "Task Organization"],
         screenshots: ["todo-app.png"],
+    },
+    {
+        id: "13",
+        name: "Framer Project",
+        bigDescription: "A project created using Framer for interactive prototyping.",
+        tools: ["framer"],
+        gradient: "gradient-13",
+        mainImage: "framer-project.png",
+        type: "noCode",
+        demo: "https://example-framer-project.com",
+        github: "",
+        smallDescription: "A project created using Framer for interactive prototyping.",
+        highlights: ["Framer", "Interactive Prototyping", "User Experience Design"],
+        screenshots: ["framer-project.png"],
     },
 ];

@@ -2,11 +2,11 @@ import { Button } from "@nextui-org/react";
 import BigProjectBox from "../BigProjectBox";
 import Graphic from "../Graphic";
 import { Link } from "react-router-dom";
-import { projects } from "../../content/projects";
+import { projectsList } from "../../content/projects";
 
 const FeaturedProjects = () => {
     return (
-        <div className="bg-gray-950 mt-28 w-full p-8 py-32 lg:p-12 lg:py-32 relative flex flex-col items-center">
+        <div className="bg-gray-950 mt-28 w-full p-8 py-32 lg:p-12 lg:py-32 relative flex flex-col items-center overflow-hidden">
             <span className="text-white opacity-10 font-bold font-gt tracking-wide text-[140px] absolute left-0 top-[2em] -rotate-90">
                 FEATURED
                 <br />
@@ -31,7 +31,7 @@ const FeaturedProjects = () => {
                     <hr className="border-slate-500 border w-full" />
                 </div>
                 <div className="projects flex flex-col w-full space-y-12">
-                    {projects.map((project) => (
+                    {projectsList.slice(0, 3).map((project) => (
                         <BigProjectBox {...project} />
                     ))}
                 </div>

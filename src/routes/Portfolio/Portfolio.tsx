@@ -1,18 +1,16 @@
 import CTA from "../../components/CTA";
-import Header from "../../components/Header";
 import PageHeader from "../../components/PageHeader";
 import PortfolioTabs from "./PortfolioTabs";
 import ProjectBox from "../../components/ProjectBox/ProjectBox";
-import { projects } from "../../content/projects";
-import { useState } from "react";
+import { usePortfolioContext } from "./PortfolioContext";
+import { projectTabsList } from "../../types";
+import { AnimatePresence } from "framer-motion";
 
 const Portfolio = () => {
-    const [activeTab, setActiveTab] = useState(0);
+    const { projects, activeTab } = usePortfolioContext();
     return (
-        <div className="flex flex-col items-center self-stretch">
-            <Header />
-            <div className="mt-12 rounded-lg mx-8 lg:mx-12 lg:max-w-[1300px] w-[90%]  ">
-                {/* <PortfolioHeader /> */}
+        <div className="flex mt-12 flex-col lg:max-w-[1300px] w-[90%] ">
+            <div className="flex flex-col">
                 <PageHeader path="Portfolio">Browse All Of My Projects</PageHeader>
                 <div className="search_box_and_types mt-5 flex flex-col space-y-4 lg:space-y-0 lg:space-x-10 lg:flex-row lg:items-center lg:justify-between">
                     <input
@@ -23,9 +21,25 @@ const Portfolio = () => {
                     <PortfolioTabs />
                 </div>
                 <div className="projects mt-10 projects_grid">
-                    {projects.map((project) => (
-                        <ProjectBox {...project} />
-                    ))}
+                    {activeTab === 0 ? (
+                        <>
+                            {projects.map((project, i) => (
+                                <AnimatePresence>
+                                    <ProjectBox index={i} key={project.id} {...project} />
+                                </AnimatePresence>
+                            ))}
+                        </>
+                    ) : (
+                        <>
+                            {projects
+                                .filter((p) => p.type === projectTabsList[activeTab].type)
+                                .map((project, i) => (
+                                    <AnimatePresence>
+                                        <ProjectBox index={i} key={project.id} {...project} />
+                                    </AnimatePresence>
+                                ))}
+                        </>
+                    )}
                 </div>
             </div>
             <CTA />

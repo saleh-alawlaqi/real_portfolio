@@ -4,7 +4,7 @@ import { extendVariants, Chip } from "@nextui-org/react";
 const CustomChip = extendVariants(Chip, {
     variants: {
         color: {
-            frontEnd: {
+            frontend: {
                 content: "font-semibold",
                 base: "border-orange-500 border-3 py-4 px-4 text-orange-500",
             },
