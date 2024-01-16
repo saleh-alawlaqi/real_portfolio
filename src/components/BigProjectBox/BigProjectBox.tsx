@@ -1,7 +1,8 @@
 import { Button } from "@nextui-org/react";
-import { IBigProjectBox, projectTypeMapper } from "../../types";
+import { IBigProjectBox, projectTabsList } from "../../types";
 import ToolBox from "../ToolBox";
 import CustomChip from "../CustomChip";
+import { NavLink } from "react-router-dom";
 
 interface BigProjectBoxProps extends IBigProjectBox {}
 const BigProjectBox = (props: BigProjectBoxProps) => {
@@ -10,7 +11,7 @@ const BigProjectBox = (props: BigProjectBoxProps) => {
             <div className="project_info flex flex-col px-8 lg:px-12 lg:pb-12 w-full pb-8">
                 <div className="type_and_title flex flex-col">
                     <CustomChip color={props.type} variant="bordered" className="type text-[16px]">
-                        {projectTypeMapper[props.type]}
+                        {projectTabsList.find((tab) => tab.type === props.type)?.name}
                     </CustomChip>
                     <h3 className="title text-[40px] font-bold text-gray-800 mt-3">{props.name}</h3>
                 </div>
@@ -19,7 +20,14 @@ const BigProjectBox = (props: BigProjectBoxProps) => {
                         <p className="description text-[18px] text-gray-600">
                             {props.smallDescription}
                         </p>
-                        <Button color="primary" className="font-bold" size="lg" radius="full">
+                        <Button
+                            as={NavLink}
+                            to={`/project/${props.id}`}
+                            color="primary"
+                            className="font-bold"
+                            size="lg"
+                            radius="full"
+                        >
                             View Project
                         </Button>
                     </div>

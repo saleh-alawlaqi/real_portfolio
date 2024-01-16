@@ -20,6 +20,7 @@ export default {
                 twitter: "url('/src/assets/twitter.svg')",
                 search: "url('/src/assets/search.svg')",
                 profilePic: "url('/src/assets/profile-pic.jpg')",
+                desktop: "url('/src/assets/desktop.png')",
             },
             borderColor: {
                 "sky-blue-transparent": "rgba(135, 206, 235, 0.5)",

@@ -7,7 +7,7 @@ interface FeatureBoxProps {
 const FeatureBox = ({ heading, description, color }: FeatureBoxProps) => {
     return (
         <div
-            className={`flex rounded-3xl flex-col p-6 lg:p-8 border border-gray-200 shadow-custom bg-white space-y-3`}
+            className={`flex rounded-3xl flex-col p-6 lg:p-8 border border-gray-200  bg-white space-y-3`}
         >
             <span className={`w-10 h-10 lg:w-16 lg:h-16 rounded-2xl bg-${color}-500`}></span>
             <div className="flex flex-col info space-y-3">

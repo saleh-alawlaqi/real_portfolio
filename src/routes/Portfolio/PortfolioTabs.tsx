@@ -1,17 +1,9 @@
 import { Tab, Tabs } from "@nextui-org/react";
-import { GalleryIcon } from "./GalleryIcon";
-import { MusicIcon } from "./MusicIcon";
-import { VideoIcon } from "./VideoIcon";
-import CodeIcon from "./CodeIcon";
+import { usePortfolioContext } from "./PortfolioContext";
+import { projectTabsList } from "../../types";
 
 const PortfolioTabs = () => {
-    const tabs = [
-        { name: "All" },
-        { name: "Coded Websites" },
-        { name: "UI Design" },
-        { name: "No-Code Websites" },
-        { name: "Softwares" },
-    ];
+    const { setActiveTab } = usePortfolioContext();
     return (
         <div className="flex flex-1 flex-col">
             <Tabs
@@ -21,11 +13,9 @@ const PortfolioTabs = () => {
                 radius="full"
                 variant="bordered"
                 size="md"
-                onSelectionChange={(key) => {
-                    alert(key);
-                }}
+                onSelectionChange={(key) => setActiveTab(parseInt(key.toString()))}
             >
-                {tabs.map((tab, key) => (
+                {projectTabsList.map((tab, key) => (
                     <Tab
                         key={key}
                         className="flex-1"

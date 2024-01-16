@@ -15,6 +15,18 @@ const toolToTooltip: { [key in tools]: string } = {
     express: "Express",
     nodejs: "Node",
     mongodb: "MongoDB",
+    firebase: "Firebase",
+    redux: "Redux",
+    socketio: "Socket.io",
+    typescript: "TypeScript",
+    csharp: "C#",
+    cplus: "C++",
+    c: "C",
+    java: "Java",
+    python: "Python",
+    framer: "Framer",
+    kotlin: "Kotlin",
+    mysql: "MySQL",
 };
 const ToolBox = ({ tool }: ToolBoxProps) => {
     const [show, setShow] = useState(false);

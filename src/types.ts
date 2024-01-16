@@ -11,6 +11,14 @@ export type tools =
     | "firebase"
     | "typescript"
     | "socketio"
+    | "framer"
+    | "csharp"
+    | "python"
+    | "java"
+    | "cplus"
+    | "c"
+    | "kotlin"
+    | "mysql"
     | "express";
 
 export interface IProject {
@@ -20,24 +28,18 @@ export interface IProject {
     tools: tools[];
     gradient: gradients;
     mainImage: string;
-    type: "software" | "frontEnd" | "noCode" | "fullStack";
+    type: "software" | "frontend" | "noCode" | "fullStack";
     demo: string;
     github: string;
     smallDescription: string;
     highlights: string[];
     screenshots: string[];
+    ready: boolean;
 }
 export interface IBigProjectBox
     extends Omit<IProject, "bigDescription" | "highlights" | "screenshots" | "github"> {}
 
 export interface ISmallProjectBoxProps extends Omit<IBigProjectBox, "tools"> {}
-
-export const projectTypeMapper = {
-    software: "Software Development",
-    fullStack: "Full Stack Website",
-    noCode: "No Code Website",
-    frontEnd: "Front-end Website",
-};
 
 export type gradients =
     | "gradient-1"
@@ -53,3 +55,11 @@ export type gradients =
     | "gradient-11"
     | "gradient-12"
     | "gradient-13";
+
+export const projectTabsList = [
+    { type: "all", name: "All" },
+    { type: "frontend", name: "Front-end" },
+    { type: "uiDesign", name: "UI Design" },
+    { type: "noCode", name: "No-Code Websites" },
+    { type: "software", name: "Softwares" },
+];
