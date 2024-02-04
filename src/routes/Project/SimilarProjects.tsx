@@ -1,5 +1,6 @@
 import ProjectBox from "../../components/ProjectBox/ProjectBox";
 import { projectsList } from "../../content/projects";
+import { projectsList } from "../../content/projects";
 
 const SimilarProjects = () => {
     return (

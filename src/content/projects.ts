@@ -1,6 +1,7 @@
 import { IProject } from "../types";
 
 export const projectsList: IProject[] = [
+export const projectsList: IProject[] = [
     {
         id: "1",
         name: "Project Management SAAS Landing Page",

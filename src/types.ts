@@ -29,6 +29,7 @@ export interface IProject {
     gradient: gradients;
     mainImage: string;
     type: "software" | "frontend" | "noCode" | "fullStack";
+    type: "software" | "frontend" | "noCode" | "fullStack";
     demo: string;
     github: string;
     smallDescription: string;
