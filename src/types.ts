@@ -15,6 +15,7 @@ export type tools =
     | "csharp"
     | "python"
     | "java"
+    | "figma"
     | "cplus"
     | "c"
     | "kotlin"
@@ -27,12 +28,20 @@ export interface IProject {
     bigDescription: string;
     tools: tools[];
     gradient: gradients;
-    mainImage: string;
-    type: "software" | "frontend" | "noCode" | "fullStack";
-    type: "software" | "frontend" | "noCode" | "fullStack";
+    mainImage: File | string;
+    type: "software" | "frontend" | "noCode" | "uiDesign";
     demo: string;
     github: string;
     smallDescription: string;
+    colors: { title: string; shades: { color: string; shade: string }[] }[];
+    types: {
+        title: string;
+        fontSize: string;
+        lineHeight: string;
+        fontWeight: string;
+        fontFamily: string;
+    }[];
+    icons: { title: string; path: string }[];
     highlights: string[];
     screenshots: string[];
     ready: boolean;

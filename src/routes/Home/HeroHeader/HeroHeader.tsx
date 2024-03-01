@@ -1,30 +1,21 @@
-import { Button } from "@nextui-org/react";
-import { NavLink } from "react-router-dom";
-
+import ProjectsMarquee from "./ProjectsMarquee";
+import Button from "../../../components/Button";
 const HeroHeader = () => {
     return (
-        <div className="flex mt-4 py-8  lg:max-w-[1300px] w-[90%] flex-col rounded-xl items-start space-y-5 lg:space-y-8 ">
-            <span className="w-[110px] flex justify-center items-center h-[110px] lg:w-[150px] lg:h-[150px] profile-pic-border rounded-full  ">
-                <span className="bg-profilePic bg-top bg-cover bg-no-repeat rounded-full w-full h-full"></span>
-            </span>
-            <h1 className=" text-[30px] text-gray-800 font-gt -tracking-[1.5px] md:text-[60px] lg:text-[94px] font-semibold leading-[1.3em]">
-                Alex Silver, <br /> Full Stack Developer
-            </h1>
-            <div className="flex flex-col space-y-5 mt-5 items-start lg:flex-row-reverse lg:space-y-0 lg:justify-between lg:w-full lg:items-center">
-                <p className="text-[18px] font-inter leading-[1.7em] md:max-w-[33em] ">
-                    Unique and minimalistic portfolio template for UX Designers, Developers and
-                    other creative fields that your users will love.
-                </p>
-                <Button
-                    as={NavLink}
-                    to="/portfolio"
-                    color="primary"
-                    size="lg"
-                    className="rounded-full font-semibold font-inter"
-                >
+        <div className="flex mt-8 bd md:items-center pb-10  w-full flex-col rounded-xl ">
+            <div className="flex flex-col px-7 md:w-[560px] md:items-center">
+                <div className="flex flex-col md:items-center">
+                    <span className="font-inter">WELCOME</span>
+                    <h1 className="mt-3 text-[24px] text-gray-800 font-inter_extrabold font-semibold leading-[160%] md:text-center md:text-[32px] xl:w-[930px] xl:text-[60px] ">
+                        <span className="hero-text-gradient">Hey, I'm Alex </span> — your expert in
+                        crafting innovative and engaging web experiences.
+                    </h1>
+                </div>
+                <Button to="/portfolio" variant="dark" className=" md:w-auto mt-4 w-full">
                     View Portfolio
                 </Button>
             </div>
+            <ProjectsMarquee />
         </div>
     );
 };

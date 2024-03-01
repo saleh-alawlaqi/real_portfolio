@@ -1,6 +1,34 @@
 @font-face {
-    font-family: "GT";
-    src: url("./assets/font.ttf") format("truetype"); /* Safari, Android, iOS */
+    font-family: "GT-bold";
+    src: url("./assets/fonts/gt-bold.ttf") format("truetype"); /* Safari, Android, iOS */
+}
+@font-face {
+    font-family: "GT-light";
+    src: url("./assets/fonts/gt-light.ttf") format("truetype"); /* Safari, Android, iOS */
+}
+@font-face {
+    font-family: "GT-medium";
+    src: url("./assets/fonts/gt-medium.ttf") format("truetype"); /* Safari, Android, iOS */
+}
+@font-face {
+    font-family: "InterTight-bold";
+    src: url("./assets/fonts/InterTight-Bold.ttf") format("truetype"); /* Safari, Android, iOS */
+}
+@font-face {
+    font-family: "InterTight-regular";
+    src: url("./assets/fonts/InterTight-Regular.ttf") format("truetype"); /* Safari, Android, iOS */
+}
+@font-face {
+    font-family: "InterTight-medium";
+    src: url("./assets/fonts/InterTight-Medium.ttf") format("truetype"); /* Safari, Android, iOS */
+}
+@font-face {
+    font-family: "InterTight-semibold";
+    src: url("./assets/fonts/InterTight-SemiBold.ttf") format("truetype"); /* Safari, Android, iOS */
+}
+@font-face {
+    font-family: "InterTight-extrabold";
+    src: url("./assets/fonts/InterTight-ExtraBold.ttf") format("truetype"); /* Safari, Android, iOS */
 }
 
 @tailwind base;
@@ -14,4 +42,22 @@
 }
 .desc-paragraph {
     margin-top: 0.5rem;
+}
+.background-blur {
+    /* Ensure the background is semi-transparent */
+    background-color: rgba(255, 255, 255, 0.7); /* White with 50% opacity */
+
+    /* Apply a blur effect to the background */
+    backdrop-filter: blur(5px);
+}
+.menu-button-hover:hover {
+    /* Ensure the background is semi-transparent */
+    background-color: #00000020;
+}
+.menu-button {
+    @apply hover:bg-black p-2 hover:bg-opacity-15 w-full text-center rounded-lg;
+    transition: all 150ms ease-in-out;
+}
+.project-slide {
+    @apply w-[250px] h-[150px] bg-slate-600 rounded-lg xl:w-[370px] xl:h-[260px];
 }

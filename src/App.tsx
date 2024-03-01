@@ -14,22 +14,41 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import { createContext, useContext, useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "./firebase-config";
+import { IProject } from "./types";
+import Menu from "./components/Menu";
+
+interface IAppContext {
+    projects: IProject[];
+}
+const AppContext = createContext<IAppContext>({} as IAppContext);
+export const useAppContext = () => useContext<IAppContext>(AppContext);
+
 function App() {
+    const [projects, setProjects] = useState<IProject[]>([]);
+    useEffect(() => {
+        const getAllProjects = async () => {
+            try {
+                const querySnapshot = await getDocs(collection(db, "projects"));
+                const addedProjects: IProject[] = [];
+                querySnapshot.forEach((doc) => {
+                    // doc.data() is never undefined for query doc snapshots
+                    addedProjects.push({ id: doc.id, ...doc.data() } as IProject);
+                });
+                setProjects(addedProjects);
+            } catch (e) {
+                console.error("Error getting documents: ", e);
+            }
+        };
+        getAllProjects();
+        return () => {};
+    }, []);
+
     return (
-        <div className="flex mx-0 flex-col overflow-visible">
-            {/* <div className="lines px-20 -z-10 flex fixed top-0 h-screen w-screen">
-                <div className="columns justify-between fixed flex w-full h-full">
-                    {[...Array(5)].map((_) => (
-                        <span className="w-[0.5px] bg-gray-200"></span>
-                    ))}
-                </div>
-                <div className="rows justify-between fixed flex flex-col w-full h-full">
-                    {[...Array(5)].map((_) => (
-                        <span className="w-full h-[0.5px] bg-gray-200"></span>
-                    ))}
-                </div>
-            </div> */}
-            <div className="flex flex-col items-center self-stretch">
+        <AppContext.Provider value={{ projects }}>
+            <div className="flex pt-7 flex-col items-center  self-stretch overflow-x-hidden overflow-y-visible">
                 <Header />
                 <Routes>
                     <Route path="/" element={<Home />} />
@@ -63,9 +82,10 @@ function App() {
                     />
                     <Route path="/contact" element={<Contact />} />
                 </Routes>
+                <Menu />
                 <Footer />
             </div>
-        </div>
+        </AppContext.Provider>
     );
 }
 

@@ -14,6 +14,7 @@ export const ProjectProvider = ({ children }: any) => {
     const [project, setProject] = useState<IProject | null>(null);
     const { projectId } = useParams();
 
+    useEffect(() => {}, []);
     useEffect(() => {
         if (!projectId) return;
         const getProject = () => {

@@ -8,14 +8,14 @@ const ProjectHeader = () => {
     const { project } = useProjectContext();
     const { name, smallDescription, tools } = project;
     return (
-        <div className="info_and_tools border border-slate-200 p-8 lg:items-center rounded-2xl lg:space-x-8 bg-white flex flex-col w-full lg:flex-row">
+        <div className="info_and_tools border border-slate-200 p-8 lg:items-center rounded-2xl lg:space-x-14 bg-white flex flex-col w-full lg:flex-row">
             <Button color="primary" isIconOnly variant="bordered" className="rounded-full">
                 <FullArrowLeftIcon />
             </Button>
-            <div className="info flex flex-col lg:flex-row flex-1 lg:items-center">
-                <div className="name_and_description flex-1 flex flex-col ">
-                    <h2 className="text-[38px] font-bold font-gt text-slate-700">{name}</h2>
-                    <p className="mt-1 text-slate-600 lg:w-[60%]">{smallDescription}</p>
+            <div className="info flex flex-col lg:flex-row flex-1 lg:items-center lg:gap-14">
+                <div className="name_and_description flex-1  flex flex-col ">
+                    <h2 className="text-[32px] font-bold font-gt text-slate-700">{name}</h2>
+                    <p className="mt-1 text-slate-600 ">{smallDescription}</p>
                 </div>
                 <div className="tools mt-6 lg:mt-0 grid">
                     {tools.map((tool) => (

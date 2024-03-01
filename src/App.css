@@ -2,11 +2,12 @@
     display: inline-grid;
     gap: 8px;
     grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
-    justify-content: end;
+    justify-content: start;
 }
 @media (min-width: 1024px) {
     .grid {
-        grid-template-columns: repeat(6, minmax(0, 1fr));
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        justify-content: start;
     }
 }
 .features_grid {
@@ -17,87 +18,91 @@
 .projects_grid {
     display: grid;
     gap: 20px;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
 }
 .projects_grid2 {
-    display: grid;
+    display: inline-grid;
     gap: 32px;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    justify-content: stretch;
 }
-.textt {
+.tooltip-text {
     width: max-content;
     background: #000000a4;
 }
 .tool_box {
     background-repeat: no-repeat;
-    background-size: 22px;
+    background-size: 20px;
     background-position: center;
 }
 .angular {
-    background-image: url(./assets/angular.svg);
+    background-image: url(./assets/tools/angular.svg);
 }
 .react {
-    background-image: url(./assets/react.svg);
+    background-image: url(./assets/tools/react.svg);
 }
 .svelte {
-    background-image: url(./assets/svelte.svg);
+    background-image: url(./assets/tools/svelte.svg);
 }
 .vue {
-    background-image: url(./assets/vue.svg);
+    background-image: url(./assets/tools/vue.svg);
 }
 .tailwind {
-    background-image: url(./assets/tailwind.svg);
+    background-image: url(./assets/tools/tailwind.svg);
 }
 .sass {
-    background-image: url(./assets/sass.svg);
+    background-image: url(./assets/tools/sass.svg);
 }
 .java {
-    background-image: url(./assets/java.svg);
+    background-image: url(./assets/tools/java.svg);
 }
 .python {
-    background-image: url(./assets/python.svg);
+    background-image: url(./assets/tools/python.svg);
 }
 .kotlin {
-    background-image: url(./assets/kotlin.svg);
+    background-image: url(./assets/tools/kotlin.svg);
 }
 .c {
-    background-image: url(./assets/c.svg);
+    background-image: url(./assets/tools/c.svg);
 }
 .cplus {
-    background-image: url(./assets/cplus.svg);
+    background-image: url(./assets/tools/cplus.svg);
 }
 .csharp {
-    background-image: url(./assets/csharp.svg);
+    background-image: url(./assets/tools/csharp.svg);
 }
 .nodejs {
-    background-image: url(./assets/nodejs.svg);
+    background-image: url(./assets/tools/nodejs.svg);
 }
 .express {
-    background-image: url(./assets/express.svg);
+    background-image: url(./assets/tools/express.svg);
 }
 .mongodb {
-    background-image: url(./assets/mongodb.svg);
+    background-image: url(./assets/tools/mongodb.svg);
 }
 .mysql {
-    background-image: url(./assets/mysql.svg);
+    background-image: url(./assets/tools/mysql.svg);
 }
 .firebase {
-    background-image: url(./assets/firebase.svg);
+    background-image: url(./assets/tools/firebase.svg);
 }
 .cplus {
-    background-image: url(./assets/cplus.svg);
+    background-image: url(./assets/tools/cplus.svg);
 }
 .socketio {
-    background-image: url(./assets/socketio.svg);
+    background-image: url(./assets/tools/socketio.svg);
 }
 .framer {
-    background-image: url(./assets/framer.svg);
+    background-image: url(./assets/tools/framer.svg);
 }
 .typescript {
-    background-image: url(./assets/typescript.svg);
+    background-image: url(./assets/tools/typescript.svg);
 }
 .redux {
-    background-image: url(./assets/redux.svg);
+    background-image: url(./assets/tools/redux.svg);
+}
+.figma {
+    background-image: url(./assets/tools/figma.svg);
 }
 .cta {
     background: linear-gradient(#2044ff, #5b78ff);
@@ -272,4 +277,34 @@ a:hover::before {
 }
 .eye {
     background: url(./assets/view.svg) center/contain no-repeat;
+}
+
+.bd {
+    border: 1px dashed #000;
+}
+
+/* .project_box:hover {
+    transform: scale(1.05) !important;
+    transition: all 0.3s ease-in-out !important;
+} */
+.thumbnail {
+    background: #000 url(./assets/projects/1.png) center/contain no-repeat;
+}
+.big-projects-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(1, 1fr);
+}
+
+.hero-text-gradient {
+    background-image: radial-gradient(
+        circle 248px at center,
+        #16d9e3 0%,
+        #30c7ec 47%,
+        #46aef7 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; /* Make the text color transparent to show the background */
+    background-clip: text;
+    text-fill-color: transparent; /* Standard syntax, though may not be supported in all browsers */
 }

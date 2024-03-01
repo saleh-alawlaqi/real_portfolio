@@ -21,17 +21,25 @@ export default {
                 search: "url('/src/assets/search.svg')",
                 profilePic: "url('/src/assets/profile-pic.jpg')",
                 desktop: "url('/src/assets/desktop.png')",
+                arrow_right_1: "url('/src/assets/arrow_right_1.svg')",
             },
             borderColor: {
                 "sky-blue-transparent": "rgba(135, 206, 235, 0.5)",
             },
             backgroundSize: {
+                18: "18px 18px",
                 24: "24px 24px",
                 32: "32px 32px",
             },
             fontFamily: {
-                inter: ["Inter", "sans-serif"],
-                gt: ["GT", "sans-serif"],
+                inter: ["InterTight-regular", "sans-serif"],
+                inter_bold: ["InterTight-bold", "sans-serif"],
+                inter_semibold: ["InterTight-semibold", "sans-serif"],
+                inter_extrabold: ["InterTight-extrabold", "sans-serif"],
+                inter_medium: ["InterTight-medium", "sans-serif"],
+                gt: ["GT-bold", "sans-serif"],
+                gt_light: ["GT-light", "sans-serif"],
+                gt_medium: ["GT-medium", "sans-serif"],
             },
             maxWidth: {
                 maxScreen: "1300px",
@@ -67,7 +75,7 @@ export default {
                         secondary: {
                             //... 50 to 900
                             foreground: "#ffffff",
-                            DEFAULT: "#14b8a6",
+                            DEFAULT: "#0F172A",
                         },
                     },
                     dark: {

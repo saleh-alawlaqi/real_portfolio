@@ -27,6 +27,7 @@ const toolToTooltip: { [key in tools]: string } = {
     framer: "Framer",
     kotlin: "Kotlin",
     mysql: "MySQL",
+    figma: "Figma",
 };
 const ToolBox = ({ tool }: ToolBoxProps) => {
     const [show, setShow] = useState(false);
@@ -42,7 +43,7 @@ const ToolBox = ({ tool }: ToolBoxProps) => {
                         animate={{ opacity: 1, y: "-40px" }}
                         initial={{ opacity: 0, y: "-25px" }}
                         exit={{ opacity: 0, y: "-25px" }}
-                        className="p-2 px-3 rounded-full text-[16px] leading-none font-semibold absolute textt text-white "
+                        className="p-2 px-3 rounded-full text-[14px] leading-none font-semibold absolute tooltip-text text-white "
                     >
                         {toolToTooltip[tool]}
                     </motion.span>
