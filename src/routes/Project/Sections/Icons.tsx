@@ -7,7 +7,7 @@ const Icons = () => {
     } = useProjectContext();
     return (
         <div className="flex flex-col gap-5">
-            <h3 className="font-gt_medium text-slate-600 text-[32px]">Iconography</h3>
+            <h3 className="font-gt_light text-slate-600 text-[32px]">Iconography</h3>
             <hr />
             {icons && (
                 <div className="flex flex-wrap color-sections gap-5">

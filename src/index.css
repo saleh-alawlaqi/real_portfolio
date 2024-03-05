@@ -1,3 +1,6 @@
+html {
+    scroll-behavior: smooth;
+}
 @font-face {
     font-family: "GT-bold";
     src: url("./assets/fonts/gt-bold.ttf") format("truetype"); /* Safari, Android, iOS */
@@ -31,6 +34,11 @@
     src: url("./assets/fonts/InterTight-ExtraBold.ttf") format("truetype"); /* Safari, Android, iOS */
 }
 
+@font-face {
+    font-family: "InterTight-black";
+    src: url("./assets/fonts/InterTight-Black.ttf") format("truetype"); /* Safari, Android, iOS */
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -58,6 +66,49 @@
     @apply hover:bg-black p-2 hover:bg-opacity-15 w-full text-center rounded-lg;
     transition: all 150ms ease-in-out;
 }
+.project-slide-container {
+    @apply w-[220px] h-[130px] xl:w-[240px] xl:h-[170px] ml-3;
+}
 .project-slide {
-    @apply w-[250px] h-[150px] bg-slate-600 rounded-lg xl:w-[370px] xl:h-[260px];
+    @apply rounded-2xl;
+    background: url(./assets/project-1.png) center/cover no-repeat;
+    cursor: pointer;
+    position: relative; /* Ensure this is here for z-index to work */
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 50;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+}
+
+.project-slide:hover {
+    @apply hover:bg-slate-600;
+    transform: scale(0.9);
+    z-index: 1000;
+    opacity: 1 !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.project-slide-shadow {
+    position: absolute;
+    @apply rounded-2xl;
+    bottom: 0px;
+    z-index: -100;
+}
+.project-slide-shadow.third {
+    @apply bg-slate-50;
+    width: 80%;
+    height: 80%;
+    bottom: 40px;
+}
+.project-slide-shadow.second {
+    @apply bg-sky-500;
+    bottom: 20px;
+    width: 90%;
+    height: 90%;
+}
+.project-slide-shadow.first {
+    width: 100%;
+    height: 100%;
+    @apply bg-sky-500;
+    bottom: 0px;
 }

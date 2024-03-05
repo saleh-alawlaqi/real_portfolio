@@ -23,9 +23,9 @@ const ProjectScreenshots = () => {
                 className="px-20 py-16 w-full h-full"
                 pagination={{ clickable: true }}
             >
-                {screenshots.map((screenshot) => (
+                {screenshots.map(() => (
                     <SwiperSlide className="flex">
-                        <Screenshot image={screenshot} />
+                        <Screenshot />
                     </SwiperSlide>
                 ))}
             </Swiper>

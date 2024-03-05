@@ -1,0 +1,24 @@
+.button-light {
+    transition-property: background, border, color, box-shadow;
+    transition-duration: 150ms;
+    transition-timing-function: ease-in-out;
+    background: linear-gradient(white, white) padding-box,
+        linear-gradient(to right, #cbd5e1, #cbd5e1) border-box;
+    border: 2px solid transparent;
+}
+.button-light:hover {
+    background: linear-gradient(white, white) padding-box,
+        linear-gradient(to right, #0ea5e9, #3b82f6) border-box;
+}
+/* .button-dark {
+    transition-property: background, border, color, box-shadow;
+    transition-duration: 150ms;
+    transition-timing-function: ease-in-out;
+    background: linear-gradient(#0f172a, #0f172a) padding-box,
+        linear-gradient(to right, #0f172a, #0f172a) border-box;
+    border: 4px solid transparent;
+}
+.button-dark:hover {
+    background: linear-gradient(#0f172a, #0f172a) padding-box,
+        linear-gradient(to right, #ef4444, #14b8a6) border-box;
+} */

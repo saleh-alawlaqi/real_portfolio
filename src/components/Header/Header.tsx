@@ -1,18 +1,26 @@
 import { NavLink } from "react-router-dom";
-import Button from "../Button";
+import CustomButton from "../Button/CustomButton";
+import { motion } from "framer-motion";
 
 const Header = () => {
     return (
-        <div className="flex bd px-7 z-20 backdrop-blur-sm w-full flex-col items-center md:px-10 lg:px-16 xl:px-[120px]">
+        <motion.div
+            initial={{ opacity: 0, y: -100 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex px-7 z-20 w-full flex-col items-center md:px-10 lg:px-16 xl:px-[120px]"
+        >
             <div className="flex items-center justify-between w-full rounded-xl lg:max-w-[1200px]">
-                <NavLink to={"/"} className="font-gt text-[22px] lg:text-[32px]">
-                    Alex.
+                <NavLink
+                    to={"/"}
+                    className="font-inter_black text-gradient text-[22px] lg:text-[22px]"
+                >
+                    AlexDevStudio.
                 </NavLink>
-                <Button variant="light" size="small">
+                <CustomButton to="/contact" variant="light" size="small">
                     Contact Me
-                </Button>
+                </CustomButton>
             </div>
-        </div>
+        </motion.div>
     );
 };
 

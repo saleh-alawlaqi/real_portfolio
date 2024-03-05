@@ -1,5 +1,3 @@
-import React from "react";
-
 const ExperianceBox = () => {
     return (
         <div className="experience_box flex flex-col">

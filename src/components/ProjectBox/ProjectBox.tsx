@@ -1,4 +1,3 @@
-import { Button, Link } from "@nextui-org/react";
 import { NavLink } from "react-router-dom";
 import { ISmallProjectBoxProps, projectTabsList } from "../../types";
 import { motion, useMotionValue, useTransform } from "framer-motion";
@@ -7,16 +6,7 @@ import CustomChip from "../CustomChip";
 interface ProjectBoxProps extends ISmallProjectBoxProps {
     index: number;
 }
-const ProjectBox = ({
-    name,
-    demo,
-    gradient,
-    id,
-    smallDescription,
-    index,
-    type,
-}: ProjectBoxProps) => {
-    const delay = index * 0.15;
+const ProjectBox = ({ name, gradient, id, type }: ProjectBoxProps) => {
     const x = useMotionValue(0);
     const y = useMotionValue(0);
 

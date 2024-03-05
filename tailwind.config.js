@@ -30,6 +30,7 @@ export default {
                 18: "18px 18px",
                 24: "24px 24px",
                 32: "32px 32px",
+                48: "48px 48px",
             },
             fontFamily: {
                 inter: ["InterTight-regular", "sans-serif"],
@@ -37,6 +38,7 @@ export default {
                 inter_semibold: ["InterTight-semibold", "sans-serif"],
                 inter_extrabold: ["InterTight-extrabold", "sans-serif"],
                 inter_medium: ["InterTight-medium", "sans-serif"],
+                inter_black: ["InterTight-black", "sans-serif"],
                 gt: ["GT-bold", "sans-serif"],
                 gt_light: ["GT-light", "sans-serif"],
                 gt_medium: ["GT-medium", "sans-serif"],

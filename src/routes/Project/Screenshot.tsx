@@ -1,9 +1,9 @@
 import React from "react";
-interface ScreenshotProps {
-    image: string;
-}
+// interface ScreenshotProps {
+//     image: string;
+// }
 
-const Screenshot = (props: ScreenshotProps) => {
+const Screenshot = () => {
     const [visibility, setVisibility] = React.useState(false);
 
     const onShow = () => setVisibility(true);

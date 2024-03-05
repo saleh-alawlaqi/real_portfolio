@@ -4,12 +4,7 @@
     grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
     justify-content: start;
 }
-@media (min-width: 1024px) {
-    .grid {
-        grid-template-columns: repeat(5, minmax(0, 1fr));
-        justify-content: start;
-    }
-}
+
 .features_grid {
     display: inline-grid;
     gap: 32px;
@@ -295,16 +290,29 @@ a:hover::before {
     gap: 20px;
     grid-template-columns: repeat(1, 1fr);
 }
+@media (min-width: 768px) {
+    .big-projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
 
-.hero-text-gradient {
-    background-image: radial-gradient(
-        circle 248px at center,
-        #16d9e3 0%,
-        #30c7ec 47%,
-        #46aef7 100%
-    );
+.text-gradient {
+    background-image: linear-gradient(-45deg, #4481eb, #04befe);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; /* Make the text color transparent to show the background */
+    -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-fill-color: transparent; /* Standard syntax, though may not be supported in all browsers */
+    text-fill-color: transparent;
+}
+.effect {
+    width: 200% !important;
+    transform: perspective(1000px) rotateX(40deg);
+}
+.project-image {
+    background: url(./assets/project.png) center/cover no-repeat;
+}
+.bg-project {
+    background: url(./assets/project.png) center/cover no-repeat;
+}
+.project-1 {
+    background: url(./assets/project-1.png) center/cover no-repeat;
 }

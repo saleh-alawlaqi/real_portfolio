@@ -1,59 +1,57 @@
-import { NavLink } from "react-router-dom";
+import { useState } from "react";
+import { motion } from "framer-motion";
+import "./Button.css";
+const Button = ({
+    children,
+    classNames,
+    fontSize,
+}: {
+    fontSize?: any;
+    classNames?: string;
+    children?: any;
+}) => {
+    const [isHovered, setIsHovered] = useState(false);
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-const Button = (
-    props: {
-        variant?: "dark" | "light";
-        size?: "big" | "small";
-        children?: any;
-        className?: string;
-        to?: string;
-    } = { size: "small", variant: "light" }
-) => {
-    const fontSize = props.size === "big" ? "18px" : "16px";
+    const handleMouseEnter = (event: any) => {
+        setIsHovered(true);
+        updateMousePosition(event);
+    };
 
-    if (props.variant === "dark") {
-        if (props.to) {
-            return (
-                <NavLink
-                    to={props.to}
-                    style={{ fontSize }}
-                    className={`px-4 py-3 text-center font-inter_semibold bg-slate-900 border-0 text-white rounded-md ${props.className}`}
-                >
-                    {props.children}
-                </NavLink>
-            );
+    const handleMouseMove = (event: any) => {
+        if (isHovered) {
+            updateMousePosition(event);
         }
-        return (
-            <button
-                style={{ fontSize }}
-                className={`px-4 py-3 font-inter_semibold bg-slate-900 border-0 text-white rounded-md ${props.className}`}
-            >
-                {props.children}
-            </button>
-        );
-    }
-    if (props.variant === "light") {
-        if (props.to) {
-            return (
-                <NavLink
-                    to={props.to}
-                    style={{ fontSize }}
-                    className={`px-4 py-2 text-center font-inter_semibold bg-white border-2 border-slate-300 text-black rounded-md ${props.className}`}
-                >
-                    {props.children}
-                </NavLink>
-            );
-        }
-        return (
-            <button
-                style={{ fontSize }}
-                className={`px-4 py-2 font-inter_semibold bg-white border-2 border-slate-300 text-black rounded-md ${props.className}`}
-            >
-                {props.children}
-            </button>
-        );
-    }
-    return <button>{props.children}</button>;
+    };
+
+    const handleMouseLeave = () => {
+        setIsHovered(false);
+    };
+
+    const updateMousePosition = (event: any) => {
+        const rect = event.target.getBoundingClientRect();
+        const scaleFactor = 2; // Increase for subtler movements
+        setMousePosition({
+            x: (event.clientX - rect.left - rect.width / 2) / scaleFactor,
+            y: (event.clientY - rect.top - rect.height / 2) / scaleFactor,
+        });
+    };
+    return (
+        <motion.button
+            onMouseEnter={handleMouseEnter}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            animate={{
+                x: isHovered ? mousePosition.x : 0,
+                y: isHovered ? mousePosition.y : 0,
+                transition: { type: "tween" },
+            }}
+            style={{ fontSize }}
+            className={classNames}
+        >
+            {children}
+        </motion.button>
+    );
 };
 
 export default Button;

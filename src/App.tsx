@@ -36,6 +36,8 @@ function App() {
                 querySnapshot.forEach((doc) => {
                     // doc.data() is never undefined for query doc snapshots
                     addedProjects.push({ id: doc.id, ...doc.data() } as IProject);
+                    addedProjects.push({ id: doc.id, ...doc.data() } as IProject);
+                    addedProjects.push({ id: doc.id, ...doc.data() } as IProject);
                 });
                 setProjects(addedProjects);
             } catch (e) {

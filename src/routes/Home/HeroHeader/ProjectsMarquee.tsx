@@ -1,14 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Marquee from "react-fast-marquee";
+import ProjectSlide from "./ProjectSlide";
 
-const ProjectsMarquee = () => {
+interface ProjectsMarqueeProps {
+    projects: string[];
+    direction?: "down" | "left" | "right" | "up";
+    id?: string;
+}
+
+const ProjectsMarquee = ({ direction, projects, id }: ProjectsMarqueeProps) => {
     return (
-        <div className="projects-slider flex mt-8 self-center w-full">
-            <Marquee autoFill pauseOnHover className="flex py-5">
-                <div className="project-slide ml-3"></div>
-                <div className="project-slide ml-3"></div>
-                <div className="project-slide ml-3"></div>
-                <div className="project-slide ml-3"></div>
+        <div
+            id={id}
+            className="projects-slider mt-16 overflow-visible  flex self-center w-full relative"
+        >
+            <Marquee
+                autoFill
+                pauseOnHover
+                direction={direction}
+                className="flex relative !overflow-visible"
+            >
+                {projects.map((project, index) => (
+                    <ProjectSlide key={index} content={project} />
+                ))}
             </Marquee>
         </div>
     );
