@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import "./Button.css";
+import { useMediaQuery } from "usehooks-ts";
 const Button = ({
     children,
     classNames,
@@ -12,6 +13,7 @@ const Button = ({
 }) => {
     const [isHovered, setIsHovered] = useState(false);
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    const matches = useMediaQuery("(min-width: 768px)");
 
     const handleMouseEnter = (event: any) => {
         setIsHovered(true);
@@ -29,8 +31,9 @@ const Button = ({
     };
 
     const updateMousePosition = (event: any) => {
+        if (!matches) return;
         const rect = event.target.getBoundingClientRect();
-        const scaleFactor = 2; // Increase for subtler movements
+        const scaleFactor = 6; // Increase for subtler movements
         setMousePosition({
             x: (event.clientX - rect.left - rect.width / 2) / scaleFactor,
             y: (event.clientY - rect.top - rect.height / 2) / scaleFactor,

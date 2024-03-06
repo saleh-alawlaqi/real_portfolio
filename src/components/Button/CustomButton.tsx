@@ -1,6 +1,4 @@
-import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { motion } from "framer-motion";
 import "./Button.css";
 import Button from "./Button";
 const CustomButton = (
@@ -13,9 +11,8 @@ const CustomButton = (
     } = { size: "small", variant: "light" }
 ) => {
     const fontSize = props.size === "big" ? "18px" : "16px";
-
     if (props.variant === "dark") {
-        const classNames = `px-4 py-3 hover:bg-slate-950 button-dark text-center font-inter_semibold bg-slate-900  text-white rounded-full ${props.className}`;
+        const classNames = `base-button hover:bg-slate-950 button-dark bg-slate-900 text-white ${props.className}`;
         if (props.to) {
             return (
                 <NavLink to={props.to}>
@@ -26,7 +23,7 @@ const CustomButton = (
         return <Button fontSize={fontSize} classNames={classNames} children={props.children} />;
     }
     if (props.variant === "light") {
-        const classNames = `px-4 py-2 button-light text-center hover:text-sky-500  hover:shadow-2xl relative font-inter_semibold bg-white text-black rounded-full ${props.className}`;
+        const classNames = `base-button py-2 button-light hover:text-sky-500 hover:shadow-2xl bg-white text-black ${props.className}`;
 
         if (props.to) {
             return (

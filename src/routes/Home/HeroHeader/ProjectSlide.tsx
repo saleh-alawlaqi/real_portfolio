@@ -1,17 +1,27 @@
-import React, { useEffect, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useState } from "react";
+import { motion } from "framer-motion";
 
-const ProjectSlide = ({ content }: any) => {
+const ProjectSlide = () => {
+    // State to track the hover status
     const [isHovered, setIsHovered] = useState(false);
+
+    const onMouseEnterHandler = () => setIsHovered(true);
+    const onMouseLeaveHandler = () => setIsHovered(false);
+
     return (
-        <motion.div
-            className="relative flex project-slide-container items-center justify-center"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseDown={() => setIsHovered(false)}
+        <div
+            className={`project-slide-container ${
+                isHovered ? "scale-125 opacity-100 z-10" : "opacity-50"
+            }`}
         >
-            <div className="project-slide"></div>
-            {isHovered && <div className="project-slide-shadow first"></div>}
-        </motion.div>
+            <motion.div
+                className="relative flex w-[220px] h-[130px] xl:w-[240px] xl:h-[170px] ml-3 items-center justify-center"
+                onMouseEnter={onMouseEnterHandler}
+                onMouseLeave={onMouseLeaveHandler}
+            >
+                <div className="project-slide w-full h-full relative cursor-pointer rounded-2xl"></div>
+            </motion.div>
+        </div>
     );
 };
 export default ProjectSlide;

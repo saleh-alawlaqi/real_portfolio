@@ -12,7 +12,7 @@ const Header = () => {
             <div className="flex items-center justify-between w-full rounded-xl lg:max-w-[1200px]">
                 <NavLink
                     to={"/"}
-                    className="font-inter_black text-gradient text-[22px] lg:text-[22px]"
+                    className="font-inter_black text-gradient text-[18px] lg:text-[22px]"
                 >
                     AlexDevStudio.
                 </NavLink>

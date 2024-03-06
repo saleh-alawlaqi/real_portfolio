@@ -4,7 +4,6 @@
     transition-timing-function: ease-in-out;
     background: linear-gradient(white, white) padding-box,
         linear-gradient(to right, #cbd5e1, #cbd5e1) border-box;
-    border: 2px solid transparent;
 }
 .button-light:hover {
     background: linear-gradient(white, white) padding-box,
@@ -22,3 +21,7 @@
     background: linear-gradient(#0f172a, #0f172a) padding-box,
         linear-gradient(to right, #ef4444, #14b8a6) border-box;
 } */
+.base-button {
+    @apply px-4 py-2 text-sm md:text-base text-center font-inter_medium rounded-full;
+    border: 2px solid transparent;
+}
