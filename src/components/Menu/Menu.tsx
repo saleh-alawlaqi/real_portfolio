@@ -1,4 +1,4 @@
-import { useAnimation } from "framer-motion";
+import { useAnimation, useScroll, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -17,10 +17,14 @@ const Menu = () => {
             const yPos = window.scrollY;
             const isScrollingUp = yPos < lastYPos;
 
+            // Adjust values as needed for your design
+            const visibleBottom = "20px";
+            const hiddenBottom = "-500px";
+
             if (isScrollingUp) {
-                controls.start({ bottom: "20px" });
+                controls.start({ bottom: visibleBottom, opacity: 1 });
             } else {
-                controls.start({ bottom: "-500px" }); // Adjust this value to ensure the nav is fully hidden
+                controls.start({ bottom: hiddenBottom, opacity: 0 });
             }
 
             setLastYPos(yPos);
@@ -32,6 +36,7 @@ const Menu = () => {
             window.removeEventListener("scroll", handleScroll);
         };
     }, [lastYPos, controls]);
+
     return (
         <motion.div
             initial={{ bottom: "20px" }}

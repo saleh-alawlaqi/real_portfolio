@@ -99,3 +99,17 @@ html {
     @apply bg-sky-500;
     bottom: 0px;
 }
+.graphic-grid {
+    -webkit-filter: blur(100px);
+    -moz-filter: blur(100px);
+    -o-filter: blur(100px);
+    -ms-filter: blur(100px);
+    filter: blur(100px);
+    @apply bg-sky-100;
+}
+.grid-image {
+    background: url(./assets/Grid.svg) center/contain no-repeat;
+}
+.profile-pic {
+    background: url(./assets/profile-pic.jpg) top center/cover no-repeat;
+}
