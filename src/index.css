@@ -1,6 +1,9 @@
 html {
     scroll-behavior: smooth;
 }
+body {
+    @apply bg-slate-50;
+}
 @font-face {
     font-family: "GT-bold";
     src: url("./assets/fonts/gt-bold.ttf") format("truetype"); /* Safari, Android, iOS */
@@ -105,11 +108,57 @@ html {
     -o-filter: blur(100px);
     -ms-filter: blur(100px);
     filter: blur(100px);
-    @apply bg-sky-100;
+    @apply bg-sky-200;
+    opacity: 0.3;
+}
+.skills-blur {
+    -webkit-filter: blur(150px);
+    -moz-filter: blur(150px);
+    -o-filter: blur(150px);
+    -ms-filter: blur(150px);
+    filter: blur(150px);
+    @apply bg-orange-200;
+    opacity: 0.3;
+}
+.footer-blur-1 {
+    -webkit-filter: blur(150px);
+    -moz-filter: blur(150px);
+    -o-filter: blur(150px);
+    -ms-filter: blur(150px);
+    filter: blur(150px);
+    @apply bg-sky-200;
+    opacity: 0.2;
+    left: 0;
+}
+.footer-blur-2 {
+    -webkit-filter: blur(150px);
+    -moz-filter: blur(150px);
+    -o-filter: blur(150px);
+    -ms-filter: blur(150px);
+    filter: blur(150px);
+    @apply bg-emerald-200;
+    opacity: 0.2;
+    right: 0;
 }
 .grid-image {
     background: url(./assets/Grid.svg) center/contain no-repeat;
 }
 .profile-pic {
     background: url(./assets/profile-pic.jpg) top center/cover no-repeat;
+}
+.feature-box {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(6.9px);
+    -webkit-backdrop-filter: blur(6.9px);
+    border: 1px solid rgba(255, 255, 255, 0.78);
+}
+.footer-bg {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+    backdrop-filter: blur(6.9px);
+    -webkit-backdrop-filter: blur(6.9px);
+    border: 1px solid rgba(255, 255, 255, 0.78);
 }

@@ -1,6 +1,6 @@
 import { Button } from "@nextui-org/react";
 import { useEffect, useState } from "react";
-import { useProjectForm } from "../ProjectForm";
+import { useProjectForm } from "../../ProjectForm";
 
 interface ScreenshotBoxProps {
     index: number;
@@ -30,9 +30,9 @@ const ScreenshotBox = ({ index, screenshot }: ScreenshotBoxProps) => {
     };
 
     return (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col border shadow-medium rounded-lg border-slate-200 p-4 gap-4">
             <img
-                className="w-16 object-cover border border-slate-500 h-16 rounded-md"
+                className="w-60 object-cover border border-slate-500 h-48 rounded-md"
                 key={index}
                 src={preview}
             />

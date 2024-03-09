@@ -6,8 +6,6 @@ const Title = () => {
     const [isVisible, setIsVisible] = useState(false);
 
     const handleMouseMove = (event: any) => {
-        console.log(event.clientX, event.clientY);
-
         setPosition({
             x: event.clientX,
             y: event.clientY,

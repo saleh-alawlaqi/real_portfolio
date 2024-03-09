@@ -28,6 +28,7 @@ export const useAppContext = () => useContext<IAppContext>(AppContext);
 
 function App() {
     const [projects, setProjects] = useState<IProject[]>([]);
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
         const getAllProjects = async () => {
             try {
@@ -39,8 +40,10 @@ function App() {
                     addedProjects.push({ id: doc.id, ...doc.data() } as IProject);
                     addedProjects.push({ id: doc.id, ...doc.data() } as IProject);
                 });
+                setLoading(false);
                 setProjects(addedProjects);
             } catch (e) {
+                setLoading(false);
                 console.error("Error getting documents: ", e);
             }
         };
@@ -50,43 +53,47 @@ function App() {
 
     return (
         <AppContext.Provider value={{ projects }}>
-            <div className="flex pt-7 flex-col items-center  self-stretch overflow-x-hidden overflow-y-visible">
-                <Header />
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route
-                        path="/portfolio"
-                        element={
-                            <ScrollToTop>
-                                <PortfolioProvider>
-                                    <Portfolio />
-                                </PortfolioProvider>
-                            </ScrollToTop>
-                        }
-                    />
-                    <Route
-                        path="/about"
-                        element={
-                            <ScrollToTop>
-                                <About />
-                            </ScrollToTop>
-                        }
-                    />
-                    <Route
-                        path="/project/:projectId"
-                        element={
-                            <ScrollToTop>
-                                <ProjectProvider>
-                                    <Project />
-                                </ProjectProvider>
-                            </ScrollToTop>
-                        }
-                    />
-                    <Route path="/contact" element={<Contact />} />
-                </Routes>
-                <Menu />
-                <Footer />
-            </div>
+            {loading ? (
+                <div className="fixed w-screen h-screen flex items-center justify-center">
+                    Loading...
+                </div>
+            ) : (
+                <div className="flex flex-col items-center  self-stretch ">
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route
+                            path="/portfolio"
+                            element={
+                                <ScrollToTop>
+                                    <PortfolioProvider>
+                                        <Portfolio />
+                                    </PortfolioProvider>
+                                </ScrollToTop>
+                            }
+                        />
+                        <Route
+                            path="/about"
+                            element={
+                                <ScrollToTop>
+                                    <About />
+                                </ScrollToTop>
+                            }
+                        />
+                        <Route
+                            path="/project/:projectId"
+                            element={
+                                <ScrollToTop>
+                                    <ProjectProvider>
+                                        <Project />
+                                    </ProjectProvider>
+                                </ScrollToTop>
+                            }
+                        />
+                        <Route path="/contact" element={<Contact />} />
+                    </Routes>
+                    <Menu />
+                </div>
+            )}
         </AppContext.Provider>
     );
 }

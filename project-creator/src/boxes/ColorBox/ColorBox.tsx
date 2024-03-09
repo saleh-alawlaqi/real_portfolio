@@ -1,5 +1,5 @@
 import { Button, Input } from "@nextui-org/react";
-import { useProjectForm } from "../ProjectForm";
+import { useProjectForm } from "../../ProjectForm";
 import { BlockPicker } from "react-color";
 import { useState } from "react";
 
@@ -10,7 +10,7 @@ interface ColorBoxProp {
     sectionIndex: number;
 }
 const ColorBox = ({ index, sectionIndex, color, shade }: ColorBoxProp) => {
-    const { project, setProject } = useProjectForm();
+    const { setProject } = useProjectForm();
     const [showPicker, setShowPicker] = useState(false);
     const onTogglePicker = () => setShowPicker((prev) => !prev);
     const onRemove = () => {
@@ -72,12 +72,12 @@ const ColorBox = ({ index, sectionIndex, color, shade }: ColorBoxProp) => {
         });
     };
     return (
-        <div className="color-box gap-3 flex flex-col items-center">
+        <div className="color-box gap-3 border shadow-medium rounded-lg border-slate-200 p-4 flex flex-col items-center">
             <div
-                className="color_box  rounded-2xl w-16 h-16 relative flex items-center justify-center"
+                className="color_box rounded-2xl w-16 h-16 relative flex items-center justify-center"
                 style={{ background: color }}
             >
-                <button className="white" onClick={onTogglePicker}>
+                <button className="text-white text-[12px] w-full h-full" onClick={onTogglePicker}>
                     Change
                 </button>
                 {showPicker && (
@@ -99,11 +99,11 @@ const ColorBox = ({ index, sectionIndex, color, shade }: ColorBoxProp) => {
                 onChange={onEditShade}
                 size="sm"
                 labelPlacement="outside"
-                className="w-16"
+                className="w-28"
                 placeholder="Shade"
                 name="shade"
             />
-            <Button onClick={onRemove} variant="solid" color="danger">
+            <Button onClick={onRemove} variant="solid" className="w-full" color="danger">
                 Remove
             </Button>
         </div>

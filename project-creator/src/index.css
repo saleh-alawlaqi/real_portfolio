@@ -18,3 +18,40 @@
     background-repeat: no-repeat;
     background-position: center;
 }
+@font-face {
+    font-family: "GT bold";
+    src: url("./assets/fonts/gt-bold.ttf") format("truetype"); /* Safari, Android, iOS */
+}
+@font-face {
+    font-family: "GT light";
+    src: url("./assets/fonts/gt-light.ttf") format("truetype"); /* Safari, Android, iOS */
+}
+@font-face {
+    font-family: "GT medium";
+    src: url("./assets/fonts/gt-medium.ttf") format("truetype"); /* Safari, Android, iOS */
+}
+@font-face {
+    font-family: "Inter bold";
+    src: url("./assets/fonts/InterTight-Bold.ttf") format("truetype"); /* Safari, Android, iOS */
+}
+@font-face {
+    font-family: "Inter regular";
+    src: url("./assets/fonts/InterTight-Regular.ttf") format("truetype"); /* Safari, Android, iOS */
+}
+@font-face {
+    font-family: "Inter medium";
+    src: url("./assets/fonts/InterTight-Medium.ttf") format("truetype"); /* Safari, Android, iOS */
+}
+@font-face {
+    font-family: "Inter semibold";
+    src: url("./assets/fonts/InterTight-SemiBold.ttf") format("truetype"); /* Safari, Android, iOS */
+}
+@font-face {
+    font-family: "Inter extrabold";
+    src: url("./assets/fonts/InterTight-ExtraBold.ttf") format("truetype"); /* Safari, Android, iOS */
+}
+
+@font-face {
+    font-family: "InterTight-black";
+    src: url("./assets/fonts/InterTight-Black.ttf") format("truetype"); /* Safari, Android, iOS */
+}

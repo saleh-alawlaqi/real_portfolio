@@ -1,5 +1,5 @@
 import { Button, Input, Select, SelectItem } from "@nextui-org/react";
-import { useProjectForm } from "../ProjectForm";
+import { useProjectForm } from "../../ProjectForm";
 
 interface TypeBoxProps {
     index: number;
@@ -38,7 +38,7 @@ const TypeBox = ({ index, fontWeight, fontFamily, lineHeight, fontSize, title }:
             };
         });
     };
-    const onChangeFontFamily = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChangeFontFamily = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setProject((prev) => {
             return {
                 ...prev,
@@ -51,32 +51,7 @@ const TypeBox = ({ index, fontWeight, fontFamily, lineHeight, fontSize, title }:
             };
         });
     };
-    const onChangeFontWeight = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setProject((prev) => {
-            return {
-                ...prev,
-                types: prev.types?.map((type, i) => {
-                    if (i === index) {
-                        return { ...type, fontWeight: e.target.value };
-                    }
-                    return type;
-                }),
-            };
-        });
-    };
-    const onChangeLineHeight = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setProject((prev) => {
-            return {
-                ...prev,
-                types: prev.types?.map((type, i) => {
-                    if (i === index) {
-                        return { ...type, lineHeight: e.target.value };
-                    }
-                    return type;
-                }),
-            };
-        });
-    };
+
     const onRemove = () => {
         setProject((prev) => {
             return {
@@ -86,7 +61,7 @@ const TypeBox = ({ index, fontWeight, fontFamily, lineHeight, fontSize, title }:
         });
     };
     return (
-        <div className="type-box items-center flex gap-2 justify-between w-full">
+        <div className="type-box border shadow-medium rounded-lg border-slate-200 p-5 items-center flex gap-2 justify-between w-full">
             <Input
                 value={title}
                 style={{ fontSize, fontFamily, fontWeight, lineHeight }}
@@ -95,7 +70,7 @@ const TypeBox = ({ index, fontWeight, fontFamily, lineHeight, fontSize, title }:
                 placeholder="Line Height"
                 name="lineHeight"
             />
-            <div className="type-info flex w-[48%] gap-2">
+            <div className="type-info items-center flex w-[48%] gap-2">
                 <Select
                     value={fontSize}
                     onChange={onChangeFontSize}
@@ -152,13 +127,57 @@ const TypeBox = ({ index, fontWeight, fontFamily, lineHeight, fontSize, title }:
                         40px
                     </SelectItem>
                 </Select>
-                <Input
+                <Select
                     value={fontFamily}
                     onChange={onChangeFontFamily}
                     size="sm"
                     placeholder="Font family"
                     name="fontFamily"
-                />
+                >
+                    <SelectItem key="Arial" value="Arial">
+                        Arial
+                    </SelectItem>
+                    <SelectItem key="Roboto" value="Roboto">
+                        Roboto
+                    </SelectItem>
+                    <SelectItem key="Open Sans" value="Open Sans">
+                        Open Sans
+                    </SelectItem>
+                    <SelectItem key="Lato" value="Lato">
+                        Lato
+                    </SelectItem>
+                    <SelectItem key="Montserrat" value="Montserrat">
+                        Montserrat
+                    </SelectItem>
+                    <SelectItem key="GT bold" value="GT bold">
+                        GT Bold
+                    </SelectItem>
+                    <SelectItem key="GT medium" value="GT medium">
+                        GT Medium
+                    </SelectItem>
+                    <SelectItem key="GT light" value="GT light">
+                        GT Light
+                    </SelectItem>
+                    <SelectItem key="Inter bold" value="Inter bold">
+                        Inter bold
+                    </SelectItem>
+                    <SelectItem key="Inter medium" value="Inter medium">
+                        Inter medium
+                    </SelectItem>
+                    <SelectItem key="Inter light" value="Inter light">
+                        Inter light
+                    </SelectItem>
+                    <SelectItem key="Inter regular" value="Inter regular">
+                        Inter regular
+                    </SelectItem>
+                    <SelectItem key="Inter semibold" value="Inter semibold">
+                        Inter semibold
+                    </SelectItem>
+                    <SelectItem key="Inter extrabold" value="Inter extrabold">
+                        Inter extrabold
+                    </SelectItem>
+                </Select>
+
                 <Button onClick={onRemove} variant="solid" color="danger">
                     Remove
                 </Button>

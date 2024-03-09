@@ -1,14 +1,18 @@
+import { NavLink } from "react-router-dom";
+
 const Footer = () => {
     return (
-        <footer className="p-4 flex mt-20 flex-col w-full bg-white md:p-8 lg:p-10 dark:bg-gray-800">
-            <div className="mx-auto max-w-screen-xl text-center">
-                <a
-                    href="#"
-                    className="flex justify-center items-center text-2xl font-semibold text-gray-900 dark:text-white"
+        <footer className="relative w-full mt-32 lg:px-12">
+            {/* <div className="footer-blur-1 absolute w-1/2 h-[15rem]"></div>
+            <div className="footer-blur-2 absolute w-1/2 h-[15rem]"></div> */}
+            <div className="footer-container footer-bg p-4 flex items-center justify-between w-full  md:p-8 lg:p-10 ">
+                <NavLink
+                    to={"/"}
+                    className="font-inter_black text-gradient text-[18px] lg:text-[22px]"
                 >
-                    Alex Silver
-                </a>
-                <ul className="flex mt-6 flex-wrap justify-center items-center mb-6 text-gray-900 dark:text-white">
+                    AlexDevStudio.
+                </NavLink>
+                <ul className="flex flex-wrap justify-center items-center text-gray-900 dark:text-white">
                     <li>
                         <a href="#" className="mr-4 hover:underline md:mr-6 ">
                             Home
@@ -40,7 +44,6 @@ const Footer = () => {
                     <a href="#" className="hover:underline">
                         Alex Silver™
                     </a>
-                    . All Rights Reserved.
                 </span>
             </div>
         </footer>

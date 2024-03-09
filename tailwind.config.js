@@ -22,6 +22,10 @@ export default {
                 profilePic: "url('/src/assets/profile-pic.jpg')",
                 desktop: "url('/src/assets/desktop.png')",
                 arrow_right_1: "url('/src/assets/arrow_right_1.svg')",
+                brush: "url('/src/assets/brush.svg')",
+                web_code: "url('/src/assets/web_code.svg')",
+                trading: "url('/src/assets/trading.svg')",
+                software_dev: "url('/src/assets/software.svg')",
             },
             borderColor: {
                 "sky-blue-transparent": "rgba(135, 206, 235, 0.5)",

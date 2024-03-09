@@ -7,8 +7,11 @@
 
 .features_grid {
     display: inline-grid;
-    gap: 32px;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 18px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
 }
 .projects_grid {
     display: grid;
@@ -100,20 +103,20 @@
     background-image: url(./assets/tools/figma.svg);
 }
 .cta {
-    background: linear-gradient(#2044ff, #5b78ff);
+    background: linear-gradient(45deg, #6366f1, #0ea5e9);
 }
-@media (min-width: 1024px) {
+/* @media (min-width: 1024px) {
     .cta {
         background: linear-gradient(#2044ff, #5b78ff);
     }
-}
+} */
 .contact_box_grid {
     display: grid;
     gap: 32px;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 .screen_wrap {
-    background: url(./assets/desktop.png) top/cover no-repeat;
+    background: url(./assets/cta_image.png) top/cover no-repeat;
 }
 .profile-pic-border {
     position: relative;

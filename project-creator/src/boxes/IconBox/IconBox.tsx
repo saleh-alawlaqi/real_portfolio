@@ -1,6 +1,5 @@
 import { Button, Input } from "@nextui-org/react";
-import { useState } from "react";
-import { useProjectForm } from "../ProjectForm";
+import { useProjectForm } from "../../ProjectForm";
 
 interface IconBoxProps {
     path: string;
@@ -44,17 +43,27 @@ const IconBox = ({ path, title, index }: IconBoxProps) => {
         });
     };
     return (
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col border shadow-medium rounded-lg border-slate-200 p-5 items-center">
             <div
                 style={{
                     backgroundImage: `url("${path}")`,
                 }}
-                className="icon-box rounded-md bg-slate-100 bg-center  center relative flex items-center justify-center bg-18 bg-no-repeat w-10 h-10"
+                className="icon-box rounded-md  bg-slate-100 bg-center  center relative flex items-center justify-center bg-18 bg-no-repeat w-16 h-16"
             ></div>
 
-            <Input value={title} onChange={onEditTitle} className="text-center mt-2 w-40" />
-            <Input onChange={onEditPath} value={path} className="text-center mt-2 w-40" />
-            <Button onClick={onRemove} variant="solid" color="danger">
+            <Input
+                value={title}
+                onChange={onEditTitle}
+                labelPlacement="outside"
+                className="text-center mt-5 w-40"
+            />
+            <Input
+                labelPlacement="outside"
+                onChange={onEditPath}
+                value={path}
+                className="text-center mt-5 w-40"
+            />
+            <Button onClick={onRemove} variant="solid" className="mt-5 w-full" color="danger">
                 Remove
             </Button>
         </div>

@@ -13,16 +13,18 @@ const ProjectsMarquee = ({ direction, projects, id }: ProjectsMarqueeProps) => {
             id={id}
             className="projects-slider mt-16 overflow-visible  flex self-center w-full relative"
         >
-            <Marquee
+            {/* <Marquee
                 autoFill
+                loop={1}
+
                 pauseOnHover
                 direction={direction}
                 className="flex relative !overflow-visible"
-            >
-                {projects.map((_, index) => (
-                    <ProjectSlide key={index} />
-                ))}
-            </Marquee>
+            > */}
+            {[...Array(20)].map((_, index) => (
+                <ProjectSlide key={index} />
+            ))}
+            {/* </Marquee> */}
         </div>
     );
 };

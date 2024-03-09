@@ -1,12 +1,12 @@
 import { Button, Input } from "@nextui-org/react";
 import ColorBox from "../ColorBox";
-import { useProjectForm } from "../ProjectForm";
-interface ColorSectionProps {
+import { useProjectForm } from "../../ProjectForm";
+interface ColorPaletteProps {
     index: number;
     title: string;
     shades: { color: string; shade: string }[];
 }
-const ColorSection = ({ index, title, shades }: ColorSectionProps) => {
+const ColorPalette = ({ index, title, shades }: ColorPaletteProps) => {
     const { project, setProject } = useProjectForm();
     const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
         // const newColors = colors.map((color) => {
@@ -29,14 +29,12 @@ const ColorSection = ({ index, title, shades }: ColorSectionProps) => {
         // For example, if you have a setState method for colors:
         // setColors(newColors);
     };
-    const onRemoveColorSection = () => {
+    const onRemoveColorPalette = () => {
         setProject({
             ...project,
             colors: project.colors?.filter((_, i) => i !== index),
         });
     };
-    // When it adds a new color increment 100 then 200 and so on
-
     const onAddColor = () => {
         setProject((prev) => {
             return {
@@ -54,7 +52,7 @@ const ColorSection = ({ index, title, shades }: ColorSectionProps) => {
         });
     };
     return (
-        <div className="flex border border-slate-300 gap-5 p-5 flex-col color-section">
+        <div className="flex border shadow-medium rounded-lg border-slate-300 gap-5 p-5 flex-col color-section">
             <div className="flex justify-between gap-5 items-center">
                 <Input
                     value={title}
@@ -63,10 +61,20 @@ const ColorSection = ({ index, title, shades }: ColorSectionProps) => {
                     placeholder="Project Name"
                     name="name"
                 />
-                <Button onClick={onAddColor} variant="solid" color="secondary">
+                <Button
+                    onClick={onAddColor}
+                    className="rounded-full flex-1"
+                    variant="solid"
+                    color="secondary"
+                >
                     Add color
                 </Button>
-                <Button variant="solid" color="danger" onClick={onRemoveColorSection}>
+                <Button
+                    variant="solid"
+                    className="rounded-full flex-1"
+                    color="danger"
+                    onClick={onRemoveColorPalette}
+                >
                     Remove
                 </Button>
             </div>
@@ -79,4 +87,4 @@ const ColorSection = ({ index, title, shades }: ColorSectionProps) => {
     );
 };
 
-export default ColorSection;
+export default ColorPalette;

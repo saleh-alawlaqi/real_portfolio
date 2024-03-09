@@ -2,17 +2,14 @@ import ProjectsMarquee from "./ProjectsMarquee";
 import CustomButton from "../../../components/Button/CustomButton";
 import CustomChip from "../../../components/CustomChip";
 import Title from "./Title";
-import { useScroll, useTransform, motion } from "framer-motion";
+import { motion } from "framer-motion";
+import Header from "../../../components/Header";
 const HeroHeader = () => {
-    const { scrollY } = useScroll();
-    const marginTop = useTransform(scrollY, [0, 100], [0, -100]);
     return (
-        <div className="flex mt-14 md:items-center pb-16 w-full flex-col rounded-xl ">
-            <motion.div
-                style={{ marginTop }}
-                className="flex flex-col px-7  md:w-[560px] md:items-center"
-            >
-                {/* <div className="graphic-grid w-[24rem] h-[24rem] absolute"></div> */}
+        <motion.div className="flex  md:items-center mt-10 pb-16 w-full flex-col rounded-xl overflow-hidden ">
+            <Header />
+            <div className="graphic-grid  w-[24rem] h-[24rem] absolute"></div>
+            <div className="flex mt-14 flex-col px-7 z-10  md:w-[560px] md:items-center">
                 <div className="flex flex-col md:items-center">
                     <CustomChip variant="solid" color="blue" className="font-inter">
                         WELCOME
@@ -26,9 +23,9 @@ const HeroHeader = () => {
                 >
                     View Portfolio
                 </CustomButton>
-            </motion.div>
+            </div>
             <ProjectsMarquee id="first_marquee" direction="left" projects={["1", "2", "3"]} />
-        </div>
+        </motion.div>
     );
 };
 

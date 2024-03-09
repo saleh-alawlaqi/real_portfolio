@@ -1,6 +1,6 @@
 import { Button, Input } from "@nextui-org/react";
 import React from "react";
-import { useProjectForm } from "../ProjectForm";
+import { useProjectForm } from "../../ProjectForm";
 
 interface HighlightBoxProps {
     title: string;
@@ -30,7 +30,7 @@ const HighlightBox = ({ index, title }: HighlightBoxProps) => {
         });
     };
     return (
-        <div className="flex w-full justify-between gap-5">
+        <div className="flex w-full border shadow-medium rounded-lg border-slate-200 p-5 justify-between gap-5">
             <Input
                 value={title}
                 labelPlacement="outside"

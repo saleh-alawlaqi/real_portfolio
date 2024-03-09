@@ -12,7 +12,7 @@ const CustomButton = (
 ) => {
     const fontSize = props.size === "big" ? "18px" : "16px";
     if (props.variant === "dark") {
-        const classNames = `base-button hover:bg-slate-950 button-dark bg-slate-900 text-white ${props.className}`;
+        const classNames = `base-button hover:bg-slate-800 transition-background button-dark bg-slate-900 text-white ${props.className}`;
         if (props.to) {
             return (
                 <NavLink to={props.to}>

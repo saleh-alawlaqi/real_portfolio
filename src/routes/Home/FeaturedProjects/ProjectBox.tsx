@@ -1,8 +1,7 @@
-import { motion, useAnimation, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import ToolBox from "../../../components/ToolBox";
 import { IProject } from "../../../types";
-import { useInView } from "framer-motion";
 
 interface ProjectBoxProps {
     project: IProject;
@@ -17,13 +16,13 @@ const ProjectBox = ({ project, index }: ProjectBoxProps) => {
     useEffect(() => {
         const boxTop = (boxRef.current as any).offsetTop || 0;
         // Adjust these values based on your needs
-        const offsetStart = 300;
-        const offsetEnd = 700;
-        setScrollStart(boxTop - offsetStart);
-        setScrollEnd(boxTop + offsetEnd);
+        // const offsetStart = 500;
+        // const offsetEnd = 1000;
+        setScrollStart(boxTop - 1000);
+        setScrollEnd(boxTop);
     }, [index]);
 
-    const projectWidth = useTransform(scrollY, [scrollStart, scrollEnd], ["80%", "100%"]);
+    const projectWidth = useTransform(scrollY, [scrollStart, scrollEnd], ["50%", "100%"]);
     const [showOverlay, setShowOverlay] = useState(false);
 
     const handleMouseEnter = () => setShowOverlay(true);
