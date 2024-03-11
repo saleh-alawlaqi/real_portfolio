@@ -35,7 +35,7 @@ const WritingEffect = ({
                     animate={condition ? { opacity: 1 } : { opacity: 0 }}
                     transition={{
                         duration,
-                        delay: (delay + index) * 0.02,
+                        delay: (delay + index) * 0.015,
                     }}
                 >
                     {character}

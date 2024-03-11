@@ -4,12 +4,12 @@ const CTA = () => {
     return (
         <div className="flex flex-col lg:px-12 section-seperator w-full px-8 items-center">
             <div className="cta relative rounded-xl  w-full  pb-[20em] md:pb-[25em] overflow-hidden p-8 lg:p-20 flex flex-col">
-                <div className="heading_and_button w-full lg:w-[40%] flex flex-col items-start">
+                <div className="heading_and_button w-full lg:w-[45%] flex flex-col items-start">
                     <div className="flex flex-col w-full">
-                        <h3 className="text-[30px] lg:text-[42px] font-inter_bold leading-snug text-white">
+                        <h3 className="text-[30px] lg:text-[48px] font-inter_bold leading-snug text-white">
                             Contact me to discuss your project
                         </h3>
-                        <p className="text-[16px] lg:text-[18px] mt-4 leading-relaxed font-inter text-white ">
+                        <p className="text-[16px] lg:text-[20px] mt-4 leading-relaxed font-inter text-white ">
                             I am available for freelance work. Connect with me right here right now
                         </p>
                     </div>

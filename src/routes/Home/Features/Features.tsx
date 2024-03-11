@@ -30,7 +30,7 @@ const Features = () => {
                 <p className="text-[18px] md:text-center text-slate-600">
                     <WritingEffect
                         condition={isInView}
-                        duration={0.1}
+                        delay={heading.length + highlightedText.length}
                         text="With over a decade of design and development experience under my belt, I have
                         helped tens of companies with their goals in different ways."
                     />

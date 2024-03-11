@@ -11,10 +11,7 @@ const Header = () => {
                     transition={{ type: "spring", damping: 20, stiffness: 110 }}
                     animate={{ opacity: 1, y: 0 }}
                 >
-                    <NavLink
-                        to={"/"}
-                        className="font-inter_black text-gradient text-[18px] lg:text-[22px]"
-                    >
+                    <NavLink to={"/"} className="font-gt text-black p-3 text-[18px] lg:text-[20px]">
                         AlexDevStudio.
                     </NavLink>
                 </motion.div>
