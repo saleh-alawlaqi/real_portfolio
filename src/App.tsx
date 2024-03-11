@@ -18,7 +18,6 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebase-config";
 import { IProject } from "./types";
 import Menu from "./components/Menu";
-import Footer from "./components/Footer";
 
 interface IAppContext {
     projects: IProject[];
