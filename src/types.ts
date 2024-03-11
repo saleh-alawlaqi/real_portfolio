@@ -23,12 +23,12 @@ export type tools =
     | "express";
 
 export interface IProject {
-    id: string;
+    id?: string;
     name: string;
     bigDescription: string;
     tools: tools[];
     gradient: gradients;
-    mainImage: File | string;
+    // mainImage?: File | string;
     type: "software" | "frontend" | "noCode" | "uiDesign";
     demo: string;
     github: string;
@@ -43,13 +43,13 @@ export interface IProject {
     }[];
     icons: { title: string; path: string }[];
     highlights: string[];
-    screenshots: string[];
+    // screenshots?: string[];
     ready: boolean;
 }
 export interface IBigProjectBox
     extends Omit<IProject, "bigDescription" | "highlights" | "screenshots" | "github"> {}
 
-export interface ISmallProjectBoxProps extends Omit<IBigProjectBox, "tools"> {}
+export interface ISmallProjectBoxProps extends IBigProjectBox {}
 
 export type gradients =
     | "gradient-1"

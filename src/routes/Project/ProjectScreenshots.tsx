@@ -5,7 +5,7 @@ import Screenshot from "./Screenshot";
 
 const ProjectScreenshots = () => {
     const { project } = useProjectContext();
-    const { gradient, screenshots } = project;
+    const { gradient } = project;
     return (
         <div
             className={`image ${gradient} flex items-stretch justify-center relative w-full h-[20em] rounded-xl lg:w-full lg:h-[30em]  bg-no-repeat bg-cover bg-center`}
@@ -23,11 +23,11 @@ const ProjectScreenshots = () => {
                 className="px-20 py-16 w-full h-full"
                 pagination={{ clickable: true }}
             >
-                {screenshots.map(() => (
-                    <SwiperSlide className="flex">
-                        <Screenshot />
-                    </SwiperSlide>
-                ))}
+                {/* {screenshots.map(() => ( */}
+                <SwiperSlide className="flex">
+                    <Screenshot />
+                </SwiperSlide>
+                {/* // ))} */}
             </Swiper>
         </div>
     );

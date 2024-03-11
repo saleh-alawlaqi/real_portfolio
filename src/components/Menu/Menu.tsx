@@ -1,4 +1,4 @@
-import { useAnimation, useScroll, useTransform } from "framer-motion";
+import { useAnimation } from "framer-motion";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";

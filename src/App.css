@@ -14,9 +14,15 @@
     align-items: center;
 }
 .projects_grid {
-    display: grid;
-    gap: 20px;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    display: flex;
+    flex-direction: column;
+}
+@media (min-width: 768px) {
+    .projects_grid {
+        display: grid;
+        gap: 20px;
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    }
 }
 .projects_grid2 {
     display: inline-grid;

@@ -1,5 +1,4 @@
 import Highlights from "./Highlights";
-import CTA from "../../components/CTA";
 import SimilarProjects from "./SimilarProjects";
 import { useProjectContext } from "./ProjectContext";
 import ProjectHeader from "./ProjectHeader";
@@ -24,7 +23,6 @@ const Project = () => {
                     </div>
                     <hr className="my-10 border border-slate-200" />
                     <SimilarProjects />
-                    <CTA />
                 </div>
             </div>
         </div>

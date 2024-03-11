@@ -1,4 +1,3 @@
-import Marquee from "react-fast-marquee";
 import ProjectSlide from "./ProjectSlide";
 
 interface ProjectsMarqueeProps {
@@ -7,7 +6,7 @@ interface ProjectsMarqueeProps {
     id?: string;
 }
 
-const ProjectsMarquee = ({ direction, projects, id }: ProjectsMarqueeProps) => {
+const ProjectsMarquee = ({ id }: ProjectsMarqueeProps) => {
     return (
         <div
             id={id}

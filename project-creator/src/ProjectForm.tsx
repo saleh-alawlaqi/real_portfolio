@@ -1,6 +1,6 @@
 import { Button, Textarea, Checkbox } from "@nextui-org/react";
 import { createContext, useContext, useState } from "react";
-import { db } from "./firebase-config";
+import { db, storageRef, uploadFile } from "./firebase-config";
 import { collection, addDoc } from "firebase/firestore";
 import { IProject } from "../../src/types"; // Assume these are defined in types.ts
 import TypeAndName from "./sections/TypeAndName";
@@ -12,35 +12,29 @@ import TypeSection from "./sections/TypeSection";
 import IconSection from "./sections/IconSection";
 import HighlightSection from "./sections/HighlightSection";
 import ScreenshotSection from "./sections/ScreenshotSection";
+import { uploadBytes } from "firebase/storage";
 
-const ProjectFormContext = createContext<{
+interface ProjectFormProps {
     project: IProject;
     setProject: React.Dispatch<React.SetStateAction<IProject>>;
-    setScreenshots: React.Dispatch<React.SetStateAction<File[]>>;
     screenshots: File[];
+    setScreenshots: React.Dispatch<React.SetStateAction<File[]>>;
     setPreviewMainImage: React.Dispatch<React.SetStateAction<File | null>>;
     previewMainImage: File | null;
     handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
     handleMainImageChange: (e: any) => void;
-}>(
-    {} as {
-        project: IProject;
-        setProject: React.Dispatch<React.SetStateAction<IProject>>;
-        screenshots: File[];
-        setScreenshots: React.Dispatch<React.SetStateAction<File[]>>;
-        setPreviewMainImage: React.Dispatch<React.SetStateAction<File | null>>;
-        previewMainImage: File | null;
-        handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-        handleMainImageChange: (e: any) => void;
-    }
-);
+    icons: { title: string; path: File }[];
+    setIcons: React.Dispatch<React.SetStateAction<{ title: string; path: File }[]>>;
+}
+const ProjectFormContext = createContext<ProjectFormProps>({} as ProjectFormProps);
+
 export const useProjectForm = () => useContext(ProjectFormContext);
+
 const ProjectForm = () => {
     const [project, setProject] = useState<IProject>({
         name: "",
         bigDescription: "",
         gradient: "gradient-1",
-        mainImage: "",
         type: "software",
         demo: "",
         github: "",
@@ -50,13 +44,12 @@ const ProjectForm = () => {
         types: [],
         icons: [],
         highlights: [],
-        screenshots: [],
         tools: [],
-        id: "",
     });
 
     const [previewMainImage, setPreviewMainImage] = useState<File | null>(null);
     const [screenshots, setScreenshots] = useState<File[]>([]);
+    const [icons, setIcons] = useState<{ title: string; path: File }[]>([]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -73,11 +66,18 @@ const ProjectForm = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log("project", project);
 
         try {
+            // 'file' comes from the Blob or File API
             const docRef = await addDoc(collection(db, "projects"), project);
-            console.log("Document written with ID: ", docRef.id);
+            await uploadFile("main_image", docRef.id, previewMainImage as File);
+            await Promise.all(
+                screenshots.map(
+                    async (screenshot, index) =>
+                        await uploadFile(`screenshot_${index}`, docRef.id, screenshot)
+                )
+            );
+
             // Reset form or give feedback to user
         } catch (e) {
             console.error("Error adding document: ", e);
@@ -95,6 +95,8 @@ const ProjectForm = () => {
                 previewMainImage,
                 handleChange,
                 handleMainImageChange,
+                icons,
+                setIcons,
             }}
         >
             <form

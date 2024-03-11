@@ -8,7 +8,6 @@ import Project from "./routes/Project";
 import ScrollToTop from "./components/ScrollToTop";
 import PortfolioProvider from "./routes/Portfolio/PortfolioContext";
 import { ProjectProvider } from "./routes/Project/ProjectContext";
-import Footer from "./components/Footer/Footer";
 import Header from "./components/Header";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -19,6 +18,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebase-config";
 import { IProject } from "./types";
 import Menu from "./components/Menu";
+import Footer from "./components/Footer";
 
 interface IAppContext {
     projects: IProject[];
@@ -36,8 +36,6 @@ function App() {
                 const addedProjects: IProject[] = [];
                 querySnapshot.forEach((doc) => {
                     // doc.data() is never undefined for query doc snapshots
-                    addedProjects.push({ id: doc.id, ...doc.data() } as IProject);
-                    addedProjects.push({ id: doc.id, ...doc.data() } as IProject);
                     addedProjects.push({ id: doc.id, ...doc.data() } as IProject);
                 });
                 setLoading(false);
@@ -58,7 +56,8 @@ function App() {
                     Loading...
                 </div>
             ) : (
-                <div className="flex flex-col items-center  self-stretch ">
+                <div className="flex flex-col items-center  self-stretch">
+                    <Header />
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route
@@ -91,6 +90,7 @@ function App() {
                         />
                         <Route path="/contact" element={<Contact />} />
                     </Routes>
+                    <Footer />
                     <Menu />
                 </div>
             )}

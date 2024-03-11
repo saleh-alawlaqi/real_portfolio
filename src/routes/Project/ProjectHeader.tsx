@@ -17,7 +17,7 @@ const ProjectHeader = () => {
                     <h2 className="text-[32px] font-bold font-gt text-slate-700">{name}</h2>
                     <p className="mt-1 text-slate-600 ">{smallDescription}</p>
                 </div>
-                <div className="tools mt-6 lg:mt-0 grid">
+                <div className="tools w-[15rem] mt-6 lg:mt-0 grid">
                     {tools.map((tool) => (
                         <ToolBox tool={tool} />
                     ))}

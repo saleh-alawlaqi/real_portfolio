@@ -1,27 +1,30 @@
 import { Button } from "@nextui-org/react";
 import { useProjectForm } from "../../ProjectForm";
 import IconBox from "../../boxes/IconBox";
+import { useRef } from "react";
 
 const IconSection = () => {
-    const { setProject, project } = useProjectForm();
-    const addIcon = () => {
-        setProject((prev) => ({
-            ...prev,
-            icons: [
-                ...prev.icons!,
-                {
-                    title: "New Icon Section",
-                    path: "path",
-                },
-            ],
-        }));
+    const { setIcons, icons } = useProjectForm();
+    const iconRef = useRef<HTMLInputElement>(null);
+
+    const addIcon = (e: any) => {
+        const { files } = e.target;
+        if (!files) return;
+        setIcons((prev) => [...prev, { title: "something", path: files[0] }]);
     };
+    const handleIconButton = () => {
+        if (iconRef.current) {
+            iconRef.current.click();
+        }
+    };
+
     return (
         <div className="flex flex-col icons gap-5">
             <div className="colors-heading flex justify-between">
                 <span className="text-2xl">Icons</span>
+                <input onChange={addIcon} type="file" multiple ref={iconRef} hidden accept=".svg" />
                 <Button
-                    onClick={addIcon}
+                    onClick={handleIconButton}
                     className="rounded-full font-medium"
                     variant="solid"
                     color="primary"
@@ -29,16 +32,17 @@ const IconSection = () => {
                     Add icon
                 </Button>
             </div>
-            {project.icons.length > 0 && (
+            {icons.length > 0 && (
                 <div className="flex flex-wrap gap-5">
-                    {project.icons
+                    {icons
                         ?.slice()
                         .reverse()
                         .map((icon, index) => (
                             <IconBox
-                                index={project.icons.length - 1 - index}
+                                index={icons.length - 1 - index}
                                 key={index}
-                                {...icon}
+                                title={icon.title}
+                                path={icon.path}
                             />
                         ))}
                 </div>

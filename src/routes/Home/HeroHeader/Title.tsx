@@ -16,8 +16,8 @@ const Title = () => {
     const restOfText = "— your expert in crafting innovative and engaging web experiences.";
 
     return (
-        <>
-            <h1 className="mt-3 text-[24px] text-gray-800  font-inter_black font-semibold leading-[150%] md:text-center md:text-[32px] lg:text-[40px] lg:w-[700px] xl:w-[930px] xl:text-[58px]">
+        <motion.div className="flex flex-col">
+            <h1 className="mt-3 text-[32px] text-gray-800 font-inter_black font-semibold leading-[150%] md:text-center md:text-[32px] lg:text-[40px] lg:w-[700px] xl:w-[930px] xl:text-[58px]">
                 <span className="text-sky-500">
                     {highlightedText.split("").map((character, index) => (
                         <motion.span
@@ -68,7 +68,7 @@ const Title = () => {
                     ></motion.div>
                 )}
             </AnimatePresence>
-        </>
+        </motion.div>
     );
 };
 

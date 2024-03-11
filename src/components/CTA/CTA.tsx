@@ -2,8 +2,8 @@ import CustomButton from "../Button/CustomButton";
 
 const CTA = () => {
     return (
-        <div className="flex flex-col lg:px-12 mt-32 w-full items-center">
-            <div className="cta relative rounded-xl  lg:w-full  pb-[20em] md:pb-[25em] overflow-hidden p-8 lg:p-20 flex flex-col">
+        <div className="flex flex-col lg:px-12 section-seperator w-full px-8 items-center">
+            <div className="cta relative rounded-xl  w-full  pb-[20em] md:pb-[25em] overflow-hidden p-8 lg:p-20 flex flex-col">
                 <div className="heading_and_button w-full lg:w-[40%] flex flex-col items-start">
                     <div className="flex flex-col w-full">
                         <h3 className="text-[30px] lg:text-[42px] font-inter_bold leading-snug text-white">

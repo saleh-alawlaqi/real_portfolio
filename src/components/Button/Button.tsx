@@ -13,7 +13,7 @@ const Button = ({
 }) => {
     const [isHovered, setIsHovered] = useState(false);
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-    const matches = useMediaQuery("(min-width: 768px)");
+    const matches = useMediaQuery("(min-width: 1024px)");
 
     const handleMouseEnter = (event: any) => {
         setIsHovered(true);
@@ -45,8 +45,8 @@ const Button = ({
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             animate={{
-                x: isHovered ? mousePosition.x : 0,
-                y: isHovered ? mousePosition.y : 0,
+                x: matches && isHovered ? mousePosition.x : 0,
+                y: matches && isHovered ? mousePosition.y : 0,
                 transition: { type: "tween" },
             }}
             style={{ fontSize }}

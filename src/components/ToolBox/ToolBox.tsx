@@ -52,7 +52,7 @@ const ToolBox = ({ tool }: ToolBoxProps) => {
             <span
                 onMouseEnter={handleShow}
                 onMouseLeave={handleHide}
-                className={`tool_box bg-slate-100 rounded-xl w-10 h-10 ${tool}`}
+                className={`tool_box bg-white rounded-xl w-10 h-10 ${tool}`}
             ></span>
         </div>
     );

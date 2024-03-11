@@ -8,7 +8,6 @@ export const projectsList: IProject[] = [
             "A landing page for a project management SAAS application. It showcases the features and benefits of the SAAS platform, including task management, team collaboration, and project tracking. The landing page is designed to attract potential users and provide them with a clear understanding of the value proposition of the application. It features a modern and responsive design, with intuitive navigation and visually appealing elements. The landing page also includes testimonials from satisfied users and a call-to-action to encourage visitors to sign up for a free trial or request a demo.",
         tools: ["framer", "figma", "react", "tailwind", "angular", "svelte", "vue", "typescript"],
         gradient: "gradient-1",
-        mainImage: "social-media-app.png",
         type: "uiDesign",
         demo: "https://example-social-media-app.com",
         github: "https://github.com/example-social-media-app",
@@ -16,7 +15,6 @@ export const projectsList: IProject[] = [
             "A landing page for a project management SAAS application. It showcases the features and benefits of the SAAS platform, including task management.",
 
         highlights: ["React", "Node.js", "MongoDB", "Express", "RESTful API", "Authentication"],
-        screenshots: [""],
         ready: true,
         colors: [
             {

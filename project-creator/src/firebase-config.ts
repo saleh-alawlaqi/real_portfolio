@@ -19,4 +19,15 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
-const storage = getStorage(app);
+const storage = getStorage();
+export const storageRef = ref(storage, "gs://portfolio-9601d.appspot.com");
+// Function to upload file
+export async function uploadFile(fileName: string, folderName: string, file: File) {
+    // Create a storage reference
+    const storageRef = ref(storage, `${folderName}/${fileName}.${file.name.split(".")[1]}`);
+
+    // Upload the file
+    uploadBytes(storageRef, file).then((snapshot) => {
+        console.log("Uploaded a blob or file!", snapshot);
+    });
+}

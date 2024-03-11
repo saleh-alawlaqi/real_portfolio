@@ -58,7 +58,7 @@ const ProjectBox = ({ name, gradient, id, type }: ProjectBoxProps) => {
                                 {name}
                             </h3>
                             <CustomChip
-                                color={type as any}
+                                color={"blue"}
                                 variant="bordered"
                                 className="type mt-4 w-full"
                             >
