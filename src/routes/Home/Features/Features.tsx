@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import CustomChip from "../../../components/CustomChip";
 import FeatureBox from "../../../components/FeatureBox/FeatureBox";

@@ -7,7 +7,7 @@ interface ProjectsMarqueeProps {
     id?: string;
 }
 
-const ProjectsMarquee = ({ direction, projects, id }: ProjectsMarqueeProps) => {
+const ProjectsMarquee = ({ direction, id }: ProjectsMarqueeProps) => {
     return (
         <div
             id={id}
