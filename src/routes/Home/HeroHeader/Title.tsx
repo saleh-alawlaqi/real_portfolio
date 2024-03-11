@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import WritingEffect from "../../../components/WritingEffect";
 
 const Title = () => {
     const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -19,26 +20,15 @@ const Title = () => {
         <motion.div className="flex flex-col">
             <h1 className="mt-3 text-[32px] text-gray-800 font-inter_black font-semibold leading-[150%] md:text-center md:text-[32px] lg:text-[40px] lg:w-[700px] xl:w-[930px] xl:text-[58px]">
                 <span className="text-sky-500">
-                    {highlightedText.split("").map((character, index) => (
-                        <motion.span
-                            aria-hidden="true"
-                            key={`highlighted-${index}`}
-                            onMouseMove={handleMouseMove}
-                            className="cursor-none"
-                            onMouseEnter={() => setIsVisible(true)}
-                            onMouseLeave={() => setIsVisible(false)}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{
-                                duration: 0.3,
-                                delay: index * 0.02,
-                            }}
-                        >
-                            {character}
-                        </motion.span>
-                    ))}
+                    <WritingEffect
+                        onMouseMove={handleMouseMove}
+                        className="cursor-none"
+                        onMouseEnter={() => setIsVisible(true)}
+                        onMouseLeave={() => setIsVisible(false)}
+                        text={highlightedText}
+                    />
                 </span>{" "}
-                {restOfText.split("").map((character, index) => (
+                {/* {restOfText.split("").map((character, index) => (
                     <motion.span
                         aria-hidden="true"
                         key={`rest-${index}`}
@@ -51,7 +41,8 @@ const Title = () => {
                     >
                         {character}
                     </motion.span>
-                ))}
+                ))} */}
+                <WritingEffect text={restOfText} delay={highlightedText.length} />
             </h1>
             <AnimatePresence>
                 {isVisible && (

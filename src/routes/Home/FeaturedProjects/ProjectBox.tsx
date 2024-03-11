@@ -1,41 +1,45 @@
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import ToolBox from "../../../components/ToolBox";
 import { IProject } from "../../../types";
 import { NavLink } from "react-router-dom";
+import { storage } from "../../../firebase-config";
+import { getDownloadURL, ref } from "firebase/storage";
 
 interface ProjectBoxProps {
     project: IProject;
     index: number;
 }
-const ProjectBox = ({ project, index }: ProjectBoxProps) => {
+const ProjectBox = ({ project }: ProjectBoxProps) => {
+    const [backgroundImage, setBackgroundImage] = useState("");
     const boxRef = useRef(null);
-    const { scrollY } = useScroll();
-    const [scrollStart, setScrollStart] = useState(0);
-    const [scrollEnd, setScrollEnd] = useState(0);
+    const showInView = useInView(boxRef, { margin: "-300px", once: true });
+    const fullInView = useInView(boxRef, { amount: "all" });
 
-    useEffect(() => {
-        const boxTop = (boxRef.current as any).offsetTop || 0;
-        setScrollStart(boxTop - 1000);
-        setScrollEnd(boxTop - 50);
-    }, [index]);
-
-    const projectWidth = useTransform(scrollY, [scrollStart, scrollEnd], ["80%", "100%"]);
     const [showOverlay, setShowOverlay] = useState(false);
 
     const handleMouseEnter = () => setShowOverlay(true);
     const handleMouseLeave = () => setShowOverlay(false);
 
+    useEffect(() => {
+        const image = ref(storage, `gs://portfolio-9601d.appspot.com/${project.id}/main_image.png`);
+        getDownloadURL(image).then((url) => {
+            setBackgroundImage(url);
+        });
+    }, [project]);
+
     return (
         <motion.div
             ref={boxRef}
-            style={{ width: projectWidth }}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
+            transition={{ duration: 0.5, type: "spring", damping: 10, stiffness: 100 }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={showInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
             className="flex project-image cursor-pointer w-full h-[50vh] md:h-[90vh] rounded-[2rem] items-center flex-col"
         >
             <AnimatePresence>
-                {showOverlay && (
+                {(fullInView || showOverlay) && (
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -81,6 +85,9 @@ const ProjectBox = ({ project, index }: ProjectBoxProps) => {
                                     stiffness: 100,
                                     damping: 20,
                                     delay: 0.2,
+                                }}
+                                style={{
+                                    backgroundImage: `url(${backgroundImage})`,
                                 }}
                                 className="rounded-2xl w-full h-[10rem] lg:h-[25rem] lg:w-[25rem] bg-project"
                             ></motion.div>

@@ -1,3 +1,4 @@
+import Marquee from "react-fast-marquee";
 import ProjectSlide from "./ProjectSlide";
 
 interface ProjectsMarqueeProps {
@@ -6,24 +7,24 @@ interface ProjectsMarqueeProps {
     id?: string;
 }
 
-const ProjectsMarquee = ({ id }: ProjectsMarqueeProps) => {
+const ProjectsMarquee = ({ direction, projects, id }: ProjectsMarqueeProps) => {
     return (
         <div
             id={id}
             className="projects-slider mt-16 overflow-visible  flex self-center w-full relative"
         >
-            {/* <Marquee
+            <Marquee
                 autoFill
                 loop={1}
-
+                speed={60}
                 pauseOnHover
                 direction={direction}
                 className="flex relative !overflow-visible"
-            > */}
-            {[...Array(20)].map((_, index) => (
-                <ProjectSlide key={index} />
-            ))}
-            {/* </Marquee> */}
+            >
+                {[...Array(20)].map((_, index) => (
+                    <ProjectSlide key={index} />
+                ))}
+            </Marquee>
         </div>
     );
 };

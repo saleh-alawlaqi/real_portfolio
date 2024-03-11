@@ -4,6 +4,8 @@ import { useProjectContext } from "./ProjectContext";
 import ProjectHeader from "./ProjectHeader";
 import ProjectScreenshots from "./ProjectScreenshots";
 import ProjectDescription from "./ProjectDescription";
+import Footer from "../../components/Footer";
+import CTA from "../../components/CTA";
 
 const Project = () => {
     const { project } = useProjectContext();

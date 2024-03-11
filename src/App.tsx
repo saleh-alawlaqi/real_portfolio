@@ -90,7 +90,6 @@ function App() {
                         />
                         <Route path="/contact" element={<Contact />} />
                     </Routes>
-                    <Footer />
                     <Menu />
                 </div>
             )}

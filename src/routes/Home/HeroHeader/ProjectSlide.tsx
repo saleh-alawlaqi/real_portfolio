@@ -11,7 +11,7 @@ const ProjectSlide = () => {
     return (
         <div
             className={`project-slide-container ${
-                isHovered ? "scale-125 opacity-100 z-10" : "opacity-50"
+                isHovered ? "scale-125 opacity-100 !z-10" : "opacity-50 !-z-10"
             }`}
         >
             <motion.div

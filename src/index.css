@@ -127,7 +127,7 @@ body {
     -ms-filter: blur(150px);
     filter: blur(150px);
     @apply bg-sky-200;
-    opacity: 0.2;
+    opacity: 0.6;
     left: 0;
 }
 .footer-blur-2 {
@@ -137,7 +137,7 @@ body {
     -ms-filter: blur(150px);
     filter: blur(150px);
     @apply bg-emerald-200;
-    opacity: 0.2;
+    opacity: 0.6;
     right: 0;
 }
 .grid-image {
@@ -165,4 +165,43 @@ body {
 
 .section-seperator {
     @apply mt-28 md:mt-32;
+}
+.featured_projects {
+    background: #000;
+}
+.featured-blur-1 {
+    @apply absolute -z-20 top-0 left-0 w-[50rem] h-[50rem] bg-sky-500;
+    -webkit-filter: blur(150px);
+    -moz-filter: blur(150px);
+    -o-filter: blur(150px);
+    -ms-filter: blur(150px);
+    filter: blur(150px);
+    opacity: 0.3;
+}
+.featured-blur-2 {
+    @apply absolute -z-20 top-0 right-0 w-[50rem] h-[50rem] bg-emerald-500;
+    -webkit-filter: blur(150px);
+    -moz-filter: blur(150px);
+    -o-filter: blur(150px);
+    -ms-filter: blur(150px);
+    filter: blur(150px);
+    opacity: 0.3;
+}
+.featured-blur-3 {
+    @apply absolute -z-20 bottom-0 left-0 w-[50rem] h-[50rem] bg-pink-500;
+    -webkit-filter: blur(150px);
+    -moz-filter: blur(150px);
+    -o-filter: blur(150px);
+    -ms-filter: blur(150px);
+    filter: blur(150px);
+    opacity: 0.3;
+}
+.featured-blur-4 {
+    @apply absolute -z-20 bottom-0 right-0 w-[50rem] h-[50rem] bg-purple-500;
+    -webkit-filter: blur(150px);
+    -moz-filter: blur(150px);
+    -o-filter: blur(150px);
+    -ms-filter: blur(150px);
+    filter: blur(150px);
+    opacity: 0.3;
 }
