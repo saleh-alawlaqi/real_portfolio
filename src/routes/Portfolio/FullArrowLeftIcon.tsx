@@ -10,7 +10,7 @@ const FullArrowLeftIcon = () => {
             <path
                 d="M11 6.5L5.5 12M5.5 12L11 17.5M5.5 12H20"
                 stroke="currentColor"
-                stroke-width="2"
+                strokeWidth="2"
             />
         </svg>
     );

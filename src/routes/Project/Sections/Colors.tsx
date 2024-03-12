@@ -11,8 +11,8 @@ const Colors = () => {
             <hr />
             {colors && (
                 <div className="flex flex-col color-sections gap-5">
-                    {colors.map((color) => (
-                        <ColorSection title={color.title} colors={color.shades} />
+                    {colors.map((color, i) => (
+                        <ColorSection key={i} title={color.title} colors={color.shades} />
                     ))}
                 </div>
             )}
