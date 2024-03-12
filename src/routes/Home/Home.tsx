@@ -9,11 +9,9 @@ const Home = () => {
             {/* <div className="graphic-grid w-[24rem] h-[24rem] absolute"></div> */}
             <HeroHeader />
             <FeaturedProjects />
-            <div className="flex section-seperator  flex-col w-full lg:max-w-[1300px]">
-                <Features />
-                <CTA />
-                <Footer />
-            </div>
+            <Features />
+            <CTA />
+            <Footer />
         </div>
     );
 };

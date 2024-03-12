@@ -18,7 +18,7 @@ const CTA = () => {
     return (
         <div
             ref={ref}
-            className="flex flex-col lg:px-12 section-seperator w-full px-8 items-center"
+            className="flex flex-col lg:px-0 lg:max-w-[1300px] section-seperator w-full px-8 items-center"
         >
             <div className="cta relative rounded-xl  w-full  pb-[20em] md:pb-[25em] overflow-hidden p-8 lg:p-20 flex flex-col">
                 <div className="heading_and_button w-full lg:w-[45%] flex flex-col items-start">
