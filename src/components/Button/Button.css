@@ -2,6 +2,8 @@
     transition-property: background, border, color, box-shadow;
     transition-duration: 150ms;
     transition-timing-function: ease-in-out;
+    border: 2px solid transparent;
+
     background: linear-gradient(white, white) padding-box,
         linear-gradient(to right, #cbd5e1, #cbd5e1) border-box;
 }
@@ -23,5 +25,4 @@
 } */
 .base-button {
     @apply px-5 py-2 lg:py-3 text-sm md:text-base text-center font-inter_medium rounded-full;
-    border: 2px solid transparent;
 }

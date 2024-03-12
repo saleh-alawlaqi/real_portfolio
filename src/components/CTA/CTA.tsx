@@ -1,8 +1,25 @@
+import { useEffect, useRef, useState } from "react";
 import CustomButton from "../Button/CustomButton";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const CTA = () => {
+    const ref = useRef<HTMLDivElement>(null);
+    const { scrollY } = useScroll({ target: ref });
+    const [divTop, setDivTop] = useState(0);
+
+    useEffect(() => {
+        const divTop = ((ref.current as any).getBoundingClientRect().top +
+            window.scrollY) as number;
+        setDivTop(divTop);
+    }, [ref]);
+
+    const marginTop = useTransform(scrollY, [divTop - 500, divTop + 500], [0, 100]);
+
     return (
-        <div className="flex flex-col lg:px-12 section-seperator w-full px-8 items-center">
+        <div
+            ref={ref}
+            className="flex flex-col lg:px-12 section-seperator w-full px-8 items-center"
+        >
             <div className="cta relative rounded-xl  w-full  pb-[20em] md:pb-[25em] overflow-hidden p-8 lg:p-20 flex flex-col">
                 <div className="heading_and_button w-full lg:w-[45%] flex flex-col items-start">
                     <div className="flex flex-col w-full">
@@ -17,7 +34,15 @@ const CTA = () => {
                         Contact Me
                     </CustomButton>
                 </div>
-                <div className="screen_wrap w-[100%] lg:w-[60%] absolute -right-[2em] lg:-right-[10%] -bottom-[12em] lg:bottom-auto lg:top-[5%] rounded-2xl flex items-stretch h-[30em] md:h-[35em] mt-10 "></div>
+                {/* {isInView && ( */}
+                <motion.div
+                    // initial={{ opacity: 0, y: 150 }}
+                    // animate={{ opacity: 1, y: 0 }}
+                    style={{ marginTop }}
+                    transition={{ duration: 0.3, ease: "easeInOut", type: "tween" }}
+                    className="screen_wrap w-[100%] lg:w-[60%] absolute -right-[2em] lg:-right-[10%] -bottom-[12em] lg:bottom-auto lg:top-[5%] rounded-2xl flex items-stretch h-[30em] md:h-[35em] mt-10 "
+                ></motion.div>
+                {/* // )} */}
             </div>
         </div>
     );

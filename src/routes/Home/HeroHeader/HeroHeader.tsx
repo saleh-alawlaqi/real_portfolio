@@ -11,7 +11,7 @@ const HeroHeader = () => {
             style={{ marginTop }}
             className="flex md:items-center relative mt-14 overflow-hidden pb-16 w-full flex-col rounded-xl "
         >
-            <div className="flex flex-col px-7 z-10  md:w-[560px] md:items-center">
+            <div className="flex flex-col px-7 z-10 md:w-[560px] md:items-center">
                 <div className="flex flex-col md:items-center">
                     <CustomChip variant="solid" color="blue" className="font-inter">
                         WELCOME

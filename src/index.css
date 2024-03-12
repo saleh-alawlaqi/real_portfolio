@@ -170,7 +170,7 @@ body {
     background: #000;
 }
 .featured-blur-1 {
-    @apply absolute -z-20 top-0 left-0 w-[50rem] h-[50rem] bg-sky-500;
+    @apply absolute -z-20 top-0 left-0 w-[50vw] h-[50vh] bg-sky-500;
     -webkit-filter: blur(150px);
     -moz-filter: blur(150px);
     -o-filter: blur(150px);
@@ -179,7 +179,7 @@ body {
     opacity: 0.3;
 }
 .featured-blur-2 {
-    @apply absolute -z-20 top-0 right-0 w-[50rem] h-[50rem] bg-emerald-500;
+    @apply absolute -z-20 top-0 right-0 w-[100vh] h-[100vh] bg-emerald-500;
     -webkit-filter: blur(150px);
     -moz-filter: blur(150px);
     -o-filter: blur(150px);
@@ -188,7 +188,7 @@ body {
     opacity: 0.3;
 }
 .featured-blur-3 {
-    @apply absolute -z-20 bottom-0 left-0 w-[50rem] h-[50rem] bg-pink-500;
+    @apply absolute -z-20 bottom-0 left-0 w-[100vh] h-[100vh] bg-pink-500;
     -webkit-filter: blur(150px);
     -moz-filter: blur(150px);
     -o-filter: blur(150px);
@@ -197,7 +197,7 @@ body {
     opacity: 0.3;
 }
 .featured-blur-4 {
-    @apply absolute -z-20 bottom-0 right-0 w-[50rem] h-[50rem] bg-purple-500;
+    @apply absolute -z-20 bottom-0 right-0 w-[100vh] h-[100vh] bg-purple-500;
     -webkit-filter: blur(150px);
     -moz-filter: blur(150px);
     -o-filter: blur(150px);

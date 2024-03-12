@@ -18,6 +18,10 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebase-config";
 import { IProject } from "./types";
 import Menu from "./components/Menu";
+import { storage } from "./firebase-config";
+import { getDownloadURL, ref } from "firebase/storage";
+import Lottie from "lottie-react";
+import loadingAnimation from "./assets/loading.json";
 
 interface IAppContext {
     projects: IProject[];
@@ -33,11 +37,20 @@ function App() {
             try {
                 const querySnapshot = await getDocs(collection(db, "projects"));
                 const addedProjects: IProject[] = [];
-                querySnapshot.forEach((doc) => {
+                querySnapshot.forEach(async (doc) => {
                     // doc.data() is never undefined for query doc snapshots
-                    addedProjects.push({ id: doc.id, ...doc.data() } as IProject);
+                    let project = { id: doc.id, ...doc.data() } as IProject;
+                    const image = ref(
+                        storage,
+                        `gs://portfolio-9601d.appspot.com/${project.id}/main_image.png`
+                    );
+                    const url = await getDownloadURL(image);
+                    project = { ...project, mainImage: url };
+                    addedProjects.push(project);
                 });
-                setLoading(false);
+                setTimeout(() => {
+                    setLoading(false);
+                }, 1000);
                 setProjects(addedProjects);
             } catch (e) {
                 setLoading(false);
@@ -51,8 +64,13 @@ function App() {
     return (
         <AppContext.Provider value={{ projects }}>
             {loading ? (
-                <div className="fixed w-screen h-screen flex items-center justify-center">
-                    Loading...
+                <div className="fixed w-screen h-screen flex flex-col items-center justify-center">
+                    <Lottie
+                        animationData={loadingAnimation}
+                        style={{ height: 290, width: 400 }}
+                        loop={true}
+                    />
+                    <span className="text-[32px] font-gt mt-5">Loading...</span>
                 </div>
             ) : (
                 <div className="flex flex-col items-center  self-stretch">
