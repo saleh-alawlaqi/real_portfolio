@@ -13,9 +13,9 @@ const FeaturedProjects = () => {
         <motion.div
             id="featured_projects"
             ref={featuredProjectsRef}
-            className={`featured_projects w-full p-8 relative lg:p-12 lg:py-24 z-10 mt-10 flex flex-col items-center overflow-hidden`}
+            className={`featured_projects w-full py-8 relative  lg:py-24 z-10 mt-10 flex flex-col items-center overflow-hidden`}
         >
-            <div className="flex flex-col w-full lg:max-w-[1300px] items-center gap-8 lg:gap-16">
+            <div className="flex flex-col w-[90%] lg:max-w-[1300px] items-center gap-8 lg:gap-10">
                 <h2 className="text-[32px] md:text-[40px] text-white font-gt_medium xl:text-[62px] self-start">
                     {isInView && <WritingEffect text="Featured Projects" />}
                 </h2>

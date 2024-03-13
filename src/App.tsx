@@ -8,7 +8,6 @@ import Project from "./routes/Project";
 import ScrollToTop from "./components/ScrollToTop";
 import PortfolioProvider from "./routes/Portfolio/PortfolioContext";
 import { ProjectProvider } from "./routes/Project/ProjectContext";
-import Header from "./components/Header";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";

@@ -9,7 +9,7 @@ const Features = () => {
     return (
         <motion.div
             ref={ref}
-            className="flex flex-col px-8 w-full lg:max-w-[1300px] section-seperator lg:px-0 relative items-center gap-14"
+            className="flex flex-col  w-[90%] lg:max-w-[1300px] section-seperator relative items-center gap-8 lg:gap-10"
         >
             <div className="skills-blur w-[32rem] top-0 h-[32rem] self-center absolute"></div>
             <motion.div
