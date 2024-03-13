@@ -41,9 +41,9 @@ export interface IProject {
         fontWeight: string;
         fontFamily: string;
     }[];
-    icons: { title: string; path: string }[];
+    icons?: string[];
     highlights: string[];
-    // screenshots?: string[];
+    screenshots?: string[];
     ready: boolean;
 }
 export interface IBigProjectBox

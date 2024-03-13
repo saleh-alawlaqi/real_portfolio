@@ -62,6 +62,8 @@ export default {
         "text-orange-500",
         "text-teal-500",
         "text-purple-500",
+        "bg-white",
+        "bg-slate-200",
     ],
     darkMode: "class",
     plugins: [

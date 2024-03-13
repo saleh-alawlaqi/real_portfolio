@@ -22,6 +22,7 @@ import { storage } from "./firebase-config";
 import { getDownloadURL, ref } from "firebase/storage";
 import Lottie from "lottie-react";
 import loadingAnimation from "./assets/loading.json";
+import Footer from "./components/Footer";
 
 interface IAppContext {
     projects: IProject[];
@@ -73,8 +74,7 @@ function App() {
                     <span className="text-[32px] font-gt mt-5">Loading...</span>
                 </div>
             ) : (
-                <div className="flex flex-col items-center  self-stretch">
-                    <Header />
+                <div className="flex flex-col items-center self-stretch">
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route
@@ -108,6 +108,7 @@ function App() {
                         <Route path="/contact" element={<Contact />} />
                     </Routes>
                     <Menu />
+                    <Footer />
                 </div>
             )}
         </AppContext.Provider>

@@ -1,6 +1,6 @@
 import { Button, Textarea, Checkbox } from "@nextui-org/react";
-import { createContext, useContext, useState } from "react";
-import { db, storageRef, uploadFile } from "./firebase-config";
+import { createContext, useContext, useEffect, useState } from "react";
+import { db, uploadFile } from "./firebase-config";
 import { collection, addDoc } from "firebase/firestore";
 import { IProject } from "../../src/types"; // Assume these are defined in types.ts
 import TypeAndName from "./sections/TypeAndName";
@@ -12,7 +12,6 @@ import TypeSection from "./sections/TypeSection";
 import IconSection from "./sections/IconSection";
 import HighlightSection from "./sections/HighlightSection";
 import ScreenshotSection from "./sections/ScreenshotSection";
-import { uploadBytes } from "firebase/storage";
 
 interface ProjectFormProps {
     project: IProject;
@@ -23,8 +22,14 @@ interface ProjectFormProps {
     previewMainImage: File | null;
     handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
     handleMainImageChange: (e: any) => void;
-    icons: { title: string; path: File }[];
-    setIcons: React.Dispatch<React.SetStateAction<{ title: string; path: File }[]>>;
+    icons: File[];
+    error: string;
+    setError: React.Dispatch<React.SetStateAction<string>>;
+    setIcons: React.Dispatch<React.SetStateAction<File[]>>;
+    handleChangeWithWordCount: (
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+        limit: number
+    ) => void;
 }
 const ProjectFormContext = createContext<ProjectFormProps>({} as ProjectFormProps);
 
@@ -46,15 +51,33 @@ const ProjectForm = () => {
         highlights: [],
         tools: [],
     });
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState(false);
 
     const [previewMainImage, setPreviewMainImage] = useState<File | null>(null);
     const [screenshots, setScreenshots] = useState<File[]>([]);
-    const [icons, setIcons] = useState<{ title: string; path: File }[]>([]);
+    const [icons, setIcons] = useState<File[]>([]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setProject((prev) => ({ ...prev, [name]: value }));
     };
+    const handleChangeWithWordCount = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+        limit: number
+    ) => {
+        const { name, value } = e.target;
+        const words = value.trim().split(/\s+/); // Split by one or more spaces
+        const wordCount = words.length;
+        const lastCharacter = value[value.length - 1];
+
+        if (wordCount < limit || (wordCount === limit && lastCharacter !== " ")) {
+            setProject((prev) => ({ ...prev, [name]: value.trimStart() })); // Trim start to allow backspacing and prevent leading spaces
+        } else if (wordCount === limit && lastCharacter === " ") {
+            setProject((prev) => ({ ...prev, [name]: words.join(" ") })); // Join with a single space to clean up and prevent multiple spaces
+        }
+    };
+
     const handleMainImageChange = (e: any) => {
         const { files } = e.target;
         const file = files[0];
@@ -64,8 +87,81 @@ const ProjectForm = () => {
         }
     };
 
+    useEffect(() => {
+        if (error === "") return;
+        const errorElement = document.querySelector("#" + error);
+        if (errorElement) {
+            errorElement.scrollIntoView({ behavior: "smooth", block: "center" });
+            if (errorElement instanceof HTMLInputElement) {
+                errorElement.focus();
+            }
+        }
+        const interval = setInterval(() => {
+            setError("");
+        }, 5000);
+        return () => clearInterval(interval);
+    }, [error]);
+
+    useEffect(() => {
+        if (!success) return;
+        const interval = setInterval(() => {
+            setSuccess(false);
+        }, 5000);
+        return () => clearInterval(interval);
+    }, [success]);
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        if (!project.name) {
+            setError("project_name");
+            return;
+        }
+        if (!project.github) {
+            setError("github");
+            return;
+        }
+        if (!project.demo) {
+            setError("demo");
+            return;
+        }
+        if (!previewMainImage) {
+            setError("main_image");
+            return;
+        }
+        if (!project.tools.length) {
+            setError("tools");
+            return;
+        }
+        if (!project.smallDescription) {
+            setError("small_description");
+            return;
+        }
+        if (!project.bigDescription) {
+            setError("big_description");
+            return;
+        }
+        if (!project.colors.length) {
+            setError("color_section");
+            return;
+        }
+        if (!project.types.length) {
+            setError("type_section");
+            return;
+        }
+        if (!icons.length) {
+            setError("icon_section");
+            return;
+        }
+        if (!project.highlights.length) {
+            setError("highlight_section");
+            return;
+        }
+
+        if (!screenshots.length) {
+            setError("screenshot_section");
+            return;
+        }
 
         try {
             // 'file' comes from the Blob or File API
@@ -74,14 +170,74 @@ const ProjectForm = () => {
             await Promise.all(
                 screenshots.map(
                     async (screenshot, index) =>
-                        await uploadFile(`screenshot_${index}`, docRef.id, screenshot)
+                        await uploadFile(
+                            `screenshot_${index}`,
+                            docRef.id + "/screenshots",
+                            screenshot
+                        )
                 )
             );
 
-            // Reset form or give feedback to user
+            await Promise.all(
+                icons.map(async (icon, index) => {
+                    return await uploadFile(`icon_${index}`, docRef.id + "/icons", icon);
+                })
+            );
+
+            setProject({
+                name: "",
+                bigDescription: "",
+                gradient: "gradient-1",
+                type: "software",
+                demo: "",
+                github: "",
+                smallDescription: "",
+                ready: false,
+                colors: [],
+                types: [],
+                icons: [],
+                highlights: [],
+                tools: [],
+            });
+            setSuccess(true);
         } catch (e) {
             console.error("Error adding document: ", e);
         }
+    };
+    useEffect(() => {
+        const projectString = localStorage.getItem("project");
+        if (projectString) {
+            setProject(JSON.parse(projectString));
+        }
+    }, []);
+
+    useEffect(() => {
+        //Save in local storage
+        const interval = setInterval(() => {
+            localStorage.setItem("project", JSON.stringify(project));
+        }, 2000);
+        return () => clearInterval(interval);
+    }, [project]);
+
+    const onResetProject = () => {
+        localStorage.removeItem("project");
+        setProject({
+            name: "",
+            bigDescription: "",
+            gradient: "gradient-1",
+            type: "software",
+            demo: "",
+            github: "",
+            smallDescription: "",
+            ready: false,
+            colors: [],
+            types: [],
+            icons: [],
+            highlights: [],
+            tools: [],
+        });
+        setScreenshots([]);
+        setIcons([]);
     };
 
     return (
@@ -97,6 +253,9 @@ const ProjectForm = () => {
                 handleMainImageChange,
                 icons,
                 setIcons,
+                error,
+                setError,
+                handleChangeWithWordCount,
             }}
         >
             <form
@@ -106,6 +265,7 @@ const ProjectForm = () => {
                 <div className="flex flex-col info gap-5">
                     <div className="colors-heading flex justify-between">
                         <span className="text-2xl">Add a new project</span>
+                        <Button onClick={onResetProject}>Reset project</Button>
                     </div>
 
                     <TypeAndName />
@@ -114,9 +274,16 @@ const ProjectForm = () => {
                     <ToolsAndSmallDesc />
                     <Textarea
                         labelPlacement="outside"
+                        classNames={
+                            error === "big_description"
+                                ? { base: "border-2 border-red-500" }
+                                : { base: "" }
+                        }
                         label="Big Description"
                         placeholder="Big Description"
                         name="bigDescription"
+                        id="big_description"
+                        value={project.bigDescription}
                         onChange={handleChange}
                     />
                 </div>
@@ -136,6 +303,11 @@ const ProjectForm = () => {
                 >
                     Ready
                 </Checkbox>
+                {success && (
+                    <div className="fixed bottom-10 left-10 bg-emerald-500 bg-opacity-90 text-white font-semibold p-5 rounded-lg px-6">
+                        Successfully created the project
+                    </div>
+                )}
                 {/* <Listbox
                 aria-label="Multiple selection example"
                 variant="flat"

@@ -5,9 +5,9 @@ const Overview = () => {
     const { bigDescription } = project;
 
     return (
-        <div className="flex flex-col">
-            <h2 className="font-gt_light text-[32px]">Overview:</h2>
-            <div className="mt-3" dangerouslySetInnerHTML={{ __html: bigDescription }}></div>
+        <div className="flex flex-col gap-5">
+            <h2 className="font-gt_light text-[32px]">Overview</h2>
+            <div dangerouslySetInnerHTML={{ __html: bigDescription }}></div>
         </div>
     );
 };

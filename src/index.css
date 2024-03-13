@@ -164,7 +164,7 @@ body {
 }
 
 .section-seperator {
-    @apply mt-28 md:mt-32;
+    @apply mt-28;
 }
 .featured_projects {
     background: #000;

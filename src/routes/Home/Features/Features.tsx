@@ -5,7 +5,7 @@ import FeatureBox from "../../../components/FeatureBox/FeatureBox";
 
 const Features = () => {
     const ref = useRef(null);
-    const isInView = useInView(ref, { margin: "-300px" });
+    const isInView = useInView(ref, { margin: "-300px", once: true });
     return (
         <motion.div
             ref={ref}

@@ -4,7 +4,7 @@ import { useProjectForm } from "../../ProjectForm";
 import { tools } from "../../../../src/types";
 
 const ToolsAndSmallDesc = () => {
-    const { project, setProject, handleChange } = useProjectForm();
+    const { project, setProject, handleChange, error } = useProjectForm();
     const handleTools = (keys: any) => {
         const myArray = Array.from(keys) as tools[];
 
@@ -18,6 +18,10 @@ const ToolsAndSmallDesc = () => {
                     variant="flat"
                     disallowEmptySelection
                     selectionMode="multiple"
+                    id="tools"
+                    classNames={
+                        error === "tools" ? { base: "border-2 border-red-500" } : { base: "" }
+                    }
                     selectedKeys={project.tools}
                     onSelectionChange={handleTools}
                 >
@@ -50,10 +54,13 @@ const ToolsAndSmallDesc = () => {
                 label="Small Description"
                 className="flex-1"
                 placeholder="Small Description"
+                id="small_description"
                 name="smallDescription"
+                value={project.smallDescription}
                 classNames={{
                     input: "flex-1",
-                    base: "flex-1",
+                    base:
+                        error === "small_description" ? "border-2 border-red-500 flex-1" : "flex-1",
                     mainWrapper: "flex-1",
                     inputWrapper: "flex-1",
                 }}

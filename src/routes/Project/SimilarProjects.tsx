@@ -1,13 +1,13 @@
-import ProjectBox from "../../components/ProjectBox/ProjectBox";
+import SmallProjectBox from "../../components/SmallProjectBox/SmallProjectBox";
 import { projectsList } from "../../content/projects";
 
 const SimilarProjects = () => {
     return (
-        <div className="flex flex-col">
-            <h3 className="text-[32px] font-gt font-semibold">Similar Projects</h3>
-            <div className="projects mt-10 projects_grid2">
+        <div className="flex flex-col gap-8">
+            <h3 className="font-gt_light text-[32px]">Similar Projects</h3>
+            <div className="projects projects_grid2">
                 {projectsList.slice(0, 3).map((project, i) => (
-                    <ProjectBox key={i} index={i} {...project} />
+                    <SmallProjectBox key={i} index={i} {...project} />
                 ))}
             </div>
         </div>

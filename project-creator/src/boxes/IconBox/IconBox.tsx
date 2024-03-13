@@ -4,10 +4,9 @@ import { useEffect, useState } from "react";
 
 interface IconBoxProps {
     path: File;
-    title: string;
     index: number;
 }
-const IconBox = ({ path, title, index }: IconBoxProps) => {
+const IconBox = ({ path, index }: IconBoxProps) => {
     const [preview, setPreview] = useState<string>("");
     const { setIcons } = useProjectForm();
     useEffect(() => {
@@ -49,7 +48,7 @@ const IconBox = ({ path, title, index }: IconBoxProps) => {
             ></div>
 
             <Input
-                value={title}
+                value={path.name}
                 onChange={onEditTitle}
                 labelPlacement="outside"
                 className="text-center mt-5 w-40"

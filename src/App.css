@@ -292,7 +292,7 @@ a:hover::before {
     transition: all 0.3s ease-in-out !important;
 } */
 .thumbnail {
-    background: #000 url(./assets/projects/1.png) center/contain no-repeat;
+    background: center/cover no-repeat;
 }
 .big-projects-grid {
     display: grid;

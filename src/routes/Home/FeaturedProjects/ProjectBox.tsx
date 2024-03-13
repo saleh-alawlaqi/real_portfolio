@@ -62,7 +62,7 @@ const ProjectBox = ({ project }: ProjectBoxProps) => {
                                 </div>
                                 <div className="tools mt-2 lg:mt-5 grid">
                                     {project.tools.map((tool) => (
-                                        <ToolBox tool={tool} key={tool} />
+                                        <ToolBox tool={tool} bgColor="bg-white" key={tool} />
                                     ))}
                                 </div>
                             </motion.div>

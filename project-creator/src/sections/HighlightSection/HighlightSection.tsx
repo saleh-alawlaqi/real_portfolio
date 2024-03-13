@@ -3,7 +3,7 @@ import HighlightBox from "../../boxes/HighlightBox/HighlightBox";
 import { useProjectForm } from "../../ProjectForm";
 
 const HighlightSection = () => {
-    const { setProject, project } = useProjectForm();
+    const { setProject, project, error } = useProjectForm();
     const addHighlight = () => {
         setProject((prev) => ({
             ...prev,
@@ -11,7 +11,12 @@ const HighlightSection = () => {
         }));
     };
     return (
-        <div className="flex flex-col highlights gap-5">
+        <div
+            id="highlight_section"
+            className={`flex flex-col highlights gap-5 ${
+                error === "highlight_section" ? "border-2 border-red-500" : ""
+            }`}
+        >
             <div className="icons-heading flex justify-between">
                 <span className="text-2xl">Highlights</span>
                 <Button

@@ -24,6 +24,8 @@ export const storageRef = ref(storage, "gs://portfolio-9601d.appspot.com");
 // Function to upload file
 export async function uploadFile(fileName: string, folderName: string, file: File) {
     // Create a storage reference
+    console.log("uploading file", file);
+
     const storageRef = ref(storage, `${folderName}/${fileName}.${file.name.split(".")[1]}`);
 
     // Upload the file

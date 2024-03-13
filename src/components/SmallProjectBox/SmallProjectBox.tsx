@@ -3,10 +3,10 @@ import { ISmallProjectBoxProps, projectTabsList } from "../../types";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import CustomChip from "../CustomChip";
 
-interface ProjectBoxProps extends ISmallProjectBoxProps {
+interface SmallProjectBoxProps extends ISmallProjectBoxProps {
     index: number;
 }
-const ProjectBox = ({ name, gradient, id, type }: ProjectBoxProps) => {
+const SmallProjectBox = ({ name, gradient, id, type, mainImage }: SmallProjectBoxProps) => {
     const x = useMotionValue(0);
     const y = useMotionValue(0);
 
@@ -44,12 +44,15 @@ const ProjectBox = ({ name, gradient, id, type }: ProjectBoxProps) => {
                 }}
                 whileHover={{ scale: 0.98 }}
                 transition={{ type: "spring", stiffness: 400 }}
-                className="project_box border border-slate-200 cursor-pointer flex flex-col rounded-2xl  bg-gray-50"
+                className="project_box border border-slate-200 cursor-pointer flex flex-col rounded-2xl  bg-white"
             >
                 <div
-                    className={`w-full ${gradient} bg-center py-1 px-1 items-stretch flex  h-[20em] bg-cover rounded-tl-2xl rounded-tr-2xl`}
+                    className={`w-full ${gradient} bg-center p-8 items-stretch flex  h-[18em] bg-cover rounded-tl-2xl rounded-tr-2xl`}
                 >
-                    <div className="laptop bg-white w-full rounded-tl-2xl rounded-tr-2xl  thumbnail"></div>
+                    <div
+                        style={{ backgroundImage: `url(${mainImage})` }}
+                        className="laptop bg-transparent w-full rounded-lg shadow-2xl thumbnail"
+                    ></div>
                 </div>
                 <div className="info flex-1 flex flex-col mt-6 px-5 pb-5">
                     <div className="name_and_description mb-auto">
@@ -92,4 +95,4 @@ const ProjectBox = ({ name, gradient, id, type }: ProjectBoxProps) => {
     );
 };
 
-export default ProjectBox;
+export default SmallProjectBox;

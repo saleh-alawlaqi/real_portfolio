@@ -4,13 +4,13 @@ import IconBox from "../../boxes/IconBox";
 import { useRef } from "react";
 
 const IconSection = () => {
-    const { setIcons, icons } = useProjectForm();
+    const { setIcons, icons, error } = useProjectForm();
     const iconRef = useRef<HTMLInputElement>(null);
 
     const addIcon = (e: any) => {
         const { files } = e.target;
         if (!files) return;
-        setIcons((prev) => [...prev, { title: "something", path: files[0] }]);
+        setIcons((prev) => [...prev, ...files]);
     };
     const handleIconButton = () => {
         if (iconRef.current) {
@@ -19,7 +19,12 @@ const IconSection = () => {
     };
 
     return (
-        <div className="flex flex-col icons gap-5">
+        <div
+            id="icon_section"
+            className={`flex flex-col types gap-5 ${
+                error === "icon_section" ? "border-2 border-red-500" : ""
+            }`}
+        >
             <div className="colors-heading flex justify-between">
                 <span className="text-2xl">Icons</span>
                 <input onChange={addIcon} type="file" multiple ref={iconRef} hidden accept=".svg" />
@@ -38,12 +43,7 @@ const IconSection = () => {
                         ?.slice()
                         .reverse()
                         .map((icon, index) => (
-                            <IconBox
-                                index={icons.length - 1 - index}
-                                key={index}
-                                title={icon.title}
-                                path={icon.path}
-                            />
+                            <IconBox index={icons.length - 1 - index} key={index} path={icon} />
                         ))}
                 </div>
             )}

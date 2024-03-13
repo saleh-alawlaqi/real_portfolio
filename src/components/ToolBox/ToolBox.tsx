@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 interface ToolBoxProps {
     tool: tools;
+    bgColor?: string;
 }
 const toolToTooltip: { [key in tools]: string } = {
     react: "React",
@@ -29,7 +30,7 @@ const toolToTooltip: { [key in tools]: string } = {
     mysql: "MySQL",
     figma: "Figma",
 };
-const ToolBox = ({ tool }: ToolBoxProps) => {
+const ToolBox = ({ tool, bgColor }: ToolBoxProps) => {
     const [show, setShow] = useState(false);
 
     const handleShow = () => setShow(true);
@@ -52,7 +53,7 @@ const ToolBox = ({ tool }: ToolBoxProps) => {
             <span
                 onMouseEnter={handleShow}
                 onMouseLeave={handleHide}
-                className={`tool_box bg-white rounded-xl w-10 h-10 ${tool}`}
+                className={`tool_box ${bgColor} rounded-xl w-10 h-10 ${tool}`}
             ></span>
         </div>
     );

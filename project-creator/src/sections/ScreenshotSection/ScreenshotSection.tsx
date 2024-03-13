@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { useProjectForm } from "../../ProjectForm";
 
 const ScreenshotSection = () => {
-    const { setScreenshots, screenshots } = useProjectForm();
+    const { setScreenshots, screenshots, error } = useProjectForm();
     const screenshotsRef = useRef<HTMLInputElement>(null);
 
     const addScreenshot = (e: any) => {
@@ -18,7 +18,12 @@ const ScreenshotSection = () => {
         }
     };
     return (
-        <div className="flex flex-col screenshots gap-5">
+        <div
+            id="screenshot_section"
+            className={`flex flex-col highlights gap-5 ${
+                error === "screenshot_section" ? "border-2 border-red-500" : ""
+            }`}
+        >
             <div className="icons-heading flex justify-between">
                 <span className="text-2xl">Screenshots</span>
                 <input onChange={addScreenshot} type="file" multiple ref={screenshotsRef} hidden />

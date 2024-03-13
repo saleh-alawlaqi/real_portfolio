@@ -5,7 +5,7 @@ import { useState } from "react";
 import { tailwindColors } from "../../includes";
 
 const ColorSection = () => {
-    const { setProject, project } = useProjectForm();
+    const { setProject, project, error } = useProjectForm();
     const [selectedTailwindColor, setSelectedTailwindColor] = useState<string>("Green");
     const addColorSection = () => {
         setProject((prev) => ({
@@ -39,7 +39,12 @@ const ColorSection = () => {
     };
 
     return (
-        <div className="flex flex-col colors gap-5">
+        <div
+            id="color_section"
+            className={`flex flex-col colors gap-5 ${
+                error === "color_section" ? "border-2 border-red-500" : ""
+            }`}
+        >
             <div className="colors-heading flex justify-between">
                 <span className="text-2xl">Colors</span>
 
@@ -50,6 +55,7 @@ const ColorSection = () => {
                         className="flex-1"
                         labelPlacement="outside"
                         value={"Green"}
+                        selectedKeys={[selectedTailwindColor]}
                         onChange={(e) => setSelectedTailwindColor(e.target.value as string)}
                     >
                         <SelectItem key={"Green"} value={"Green"}>

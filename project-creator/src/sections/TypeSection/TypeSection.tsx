@@ -3,7 +3,7 @@ import { useProjectForm } from "../../ProjectForm";
 import TypeBox from "../../boxes/TypeBox";
 
 const TypeSection = () => {
-    const { setProject, project } = useProjectForm();
+    const { setProject, project, error } = useProjectForm();
     const addType = () => {
         setProject((prev) => ({
             ...prev,
@@ -20,7 +20,12 @@ const TypeSection = () => {
         }));
     };
     return (
-        <div className="flex flex-col types gap-5">
+        <div
+            id="type_section"
+            className={`flex flex-col types gap-5 ${
+                error === "type_section" ? "border-2 border-red-500" : ""
+            }`}
+        >
             <div className="colors-heading flex justify-between">
                 <span className="text-2xl">Typography</span>
                 <Button

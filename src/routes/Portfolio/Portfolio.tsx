@@ -1,18 +1,22 @@
 import CTA from "../../components/CTA";
 import PageHeader from "../../components/PageHeader";
 import PortfolioTabs from "./PortfolioTabs";
-import ProjectBox from "../../components/ProjectBox/ProjectBox";
+import ProjectBox from "../../components/SmallProjectBox/SmallProjectBox";
 import { usePortfolioContext } from "./PortfolioContext";
 import { projectTabsList } from "../../types";
 import { AnimatePresence } from "framer-motion";
+import Header from "../../components/Header";
+import { useAppContext } from "../../App";
 
 const Portfolio = () => {
-    const { projects, activeTab } = usePortfolioContext();
+    const { activeTab } = usePortfolioContext();
+    const { projects } = useAppContext();
     return (
         <div className="flex flex-col w-full items-center">
+            <Header />
             <div className="flex mt-12 flex-col lg:max-w-[1300px] w-[90%] ">
                 <div className="flex flex-col">
-                    <PageHeader path="Portfolio">Browse All Of My Projects</PageHeader>
+                    <PageHeader path="Portfolio">Browse all of my projects</PageHeader>
                     <div className="search_box_and_types mt-5 flex flex-col space-y-4 lg:space-y-0 lg:space-x-10 lg:flex-row lg:items-center lg:justify-between">
                         <input
                             type="text"

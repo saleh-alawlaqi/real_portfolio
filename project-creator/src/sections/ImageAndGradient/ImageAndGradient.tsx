@@ -1,21 +1,42 @@
-import { Select, SelectItem } from "@nextui-org/react";
+import { Button, Select, SelectItem } from "@nextui-org/react";
 import MainImage from "../../boxes/MainImage";
 import { useProjectForm } from "../../ProjectForm";
 import { gradients } from "../../../../src/types";
+import { useRef } from "react";
 
 const ImageAndGradient = () => {
-    const { project, setProject, previewMainImage, handleMainImageChange } = useProjectForm();
+    const { project, setProject, previewMainImage, handleMainImageChange, error } =
+        useProjectForm();
+    const fileRef = useRef<HTMLInputElement>(null);
+
+    const onClickFile = () => {
+        if (fileRef.current) {
+            fileRef.current.click();
+        }
+    };
     return (
         <div className="flex gap-5 image-and-gradient">
-            <div className="flex flex-1 flex-col gap-5">
+            <div
+                className={`flex flex-1 flex-col gap-5 ${
+                    error === "main_image" ? "border-2 border-red-500" : ""
+                }`}
+            >
                 <input
                     placeholder="Main Image"
                     name="mainImage"
+                    hidden
                     type="file"
+                    ref={fileRef}
+                    id="main_image"
                     className="flex-1"
                     onChange={handleMainImageChange}
                 />
-
+                <div className="flex flex-col">
+                    <span className="text-sm">Main image</span>
+                    <Button onClick={onClickFile} className="w-full mt-2">
+                        Upload main image
+                    </Button>
+                </div>
                 <MainImage image={previewMainImage} />
             </div>
             <div className="flex flex-1 flex-col gap-5">
@@ -24,6 +45,10 @@ const ImageAndGradient = () => {
                     name="gradient"
                     value={project.gradient}
                     label="Gradient"
+                    id="gradient"
+                    classNames={
+                        error === "gradient" ? { base: "border-2 border-red-500" } : { base: "" }
+                    }
                     labelPlacement="outside"
                     onChange={(e) =>
                         setProject((prev) => ({

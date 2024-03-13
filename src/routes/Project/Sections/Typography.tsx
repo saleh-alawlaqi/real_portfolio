@@ -8,7 +8,6 @@ const Typography = () => {
     return (
         <div className="flex flex-col gap-5">
             <h3 className="font-gt_light text-slate-600 text-[32px]">Typography</h3>
-            <hr />
             {types && (
                 <div className="flex flex-col color-sections gap-5">
                     {types.map(({ fontFamily, fontSize, fontWeight, lineHeight, title }) => (

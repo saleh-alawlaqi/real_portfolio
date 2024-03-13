@@ -8,7 +8,6 @@ const Colors = () => {
     return (
         <div className="flex flex-col gap-5">
             <h3 className="font-gt_light text-slate-600 text-[32px]">Colors</h3>
-            <hr />
             {colors && (
                 <div className="flex flex-col color-sections gap-5">
                     {colors.map((color, i) => (
