@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 
 const Header = () => {
     return (
-        <div className="flex mt-10 z-20 w-full bd bg-transparent flex-col items-center">
-            <div className="flex items-center bd justify-between w-[90%] rounded-xl lg:max-w-[1300px]">
+        <div className="flex mt-10 z-20 w-full bg-transparent flex-col items-center">
+            <div className="flex items-center justify-between w-[90%] rounded-xl lg:max-w-[1300px]">
                 <motion.div
                     initial={{ opacity: 0, scale: 0 }}
                     transition={{ delay: 0.2 }}
