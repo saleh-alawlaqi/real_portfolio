@@ -1,6 +1,6 @@
 import { Button } from "@nextui-org/react";
-import { useProjectForm } from "../../ProjectForm";
-import TypeBox from "../../boxes/TypeBox";
+import { useProjectForm } from "../../../AddProject/ProjectForm";
+import TypeBox from "../../../../boxes/TypeBox";
 
 const TypeSection = () => {
     const { setProject, project, error } = useProjectForm();

@@ -1,9 +1,9 @@
 import { Button, Textarea, Checkbox } from "@nextui-org/react";
 import { createContext, useContext, useEffect, useState } from "react";
-import { db, uploadFile } from "./firebase-config";
+import { db, uploadFile } from "../../firebase-config";
 import { collection, addDoc } from "firebase/firestore";
-import { IProject } from "../../src/types"; // Assume these are defined in types.ts
-import TypeAndName from "./sections/TypeAndName";
+import { IProject } from "../../../../src/types"; // Assume these are defined in types.ts
+import TypeAndName from "../../includes/TypeAndName";
 import GithubAndDemo from "./sections/GithubAndDemo";
 import ImageAndGradient from "./sections/ImageAndGradient";
 import ToolsAndSmallDesc from "./sections/ToolsAndSmallDesc";
@@ -12,6 +12,7 @@ import TypeSection from "./sections/TypeSection";
 import IconSection from "./sections/IconSection";
 import HighlightSection from "./sections/HighlightSection";
 import ScreenshotSection from "./sections/ScreenshotSection";
+import { Link } from "react-router-dom";
 
 interface ProjectFormProps {
     project: IProject;
@@ -265,10 +266,30 @@ const ProjectForm = () => {
                 <div className="flex flex-col info gap-5">
                     <div className="colors-heading flex justify-between">
                         <span className="text-2xl">Add a new project</span>
-                        <Button onClick={onResetProject}>Reset project</Button>
+                        <div className="flex gap-5">
+                            <Button as={Link} to="/" variant="solid" color="primary">
+                                Go home
+                            </Button>
+                            <Button onClick={onResetProject}>Reset project</Button>
+                        </div>
                     </div>
 
-                    <TypeAndName />
+                    <TypeAndName
+                        name={project.name}
+                        type={project.type}
+                        error={error}
+                        onChangeName={(e) => handleChangeWithWordCount(e, 5)}
+                        onChangeType={(e) =>
+                            setProject((prev) => ({
+                                ...prev,
+                                type: e.target.value as
+                                    | "software"
+                                    | "frontend"
+                                    | "noCode"
+                                    | "uiDesign",
+                            }))
+                        }
+                    />
                     <GithubAndDemo />
                     <ImageAndGradient />
                     <ToolsAndSmallDesc />

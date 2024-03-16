@@ -1,6 +1,6 @@
 import { Button, Input } from "@nextui-org/react";
 import ColorBox from "../ColorBox";
-import { useProjectForm } from "../../ProjectForm";
+import { useProjectForm } from "../../pages/AddProject/ProjectForm";
 interface ColorPaletteProps {
     index: number;
     title: string;

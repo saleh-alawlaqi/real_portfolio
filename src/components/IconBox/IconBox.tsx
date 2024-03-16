@@ -3,9 +3,8 @@ import { useState } from "react";
 
 interface IconBoxProps {
     path: string;
-    title: string;
 }
-const IconBox = ({ path, title }: IconBoxProps) => {
+const IconBox = ({ path }: IconBoxProps) => {
     const [showIcon, setShowIcon] = useState(false);
 
     const onShowIcon = () => setShowIcon(true);
@@ -41,7 +40,7 @@ const IconBox = ({ path, title }: IconBoxProps) => {
                         exit="exit"
                         className="bg-black bg-opacity-60 rounded-xl text-[14px] font-bold font-inter text-white p-2 px-3 bottom-[105%] absolute w-max "
                     >
-                        {title}
+                        {"title"}
                     </motion.span>
                 )}
             </AnimatePresence>

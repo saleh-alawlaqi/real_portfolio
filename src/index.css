@@ -70,7 +70,7 @@ body {
     transition: all 150ms ease-in-out;
 }
 .project-slide {
-    background: url(./assets/project-1.png) center/cover no-repeat;
+    background: center/cover no-repeat;
 }
 .project-slide-container {
     transition-behavior: smooth;

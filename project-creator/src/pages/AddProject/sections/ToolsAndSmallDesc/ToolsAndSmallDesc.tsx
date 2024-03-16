@@ -1,7 +1,7 @@
 import { Listbox, ListboxItem, Textarea } from "@nextui-org/react";
-import { ListboxWrapper } from "../../ListBoxWrapper";
-import { useProjectForm } from "../../ProjectForm";
-import { tools } from "../../../../src/types";
+import { ListboxWrapper } from "../../../../ListBoxWrapper";
+import { useProjectForm } from "../../../AddProject/ProjectForm";
+import { tools } from "../../../../../../src/types";
 
 const ToolsAndSmallDesc = () => {
     const { project, setProject, handleChange, error } = useProjectForm();

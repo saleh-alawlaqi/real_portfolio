@@ -1,6 +1,6 @@
 import { Button } from "@nextui-org/react";
 import { useEffect, useState } from "react";
-import { useProjectForm } from "../../ProjectForm";
+import { useProjectForm } from "../../pages/AddProject/ProjectForm";
 
 interface ScreenshotBoxProps {
     index: number;

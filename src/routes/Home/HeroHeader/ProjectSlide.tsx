@@ -1,7 +1,14 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { NavLink } from "react-router-dom";
 
-const ProjectSlide = () => {
+interface ProjectSlideProps {
+    projectImage?: string;
+    id?: string;
+    gradient?: string;
+}
+
+const ProjectSlide = ({ id, projectImage, gradient }: ProjectSlideProps) => {
     // State to track the hover status
     const [isHovered, setIsHovered] = useState(false);
 
@@ -10,17 +17,17 @@ const ProjectSlide = () => {
 
     return (
         <div
-            className={`project-slide-container ${
-                isHovered ? "scale-125 opacity-100 !z-10" : "opacity-50 !-z-10"
-            }`}
+            className={`project-slide-container opacity-50 ml-3 !-z-10 rounded-2xl w-[220px] ${gradient} p-[3px] h-[130px] lg:w-[320px] lg:h-[200px] hover:opacity-100 hover:!z-10`}
         >
-            <motion.div
-                className="relative flex w-[220px] h-[130px] xl:w-[240px] xl:h-[170px] ml-3 items-center justify-center"
-                onMouseEnter={onMouseEnterHandler}
-                onMouseLeave={onMouseLeaveHandler}
+            <NavLink
+                to={`/project/${id}`}
+                className="relative flex w-full h-full items-center justify-center"
             >
-                <div className="project-slide w-full h-full relative cursor-pointer rounded-2xl"></div>
-            </motion.div>
+                <div
+                    style={{ backgroundImage: `url(${projectImage})` }}
+                    className="project-slide w-full h-full relative cursor-pointer rounded-2xl"
+                ></div>
+            </NavLink>
         </div>
     );
 };

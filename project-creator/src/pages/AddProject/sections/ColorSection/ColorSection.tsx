@@ -1,8 +1,8 @@
 import { Button, Select, SelectItem } from "@nextui-org/react";
-import { useProjectForm } from "../../ProjectForm";
-import ColorPalette from "../../boxes/ColorPalette";
+import { useProjectForm } from "../../../AddProject/ProjectForm";
+import ColorPalette from "../../../../boxes/ColorPalette";
 import { useState } from "react";
-import { tailwindColors } from "../../includes";
+import { tailwindColors } from "../../../../includes";
 
 const ColorSection = () => {
     const { setProject, project, error } = useProjectForm();

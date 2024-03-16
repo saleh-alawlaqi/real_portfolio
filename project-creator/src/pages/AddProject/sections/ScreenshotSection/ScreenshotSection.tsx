@@ -1,5 +1,5 @@
 import { Button } from "@nextui-org/react";
-import ScreenshotBox from "../../boxes/ScreenshotBox";
+import ScreenshotBox from "../../../../boxes/ScreenshotBox";
 import { useRef } from "react";
 import { useProjectForm } from "../../ProjectForm";
 

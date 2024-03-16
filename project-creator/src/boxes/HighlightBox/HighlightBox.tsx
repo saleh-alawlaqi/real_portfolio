@@ -1,6 +1,6 @@
 import { Button, Input } from "@nextui-org/react";
 import React from "react";
-import { useProjectForm } from "../../ProjectForm";
+import { useProjectForm } from "../../pages/AddProject/ProjectForm";
 
 interface HighlightBoxProps {
     title: string;

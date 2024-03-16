@@ -1,28 +1,28 @@
 import { Input, Select, SelectItem } from "@nextui-org/react";
-import { useProjectForm } from "../../ProjectForm";
 
-const TypeAndName = () => {
-    const { setProject, handleChangeWithWordCount, error, project } = useProjectForm();
+interface TypeAndNameProps {
+    type: "software" | "frontend" | "noCode" | "uiDesign";
+    name: string;
+    error: string;
+    onChangeName: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onChangeType: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+}
 
-    const projectNameWords = project.name.split(" ").length;
+const TypeAndName = ({ name, error, onChangeName, onChangeType, type }: TypeAndNameProps) => {
+    const projectNameWords = name.split(" ").length;
     return (
         <div className="flex gap-5 type-and-name items-start">
             <Select
                 placeholder="Select Type"
                 name="type"
                 value={"software"}
-                selectedKeys={[project.type]}
+                selectedKeys={[type]}
                 className="flex-1"
                 label="Type"
                 classNames={error === "type" ? { base: "border-2 border-red-500" } : { base: "" }}
                 id="type"
                 labelPlacement="outside"
-                onChange={(e) =>
-                    setProject((prev) => ({
-                        ...prev,
-                        type: e.target.value as "software" | "frontend" | "noCode" | "uiDesign",
-                    }))
-                }
+                onChange={onChangeType}
             >
                 <SelectItem key="software" value="software">
                     Software
@@ -43,14 +43,14 @@ const TypeAndName = () => {
                     label="Project Name"
                     id="project_name"
                     placeholder="Project Name"
-                    value={project.name}
+                    value={name}
                     name="name"
                     classNames={
                         error === "project_name"
                             ? { base: "border-2 border-red-500" }
                             : { base: "" }
                     }
-                    onChange={(e) => handleChangeWithWordCount(e, 5)}
+                    onChange={onChangeName}
                 />
                 <span className="mt-2">Max words: {projectNameWords}/5</span>
             </div>

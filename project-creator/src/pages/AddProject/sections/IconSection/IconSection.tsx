@@ -1,6 +1,6 @@
 import { Button } from "@nextui-org/react";
-import { useProjectForm } from "../../ProjectForm";
-import IconBox from "../../boxes/IconBox";
+import { useProjectForm } from "../../../AddProject/ProjectForm";
+import IconBox from "../../../../boxes/IconBox";
 import { useRef } from "react";
 
 const IconSection = () => {

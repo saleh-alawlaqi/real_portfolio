@@ -1,7 +1,4 @@
 import { useProjectContext } from "./ProjectContext";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, A11y, EffectCoverflow } from "swiper/modules";
-import Screenshot from "./Screenshot";
 import { motion } from "framer-motion";
 const ProjectScreenshots = () => {
     const { project } = useProjectContext();

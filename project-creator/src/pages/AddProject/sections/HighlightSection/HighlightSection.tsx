@@ -1,5 +1,5 @@
 import { Button } from "@nextui-org/react";
-import HighlightBox from "../../boxes/HighlightBox/HighlightBox";
+import HighlightBox from "../../../../boxes/HighlightBox/HighlightBox";
 import { useProjectForm } from "../../ProjectForm";
 
 const HighlightSection = () => {

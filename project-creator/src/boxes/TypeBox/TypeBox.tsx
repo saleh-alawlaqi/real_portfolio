@@ -1,5 +1,5 @@
 import { Button, Input, Select, SelectItem } from "@nextui-org/react";
-import { useProjectForm } from "../../ProjectForm";
+import { useProjectForm } from "../../pages/AddProject/ProjectForm";
 
 interface TypeBoxProps {
     index: number;

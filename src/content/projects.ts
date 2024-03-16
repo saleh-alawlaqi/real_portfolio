@@ -69,12 +69,7 @@ export const projectsList: IProject[] = [
                 fontFamily: "Inter",
             },
         ],
-        icons: [
-            {
-                title: "Icon 1",
-                path: "C:\\Users\\alexs\\Desktop\\search.svg",
-            },
-        ],
+        icons: [],
     },
     // },
     // {

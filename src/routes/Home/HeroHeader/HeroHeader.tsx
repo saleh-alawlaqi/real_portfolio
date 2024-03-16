@@ -26,7 +26,7 @@ const HeroHeader = () => {
                     View Portfolio
                 </CustomButton>
             </div>
-            <ProjectsMarquee id="first_marquee" direction="left" projects={["1", "2", "3"]} />
+            <ProjectsMarquee id="first_marquee" direction="left" />
         </motion.div>
     );
 };

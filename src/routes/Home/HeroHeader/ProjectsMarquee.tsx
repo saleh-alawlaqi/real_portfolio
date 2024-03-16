@@ -1,13 +1,14 @@
 import Marquee from "react-fast-marquee";
 import ProjectSlide from "./ProjectSlide";
+import { useAppContext } from "../../../App";
 
 interface ProjectsMarqueeProps {
-    projects: string[];
     direction?: "down" | "left" | "right" | "up";
     id?: string;
 }
 
 const ProjectsMarquee = ({ direction, id }: ProjectsMarqueeProps) => {
+    const { projects } = useAppContext();
     return (
         <div
             id={id}
@@ -21,8 +22,13 @@ const ProjectsMarquee = ({ direction, id }: ProjectsMarqueeProps) => {
                 direction={direction}
                 className="flex relative !overflow-visible"
             >
-                {[...Array(20)].map((_, index) => (
-                    <ProjectSlide key={index} />
+                {projects.map((project, index) => (
+                    <ProjectSlide
+                        id={project.id}
+                        gradient={project.gradient}
+                        projectImage={project.mainImage}
+                        key={index}
+                    />
                 ))}
             </Marquee>
         </div>

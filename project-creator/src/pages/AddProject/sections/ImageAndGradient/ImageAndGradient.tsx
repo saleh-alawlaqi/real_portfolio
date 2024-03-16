@@ -1,6 +1,6 @@
 import { Button, Select, SelectItem } from "@nextui-org/react";
-import MainImage from "../../boxes/MainImage";
-import { useProjectForm } from "../../ProjectForm";
+import MainImage from "../../../../boxes/MainImage";
+import { useProjectForm } from "../../../AddProject/ProjectForm";
 import { gradients } from "../../../../src/types";
 import { useRef } from "react";
 

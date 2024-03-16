@@ -11,7 +11,7 @@ const Icons = () => {
             {icons && (
                 <div className="flex flex-wrap color-sections gap-5">
                     {icons.map((icon) => (
-                        <IconBox {...icon} />
+                        <IconBox path={icon} />
                     ))}
                 </div>
             )}

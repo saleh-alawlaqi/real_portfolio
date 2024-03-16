@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useProjectForm } from "../../ProjectForm";
 import { Button } from "@nextui-org/react";
+import { useProjectForm } from "../../pages/AddProject/ProjectForm";
 
 interface MainImageProps {
     image: File | null;
