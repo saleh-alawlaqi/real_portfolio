@@ -1,15 +1,23 @@
 import { Listbox, ListboxItem, Textarea } from "@nextui-org/react";
-import { ListboxWrapper } from "../../../../ListBoxWrapper";
-import { useProjectForm } from "../../../AddProject/ProjectForm";
-import { tools } from "../../../../../../src/types";
+import { ListboxWrapper } from "../../ListBoxWrapper";
+import { useProjectForm } from "../../pages/AddProject/ProjectForm";
+import { tools } from "../../../../src/types";
 
-const ToolsAndSmallDesc = () => {
-    const { project, setProject, handleChange, error } = useProjectForm();
-    const handleTools = (keys: any) => {
-        const myArray = Array.from(keys) as tools[];
+interface ToolsAndSmallDescProps {
+    error: string;
+    tools: tools[];
+    smallDescription: string;
+    onChangeTools: (keys: any) => void;
+    onChangeSmallDescription: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
-        setProject((prev) => ({ ...prev, tools: myArray }));
-    };
+const ToolsAndSmallDesc = ({
+    error,
+    onChangeSmallDescription,
+    onChangeTools,
+    smallDescription,
+    tools,
+}: ToolsAndSmallDescProps) => {
     return (
         <div className="flex items-stretch gap-5">
             <ListboxWrapper label="Tools">
@@ -22,8 +30,8 @@ const ToolsAndSmallDesc = () => {
                     classNames={
                         error === "tools" ? { base: "border-2 border-red-500" } : { base: "" }
                     }
-                    selectedKeys={project.tools}
-                    onSelectionChange={handleTools}
+                    selectedKeys={tools}
+                    onSelectionChange={onChangeTools}
                 >
                     <ListboxItem key="react">React</ListboxItem>
                     <ListboxItem key="vue">Vue</ListboxItem>
@@ -56,7 +64,7 @@ const ToolsAndSmallDesc = () => {
                 placeholder="Small Description"
                 id="small_description"
                 name="smallDescription"
-                value={project.smallDescription}
+                value={smallDescription}
                 classNames={{
                     input: "flex-1",
                     base:
@@ -64,7 +72,7 @@ const ToolsAndSmallDesc = () => {
                     mainWrapper: "flex-1",
                     inputWrapper: "flex-1",
                 }}
-                onChange={handleChange}
+                onChange={onChangeSmallDescription}
             />
         </div>
     );

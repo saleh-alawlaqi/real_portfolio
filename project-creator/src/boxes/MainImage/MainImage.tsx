@@ -1,18 +1,17 @@
 import { useEffect, useState } from "react";
 import { Button } from "@nextui-org/react";
-import { useProjectForm } from "../../pages/AddProject/ProjectForm";
 
 interface MainImageProps {
-    image: File | null;
+    image: File | string;
+    onRemoveImage: () => void;
 }
 
-const MainImage = ({ image }: MainImageProps) => {
+const MainImage = ({ image, onRemoveImage }: MainImageProps) => {
     const [preview, setPreview] = useState<string>("");
-    const { setScreenshots, setPreviewMainImage, previewMainImage } = useProjectForm();
 
     useEffect(() => {
         const handleFileChange = () => {
-            if (image) {
+            if (image && typeof image !== "string") {
                 const reader = new FileReader();
                 reader.onloadend = () => {
                     setPreview(reader.result as string);
@@ -25,16 +24,14 @@ const MainImage = ({ image }: MainImageProps) => {
         handleFileChange();
     }, [image]);
 
-    const onRemove = () => {
-        setPreviewMainImage(null);
-    };
     return (
         <div className="flex relative">
-            {previewMainImage && (
+            {image && (
                 <Button
                     isIconOnly
                     variant="solid"
                     size="sm"
+                    onClick={onRemoveImage}
                     color="danger"
                     className="close absolute right-2 top-2"
                 />

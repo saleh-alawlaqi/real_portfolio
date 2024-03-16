@@ -5,39 +5,19 @@ import { useProjectForm } from "../../pages/AddProject/ProjectForm";
 interface HighlightBoxProps {
     title: string;
     index: number;
+    onChangeTitle: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
+    onRemove: (index: number) => void;
 }
-const HighlightBox = ({ index, title }: HighlightBoxProps) => {
-    const { setProject } = useProjectForm();
-    const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setProject((prev) => {
-            return {
-                ...prev,
-                highlights: prev.highlights.map((highlight, i) => {
-                    if (i === index) {
-                        return e.target.value;
-                    }
-                    return highlight;
-                }),
-            };
-        });
-    };
-    const onRemove = () => {
-        setProject((prev) => {
-            return {
-                ...prev,
-                highlights: prev.highlights.filter((_, i) => i !== index),
-            };
-        });
-    };
+const HighlightBox = ({ index, title, onChangeTitle, onRemove }: HighlightBoxProps) => {
     return (
         <div className="flex w-full border shadow-medium rounded-lg border-slate-200 p-5 justify-between gap-5">
             <Input
                 value={title}
                 labelPlacement="outside"
                 className="flex-1"
-                onChange={onChangeTitle}
+                onChange={(e) => onChangeTitle(e, index)}
             />
-            <Button variant="solid" color="danger" onClick={onRemove}>
+            <Button variant="solid" color="danger" onClick={() => onRemove(index)}>
                 Remove
             </Button>
         </div>

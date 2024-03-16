@@ -1,17 +1,17 @@
 import { Button } from "@nextui-org/react";
-import { useProjectForm } from "../../../AddProject/ProjectForm";
-import IconBox from "../../../../boxes/IconBox";
+import { useProjectForm } from "../../pages/AddProject/ProjectForm";
+import IconBox from "../../boxes/IconBox";
 import { useRef } from "react";
 
-const IconSection = () => {
-    const { setIcons, icons, error } = useProjectForm();
+interface IconSectionProps {
+    error: string;
+    onAddIcon: (e: any) => void;
+    icons: (string | File)[];
+    onRemoveIcon: (index: number) => void;
+}
+const IconSection = ({ error, onAddIcon, icons, onRemoveIcon }: IconSectionProps) => {
     const iconRef = useRef<HTMLInputElement>(null);
 
-    const addIcon = (e: any) => {
-        const { files } = e.target;
-        if (!files) return;
-        setIcons((prev) => [...prev, ...files]);
-    };
     const handleIconButton = () => {
         if (iconRef.current) {
             iconRef.current.click();
@@ -27,7 +27,14 @@ const IconSection = () => {
         >
             <div className="colors-heading flex justify-between">
                 <span className="text-2xl">Icons</span>
-                <input onChange={addIcon} type="file" multiple ref={iconRef} hidden accept=".svg" />
+                <input
+                    onChange={onAddIcon}
+                    type="file"
+                    multiple
+                    ref={iconRef}
+                    hidden
+                    accept=".svg"
+                />
                 <Button
                     onClick={handleIconButton}
                     className="rounded-full font-medium"
@@ -43,7 +50,12 @@ const IconSection = () => {
                         ?.slice()
                         .reverse()
                         .map((icon, index) => (
-                            <IconBox index={icons.length - 1 - index} key={index} path={icon} />
+                            <IconBox
+                                onRemove={onRemoveIcon}
+                                index={icons.length - 1 - index}
+                                key={index}
+                                path={icon}
+                            />
                         ))}
                 </div>
             )}

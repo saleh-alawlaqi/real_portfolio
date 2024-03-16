@@ -1,12 +1,25 @@
 import { Button, Select, SelectItem } from "@nextui-org/react";
-import MainImage from "../../../../boxes/MainImage";
-import { useProjectForm } from "../../../AddProject/ProjectForm";
+import MainImage from "../../boxes/MainImage";
 import { gradients } from "../../../../src/types";
 import { useRef } from "react";
 
-const ImageAndGradient = () => {
-    const { project, setProject, previewMainImage, handleMainImageChange, error } =
-        useProjectForm();
+interface ImageAndGradientProps {
+    error: string;
+    mainImage: string | File;
+    gradient: gradients;
+    onChangeMainImage: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onChangeGradient: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+    onRemoveImage: () => void;
+}
+
+const ImageAndGradient = ({
+    error,
+    mainImage,
+    onChangeGradient,
+    onChangeMainImage,
+    onRemoveImage,
+    gradient,
+}: ImageAndGradientProps) => {
     const fileRef = useRef<HTMLInputElement>(null);
 
     const onClickFile = () => {
@@ -29,7 +42,7 @@ const ImageAndGradient = () => {
                     ref={fileRef}
                     id="main_image"
                     className="flex-1"
-                    onChange={handleMainImageChange}
+                    onChange={onChangeMainImage}
                 />
                 <div className="flex flex-col">
                     <span className="text-sm">Main image</span>
@@ -37,25 +50,21 @@ const ImageAndGradient = () => {
                         Upload main image
                     </Button>
                 </div>
-                <MainImage image={previewMainImage} />
+                <MainImage onRemoveImage={onRemoveImage} image={mainImage} />
             </div>
             <div className="flex flex-1 flex-col gap-5">
                 <Select
                     placeholder="Select gradients"
                     name="gradient"
-                    value={project.gradient}
+                    value={gradient}
                     label="Gradient"
+                    selectedKeys={[gradient]}
                     id="gradient"
                     classNames={
                         error === "gradient" ? { base: "border-2 border-red-500" } : { base: "" }
                     }
                     labelPlacement="outside"
-                    onChange={(e) =>
-                        setProject((prev) => ({
-                            ...prev,
-                            gradient: e.target.value as gradients,
-                        }))
-                    }
+                    onChange={onChangeGradient}
                 >
                     <SelectItem key="gradient-1" value="gradient-1">
                         gradient-1
@@ -97,7 +106,7 @@ const ImageAndGradient = () => {
                         gradient-13
                     </SelectItem>
                 </Select>
-                <div className={`w-full h-40 rounded-lg ${project.gradient} bg-slate-400`}></div>
+                <div className={`w-full h-40 rounded-lg ${gradient} bg-slate-400`}></div>
             </div>
         </div>
     );

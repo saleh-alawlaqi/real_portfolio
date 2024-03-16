@@ -1,5 +1,4 @@
 import { Button, Input, Select, SelectItem } from "@nextui-org/react";
-import { useProjectForm } from "../../pages/AddProject/ProjectForm";
 
 interface TypeBoxProps {
     index: number;
@@ -8,72 +7,38 @@ interface TypeBoxProps {
     lineHeight: string;
     fontSize: string;
     title: string;
+    onChangeFontSize: (e: React.ChangeEvent<HTMLSelectElement>, index: number) => void;
+    onChangeTitle: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
+    onChangeFontFamily: (e: React.ChangeEvent<HTMLSelectElement>, index: number) => void;
+    onRemove: (index: number) => void;
 }
 
-const TypeBox = ({ index, fontWeight, fontFamily, lineHeight, fontSize, title }: TypeBoxProps) => {
-    const { setProject } = useProjectForm();
-    const onChangeFontSize = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        setProject((prev) => {
-            return {
-                ...prev,
-                types: prev.types?.map((type, i) => {
-                    if (i === index) {
-                        return { ...type, fontSize: e.target.value };
-                    }
-                    return type;
-                }),
-            };
-        });
-    };
-    const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setProject((prev) => {
-            return {
-                ...prev,
-                types: prev.types?.map((type, i) => {
-                    if (i === index) {
-                        return { ...type, title: e.target.value };
-                    }
-                    return type;
-                }),
-            };
-        });
-    };
-    const onChangeFontFamily = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        setProject((prev) => {
-            return {
-                ...prev,
-                types: prev.types?.map((type, i) => {
-                    if (i === index) {
-                        return { ...type, fontFamily: e.target.value };
-                    }
-                    return type;
-                }),
-            };
-        });
-    };
-
-    const onRemove = () => {
-        setProject((prev) => {
-            return {
-                ...prev,
-                types: prev.types.filter((_, i) => i !== index),
-            };
-        });
-    };
+const TypeBox = ({
+    index,
+    fontWeight,
+    fontFamily,
+    lineHeight,
+    fontSize,
+    title,
+    onChangeFontFamily,
+    onChangeFontSize,
+    onChangeTitle,
+    onRemove,
+}: TypeBoxProps) => {
     return (
         <div className="type-box border shadow-medium rounded-lg border-slate-200 p-5 items-center flex gap-2 justify-between w-full">
             <Input
                 value={title}
                 style={{ fontSize, fontFamily, fontWeight, lineHeight }}
                 className="w-[48%]"
-                onChange={onChangeTitle}
+                onChange={(e) => onChangeTitle(e, index)}
                 placeholder="Line Height"
                 name="lineHeight"
             />
             <div className="type-info items-center flex w-[48%] gap-2">
                 <Select
                     value={fontSize}
-                    onChange={onChangeFontSize}
+                    onChange={(e) => onChangeFontSize(e, index)}
                     size="sm"
                     placeholder="Size"
                     name="fontSize"
@@ -129,7 +94,7 @@ const TypeBox = ({ index, fontWeight, fontFamily, lineHeight, fontSize, title }:
                 </Select>
                 <Select
                     value={fontFamily}
-                    onChange={onChangeFontFamily}
+                    onChange={(e) => onChangeFontFamily(e, index)}
                     size="sm"
                     placeholder="Font family"
                     name="fontFamily"
@@ -178,7 +143,7 @@ const TypeBox = ({ index, fontWeight, fontFamily, lineHeight, fontSize, title }:
                     </SelectItem>
                 </Select>
 
-                <Button onClick={onRemove} variant="solid" color="danger">
+                <Button onClick={() => onRemove(index)} variant="solid" color="danger">
                     Remove
                 </Button>
             </div>

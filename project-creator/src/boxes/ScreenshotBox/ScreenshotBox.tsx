@@ -4,15 +4,15 @@ import { useProjectForm } from "../../pages/AddProject/ProjectForm";
 
 interface ScreenshotBoxProps {
     index: number;
-    screenshot: File;
+    screenshot: File | string;
+    onRemove: (index: number) => void;
 }
 
-const ScreenshotBox = ({ index, screenshot }: ScreenshotBoxProps) => {
+const ScreenshotBox = ({ index, screenshot, onRemove }: ScreenshotBoxProps) => {
     const [preview, setPreview] = useState<string>("");
-    const { setScreenshots } = useProjectForm();
     useEffect(() => {
         const handleFileChange = () => {
-            if (screenshot) {
+            if (screenshot && typeof screenshot !== "string") {
                 const reader = new FileReader();
                 reader.onloadend = () => {
                     setPreview(reader.result as string);
@@ -25,10 +25,6 @@ const ScreenshotBox = ({ index, screenshot }: ScreenshotBoxProps) => {
         handleFileChange();
     }, [screenshot]);
 
-    const onRemove = () => {
-        setScreenshots((prev) => prev.filter((_, i) => i !== index));
-    };
-
     return (
         <div className="flex flex-col border shadow-medium rounded-lg border-slate-200 p-4 gap-4">
             <img
@@ -36,7 +32,13 @@ const ScreenshotBox = ({ index, screenshot }: ScreenshotBoxProps) => {
                 key={index}
                 src={preview}
             />
-            <Button size="sm" onClick={onRemove} className="w-full" variant="solid" color="danger">
+            <Button
+                size="sm"
+                onClick={() => onRemove(index)}
+                className="w-full"
+                variant="solid"
+                color="danger"
+            >
                 Remove
             </Button>
         </div>

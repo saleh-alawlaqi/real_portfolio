@@ -1,41 +1,43 @@
 import { Button, Select, SelectItem } from "@nextui-org/react";
-import { useProjectForm } from "../../../AddProject/ProjectForm";
-import ColorPalette from "../../../../boxes/ColorPalette";
+import ColorPalette from "../../boxes/ColorPalette";
 import { useState } from "react";
-import { tailwindColors } from "../../../../includes";
+import { tailwindColors } from "../../includes";
 
-const ColorSection = () => {
-    const { setProject, project, error } = useProjectForm();
+interface ColorSectionProps {
+    error: string;
+    onAddColorSection: (colors: any) => void;
+    colors: any[];
+    onAddColor: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, index: number) => void;
+    onRemoveColorPalette: (index: number) => void;
+    onChangeColorTitle: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
+}
+
+const ColorSection = ({
+    error,
+    onAddColor,
+    colors,
+    onAddColorSection,
+    onChangeColorTitle,
+    onRemoveColorPalette,
+}: ColorSectionProps) => {
     const [selectedTailwindColor, setSelectedTailwindColor] = useState<string>("Green");
-    const addColorSection = () => {
-        setProject((prev) => ({
-            ...prev,
-            colors: [
-                ...prev.colors!,
-                {
-                    title: "New Color Section",
-                    shades: [
-                        { color: "#000000", shade: "100" },
-                        { color: "#000000", shade: "200" },
-                        { color: "#000000", shade: "300" },
-                    ],
-                },
-            ],
-        }));
-    };
 
     const addTailwindColorSection = () => {
         const selectedColor = tailwindColors[selectedTailwindColor as keyof typeof tailwindColors];
-        setProject((prev) => ({
-            ...prev,
-            colors: [
-                ...prev.colors!,
-                {
-                    title: selectedTailwindColor,
-                    shades: selectedColor,
-                },
+        onAddColorSection({
+            title: selectedTailwindColor,
+            shades: selectedColor,
+        });
+    };
+    const onAdd = () => {
+        onAddColorSection({
+            title: "New Color Section",
+            shades: [
+                { color: "#000000", shade: "100" },
+                { color: "#000000", shade: "200" },
+                { color: "#000000", shade: "300" },
             ],
-        }));
+        });
     };
 
     return (
@@ -96,7 +98,7 @@ const ColorSection = () => {
                     </Button>
                 </div>
                 <Button
-                    onClick={addColorSection}
+                    onClick={onAdd}
                     className="rounded-full font-medium"
                     variant="solid"
                     color="primary"
@@ -104,14 +106,17 @@ const ColorSection = () => {
                     Add color section
                 </Button>
             </div>
-            {project.colors.length > 0 &&
-                project.colors
+            {colors.length > 0 &&
+                colors
                     ?.slice()
                     .reverse()
                     .map((color, index) => (
                         <ColorPalette
+                            onRemoveColorPalette={onRemoveColorPalette}
+                            onChangeColorTitle={onChangeColorTitle}
+                            onAddColor={onAddColor}
                             key={index}
-                            index={project.colors.length - 1 - index} // Adjust index for descending order
+                            index={colors.length - 1 - index} // Adjust index for descending order
                             title={color.title}
                             shades={color.shades}
                         ></ColorPalette>

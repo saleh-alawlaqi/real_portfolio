@@ -1,8 +1,18 @@
 import { Input } from "@nextui-org/react";
-import { useProjectForm } from "../../../AddProject/ProjectForm";
-
-const GithubAndDemo = () => {
-    const { handleChange, error } = useProjectForm();
+interface GithubAndDemoProps {
+    error: string;
+    github: string;
+    demo: string;
+    onChangeGithub: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onChangeDemo: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+const GithubAndDemo = ({
+    demo,
+    error,
+    github,
+    onChangeDemo,
+    onChangeGithub,
+}: GithubAndDemoProps) => {
     return (
         <div className="flex gap-5 github-and-demo">
             <Input
@@ -10,18 +20,20 @@ const GithubAndDemo = () => {
                 label="Github"
                 id="github"
                 placeholder="Github"
+                value={github}
                 classNames={error === "github" ? { base: "border-2 border-red-500" } : { base: "" }}
                 name="github"
-                onChange={handleChange}
+                onChange={onChangeGithub}
             />
             <Input
                 labelPlacement="outside"
                 label="Demo"
+                value={demo}
                 id="demo"
                 classNames={error === "demo" ? { base: "border-2 border-red-500" } : { base: "" }}
                 placeholder="Demo"
                 name="demo"
-                onChange={handleChange}
+                onChange={onChangeDemo}
             />
         </div>
     );
