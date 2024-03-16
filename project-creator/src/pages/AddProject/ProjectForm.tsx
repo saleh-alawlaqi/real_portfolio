@@ -1,7 +1,7 @@
-import { Button, Textarea, Checkbox } from "@nextui-org/react";
+import { Button, Textarea } from "@nextui-org/react";
 import { createContext, useContext, useEffect, useState } from "react";
 import { db, uploadFile } from "../../firebase-config";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, updateDoc } from "firebase/firestore";
 import { IProject, gradients, tools } from "../../../../src/types"; // Assume these are defined in types.ts
 import TypeAndName from "../../includes/TypeAndName";
 import GithubAndDemo from "../../includes/GithubAndDemo";
@@ -168,11 +168,15 @@ const ProjectForm = () => {
             // 'file' comes from the Blob or File API
             const docRef = await addDoc(collection(db, "projects"), project);
             await uploadFile("main_image", docRef.id, previewMainImage as File);
+            await updateDoc(docRef, {
+                mainImage:
+                    docRef.id + `/main_image.` + (previewMainImage as File).name.split(".").pop(),
+            });
             await Promise.all(
                 screenshots.map(
-                    async (screenshot, index) =>
+                    async (screenshot) =>
                         await uploadFile(
-                            `screenshot_${index}`,
+                            `screenshot_${Math.random() * 1000}`,
                             docRef.id + "/screenshots",
                             screenshot
                         )
@@ -530,20 +534,6 @@ const ProjectForm = () => {
                         Successfully created the project
                     </div>
                 )}
-                {/* <Listbox
-                aria-label="Multiple selection example"
-                variant="flat"
-                disallowEmptySelection
-                selectionMode="multiple"
-                selectedKeys={selectedKeys}
-            >
-                <ListboxItem key="text">Text</ListboxItem>
-                <ListboxItem key="number">Number</ListboxItem>
-                <ListboxItem key="date">Date</ListboxItem>
-                <ListboxItem key="single_date">Single Date</ListboxItem>
-                <ListboxItem key="iteration">Iteration</ListboxItem>
-            </Listbox> */}
-                {/* Repeat for other fields */}
                 <Button
                     className="rounded-full font-medium"
                     variant="solid"

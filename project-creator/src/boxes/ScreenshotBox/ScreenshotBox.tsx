@@ -1,23 +1,28 @@
 import { Button } from "@nextui-org/react";
+import { getDownloadURL, ref } from "firebase/storage";
 import { useEffect, useState } from "react";
-import { useProjectForm } from "../../pages/AddProject/ProjectForm";
+import { storage } from "../../firebase-config";
 
 interface ScreenshotBoxProps {
     index: number;
     screenshot: File | string;
-    onRemove: (index: number) => void;
+    onRemove: (index: number, name: string) => void;
 }
 
 const ScreenshotBox = ({ index, screenshot, onRemove }: ScreenshotBoxProps) => {
     const [preview, setPreview] = useState<string>("");
     useEffect(() => {
-        const handleFileChange = () => {
+        const handleFileChange = async () => {
             if (screenshot && typeof screenshot !== "string") {
                 const reader = new FileReader();
                 reader.onloadend = () => {
                     setPreview(reader.result as string);
                 };
                 reader.readAsDataURL(screenshot);
+            } else if (screenshot && typeof screenshot === "string") {
+                const mainImage = ref(storage, `gs://portfolio-9601d.appspot.com/${screenshot}`);
+                const url = await getDownloadURL(mainImage);
+                setPreview(url);
             } else {
                 setPreview("");
             }
@@ -34,7 +39,9 @@ const ScreenshotBox = ({ index, screenshot, onRemove }: ScreenshotBoxProps) => {
             />
             <Button
                 size="sm"
-                onClick={() => onRemove(index)}
+                onClick={() =>
+                    onRemove(index, screenshot instanceof File ? screenshot.name : screenshot)
+                }
                 className="w-full"
                 variant="solid"
                 color="danger"

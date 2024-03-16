@@ -21,9 +21,9 @@ const Home = () => {
                         let project = { id: doc.id, ...doc.data() } as IProject;
                         const image = ref(
                             storage,
-                            `gs://portfolio-9601d.appspot.com/${project.id}/main_image.png`
+                            `gs://portfolio-9601d.appspot.com/${project.id}/main_image.jpg`
                         );
-                        const url = await getDownloadURL(image).then((url) => url);
+                        const url = await getDownloadURL(image);
                         project = { ...project, mainImage: url };
 
                         addedProjects.push(project);

@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import firebase from "firebase/app";
 
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { deleteObject, getStorage, ref, uploadBytes } from "firebase/storage";
 
 const firebaseConfig = {
     apiKey: "AIzaSyA4A1SEzT7jvdr4kMnBrVlVVpa9H7Xq4C4",
@@ -31,4 +31,10 @@ export async function uploadFile(fileName: string, folderName: string, file: Fil
     uploadBytes(storageRef, file).then((snapshot) => {
         console.log("Uploaded a blob or file!", snapshot);
     });
+}
+
+export async function deleteFile(fileName: string, folderName: string) {
+    const storageRef = ref(storage, `${fileName}`);
+    // Delete the file
+    await deleteObject(storageRef);
 }

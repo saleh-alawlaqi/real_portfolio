@@ -1,13 +1,12 @@
 import { Button } from "@nextui-org/react";
 import ScreenshotBox from "../../../../boxes/ScreenshotBox";
 import { useRef } from "react";
-import { useProjectForm } from "../../ProjectForm";
 
 interface ScreenshotSectionProps {
     error: string;
     onAddScreenshot: (e: React.ChangeEvent<HTMLInputElement>) => void;
     screenshots: (File | string)[];
-    onRemove: (index: number) => void;
+    onRemove: (index: number, name: string) => void;
 }
 
 const ScreenshotSection = ({

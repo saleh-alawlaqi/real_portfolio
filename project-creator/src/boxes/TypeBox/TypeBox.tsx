@@ -41,6 +41,7 @@ const TypeBox = ({
                     onChange={(e) => onChangeFontSize(e, index)}
                     size="sm"
                     placeholder="Size"
+                    selectedKeys={[fontSize]}
                     name="fontSize"
                 >
                     <SelectItem key="10px" value="10px">
@@ -96,6 +97,7 @@ const TypeBox = ({
                     value={fontFamily}
                     onChange={(e) => onChangeFontFamily(e, index)}
                     size="sm"
+                    selectedKeys={[fontFamily]}
                     placeholder="Font family"
                     name="fontFamily"
                 >

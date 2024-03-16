@@ -1,10 +1,10 @@
-import { doc, getDoc } from "firebase/firestore";
+import { collection, doc, getDoc, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { db, storage } from "../../firebase-config";
+import { db, deleteFile, storage, uploadFile } from "../../firebase-config";
 import { IProject, gradients, tools } from "../../../../src/types";
 import { Button, Textarea } from "@nextui-org/react";
-import { getDownloadURL, ref } from "firebase/storage";
+import { getDownloadURL, listAll, ref } from "firebase/storage";
 import TypeAndName from "../../includes/TypeAndName";
 import GithubAndDemo from "../../includes/GithubAndDemo";
 import ImageAndGradient from "../../includes/ImageAndGradient";
@@ -35,7 +35,9 @@ const Project = () => {
         screenshots: [],
     });
     const [newScreenshots, setNewScreenshots] = useState<File[]>([]);
+    const [removedScreenshots, setRemovedScreenshots] = useState<string[]>([]);
     const [newIcons, setNewIcons] = useState<File[]>([]);
+    const [removedIcons, setRemovedIcons] = useState<string[]>([]);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState(false);
     const [newMainImage, setNewMainImage] = useState<File | string>("");
@@ -49,21 +51,53 @@ const Project = () => {
 
             if (docSnap.exists()) {
                 let project = { id: docSnap.id, ...docSnap.data() } as IProject;
-                const image = ref(
-                    storage,
-                    `gs://portfolio-9601d.appspot.com/${project.id}/main_image.png`
+                const screenshotsRef = ref(storage, `${projectId}/screenshots`);
+
+                const screenshotsList = await listAll(screenshotsRef);
+                const screenshots = await Promise.all(
+                    screenshotsList.items.map(async (itemRef) => {
+                        return `${projectId}/screenshots/${itemRef.name}`;
+                    })
                 );
-                const url = await getDownloadURL(image);
-                project = { ...project, mainImage: url };
+                project = { ...project, screenshots };
+
+                const iconsRef = ref(storage, `${projectId}/icons`);
+
+                const iconsItems = await listAll(iconsRef);
+                const icons = await Promise.all(
+                    iconsItems.items.map(async (itemRef) => {
+                        return `${projectId}/icons/${itemRef.name}`;
+                    })
+                );
+                project = { ...project, icons };
                 setProject(project);
-                console.log("Document data:", docSnap.data());
             } else {
-                // docSnap.data() will be undefined in this case
                 console.log("No such document!");
             }
         };
         getProject();
     }, [projectId]);
+    useEffect(() => {
+        if (error === "") return;
+        const errorElement = document.querySelector("#" + error);
+        if (errorElement) {
+            errorElement.scrollIntoView({ behavior: "smooth", block: "center" });
+            if (errorElement instanceof HTMLInputElement) {
+                errorElement.focus();
+            }
+        }
+        const interval = setInterval(() => {
+            setError("");
+        }, 2500);
+        return () => clearInterval(interval);
+    }, [error]);
+    useEffect(() => {
+        if (!success) return;
+        const interval = setInterval(() => {
+            setSuccess(false);
+        }, 2500);
+        return () => clearInterval(interval);
+    }, [success]);
     if (!project)
         return (
             <div className="bg-white p-10 rounded-xl gap-10 mt-10 w-[62rem] flex flex-col">
@@ -213,7 +247,14 @@ const Project = () => {
         if (!files) return;
         setNewIcons((prev) => [...prev, ...files]);
     };
-    const onRemoveIcon = (index: number) => {
+    const onRemoveIcon = (index: number, name: string) => {
+        setRemovedIcons((prev) => [...prev, name]);
+        setProject((prev) => {
+            return {
+                ...prev,
+                icons: (prev.icons as string[]).filter((icon) => icon !== name),
+            };
+        });
         setNewIcons((prev) => prev.filter((_, i) => i !== index));
     };
     const addHighlight = () => {
@@ -243,7 +284,16 @@ const Project = () => {
             };
         });
     };
-    const onRemoveScreenshot = (index: number) => {
+    const onRemoveScreenshot = (index: number, name: string) => {
+        setRemovedScreenshots((prev) => [...prev, name]);
+        setProject((prev) => {
+            return {
+                ...prev,
+                screenshots: (prev.screenshots as string[]).filter(
+                    (screenshot) => screenshot !== name
+                ),
+            };
+        });
         setNewScreenshots((prev) => prev.filter((_, i) => i !== index));
     };
     const onAddScreenshot = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -251,9 +301,158 @@ const Project = () => {
         if (!files) return;
         setNewScreenshots((prev) => [...prev, ...files]);
     };
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        if (!project.name) {
+            setError("project_name");
+            return;
+        }
+        if (!project.github) {
+            setError("github");
+            return;
+        }
+        if (!project.demo) {
+            setError("demo");
+            return;
+        }
+        if (!newMainImage && !project.mainImage) {
+            setError("main_image");
+            return;
+        }
+        if (!project.tools.length) {
+            setError("tools");
+            return;
+        }
+        if (!project.smallDescription) {
+            setError("small_description");
+            return;
+        }
+        if (!project.bigDescription) {
+            setError("big_description");
+            return;
+        }
+        if (!project.colors.length) {
+            setError("color_section");
+            return;
+        }
+        if (!project.types.length) {
+            setError("type_section");
+            return;
+        }
+        // if (!icons.length) {
+        //     setError("icon_section");
+        //     return;
+        // }
+        if (!project.highlights.length) {
+            setError("highlight_section");
+            return;
+        }
+
+        // if (!newScreenshots.length) {
+        //     setError("screenshot_section");
+        //     return;
+        // }
+
+        try {
+            // 'file' comes from the Blob or File API
+            if (newScreenshots.length) {
+                await Promise.all(
+                    newScreenshots.map(
+                        async (screenshot) =>
+                            await uploadFile(
+                                `screenshot_${Math.random() * 1000}`,
+                                projectId + "/screenshots",
+                                screenshot
+                            )
+                    )
+                );
+            }
+            if (newIcons.length) {
+                await Promise.all(
+                    newIcons.map(
+                        async (icon) =>
+                            await uploadFile(
+                                `icon_${Math.random() * 1000}`,
+                                projectId + "/icons",
+                                icon
+                            )
+                    )
+                );
+            }
+            if (removedScreenshots.length) {
+                await Promise.all(
+                    removedScreenshots.map(async (screenshot) => {
+                        await deleteFile(screenshot, projectId as string);
+                    })
+                );
+            }
+            if (removedIcons.length) {
+                await Promise.all(
+                    removedIcons.map(async (icon) => {
+                        await deleteFile(icon, projectId as string);
+                    })
+                );
+            }
+            if (newMainImage) {
+                await deleteFile(project.mainImage as string, projectId as string);
+                await uploadFile("main_image", projectId as string, newMainImage as File);
+                await updateDoc(doc(db, "projects", projectId as string), {
+                    ...project,
+                    mainImage:
+                        projectId + `/main_image.` + (newMainImage as File).name.split(".").pop(),
+                });
+            } else {
+                await updateDoc(doc(db, "projects", projectId as string), {
+                    ...project,
+                });
+            }
+            // await Promise.all(
+            //     screenshots.map(
+            //         async (screenshot, index) =>
+            //             await uploadFile(
+            //                 `screenshot_${index}`,
+            //                 docRef.id + "/screenshots",
+            //                 screenshot
+            //             )
+            //     )
+            // );
+
+            // await Promise.all(
+            //     icons.map(async (icon, index) => {
+            //         return await uploadFile(`icon_${index}`, docRef.id + "/icons", icon);
+            //     })
+            // );
+
+            // setProject({
+            //     name: "",
+            //     bigDescription: "",
+            //     gradient: "gradient-1",
+            //     type: "software",
+            //     demo: "",
+            //     github: "",
+            //     smallDescription: "",
+            //     ready: false,
+            //     colors: [],
+            //     types: [],
+            //     icons: [],
+            //     highlights: [],
+            //     screenshots: [],
+            //     tools: [],
+            // });
+            setSuccess(true);
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
+    };
     return (
-        <div className={`rounded-xl gap-10 mt-10 w-[62rem] p-1 ${project.gradient} flex flex-col`}>
-            <div className={`flex flex-col bg-white info p-10 rounded-lg gap-5`}>
+        <div
+            className={`rounded-xl gap-10 mt-10 mb-10 w-[62rem] p-1 ${project.gradient} flex flex-col`}
+        >
+            <form
+                onSubmit={handleSubmit}
+                className={`flex flex-col bg-white info p-10 rounded-lg gap-5`}
+            >
                 <div className="flex justify-between">
                     <span className="text-2xl">{project.name}</span>
                     <div className="flex gap-5">
@@ -286,7 +485,7 @@ const Project = () => {
                 />
                 <ImageAndGradient
                     error={error}
-                    mainImage={newMainImage}
+                    mainImage={newMainImage || (project.mainImage as string)}
                     onChangeGradient={(e) =>
                         setProject((prev) => ({
                             ...prev,
@@ -318,7 +517,7 @@ const Project = () => {
                     value={project.bigDescription}
                     onChange={handleChange}
                 />
-                <hr />{" "}
+                <hr />
                 <ColorSection
                     colors={project.colors}
                     onAddColorSection={onAddColorSection}
@@ -340,7 +539,7 @@ const Project = () => {
                 <hr />
                 <IconSection
                     error={error}
-                    icons={newIcons}
+                    icons={[...newIcons, ...(project.icons as any)]}
                     onAddIcon={onAddIcon}
                     onRemoveIcon={onRemoveIcon}
                 />
@@ -356,10 +555,23 @@ const Project = () => {
                 <ScreenshotSection
                     error={error}
                     onAddScreenshot={onAddScreenshot}
-                    screenshots={newScreenshots}
+                    screenshots={[...newScreenshots, ...(project.screenshots as any)]}
                     onRemove={onRemoveScreenshot}
                 />
-            </div>
+                <Button
+                    className="rounded-full mt-10 font-medium"
+                    variant="solid"
+                    color="primary"
+                    type="submit"
+                >
+                    Submit
+                </Button>
+            </form>
+            {success && (
+                <div className="fixed bottom-10 left-10 bg-emerald-500 bg-opacity-90 text-white w-auto self-end font-semibold p-5 rounded-lg px-6">
+                    Successfully updated the project
+                </div>
+            )}
         </div>
     );
 };

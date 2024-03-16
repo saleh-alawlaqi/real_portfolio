@@ -1,5 +1,4 @@
 import { Button } from "@nextui-org/react";
-import { useProjectForm } from "../../pages/AddProject/ProjectForm";
 import IconBox from "../../boxes/IconBox";
 import { useRef } from "react";
 
@@ -7,7 +6,7 @@ interface IconSectionProps {
     error: string;
     onAddIcon: (e: any) => void;
     icons: (string | File)[];
-    onRemoveIcon: (index: number) => void;
+    onRemoveIcon: (index: number, name: string) => void;
 }
 const IconSection = ({ error, onAddIcon, icons, onRemoveIcon }: IconSectionProps) => {
     const iconRef = useRef<HTMLInputElement>(null);
