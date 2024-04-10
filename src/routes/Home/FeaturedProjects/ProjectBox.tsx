@@ -26,7 +26,8 @@ const ProjectBox = ({ project }: ProjectBoxProps) => {
             transition={{ duration: 0.5, type: "spring", damping: 10, stiffness: 100 }}
             initial={{ opacity: 0, y: -50 }}
             animate={showInView ? { opacity: 1, y: 1 } : { opacity: 0, y: -50 }}
-            className="flex project-image cursor-pointer w-full h-[90vh] rounded-[1rem] items-center flex-col"
+            style={project.bigCover ? { backgroundImage: `url(${project.bigCover})` } : {}}
+            className="flex cursor-pointer big-cover w-full h-[90vh] rounded-[1rem] items-center flex-col"
         >
             <AnimatePresence>
                 {(fullInView || showOverlay) && (
@@ -38,7 +39,7 @@ const ProjectBox = ({ project }: ProjectBoxProps) => {
                         className="flex w-full h-full bg-black rounded-[1rem] bg-opacity-55 backdrop-blur-md"
                     >
                         <NavLink
-                            className="project-info overflow-hidden p-6 lg:px-24 w-full lg:justify-between flex flex-col-reverse lg:flex-row items-center h-full "
+                            className="project-info overflow-hidden p-6 lg:px-24 lg:gap-20 w-full lg:justify-between flex flex-col-reverse lg:flex-row items-center h-full "
                             to={`/project/${project.id}`}
                         >
                             <motion.div
@@ -50,13 +51,13 @@ const ProjectBox = ({ project }: ProjectBoxProps) => {
                                     stiffness: 100,
                                     damping: 20,
                                 }}
-                                className="left-section flex gap-5 flex-col lg:w-[35rem]"
+                                className="left-section flex gap-5 flex-col lg:flex-1"
                             >
                                 <div className="name-and-description mt-6 lg:mt-0 flex gap-2 flex-col ">
                                     <span className="text-[26px] lg:text-[54px] leading-snug text-white font-gt">
                                         {project.name}
                                     </span>
-                                    <p className="text-white leading-relaxed text-base lg:text-lg">
+                                    <p className="text-white leading-relaxed text-base">
                                         {project.smallDescription}
                                     </p>
                                 </div>
@@ -79,7 +80,7 @@ const ProjectBox = ({ project }: ProjectBoxProps) => {
                                 style={{
                                     backgroundImage: `url(${project.mainImage})`,
                                 }}
-                                className="rounded-2xl w-full h-full lg:h-[25rem] lg:w-[25rem] bg-project"
+                                className="rounded-2xl w-full h-full small-cover bg-top lg:h-[23rem] bd lg:w-[33rem] bg-project"
                             ></motion.div>
                         </NavLink>
                     </motion.div>

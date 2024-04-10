@@ -29,6 +29,7 @@ export interface IProject {
     tools: tools[];
     gradient: gradients;
     mainImage?: string;
+    bigCover?: string;
     type: "software" | "frontend" | "noCode" | "uiDesign";
     demo: string;
     github: string;

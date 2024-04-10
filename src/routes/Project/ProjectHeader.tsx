@@ -28,7 +28,7 @@ const ProjectHeader = () => {
                 </div>
                 <div className="tools  flex flex-wrap mt-6 lg:mt-0 lg:flex-nowrap lg:grid gap-2 lg:grid-cols-4">
                     {tools.map((tool, i) => (
-                        <ToolBox bgColor="bg-slate-50" key={i} tool={tool} />
+                        <ToolBox bgColor="bg-slate-100" key={i} tool={tool} />
                     ))}
                 </div>
             </div>

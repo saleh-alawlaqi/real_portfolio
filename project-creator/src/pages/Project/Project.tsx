@@ -1,10 +1,10 @@
-import { collection, doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { db, deleteFile, storage, uploadFile } from "../../firebase-config";
 import { IProject, gradients, tools } from "../../../../src/types";
 import { Button, Textarea } from "@nextui-org/react";
-import { getDownloadURL, listAll, ref } from "firebase/storage";
+import { listAll, ref } from "firebase/storage";
 import TypeAndName from "../../includes/TypeAndName";
 import GithubAndDemo from "../../includes/GithubAndDemo";
 import ImageAndGradient from "../../includes/ImageAndGradient";
@@ -14,6 +14,7 @@ import TypeSection from "../../includes/TypeSection";
 import IconSection from "../../includes/IconSection";
 import HighlightSection from "../../includes/HighlightSection";
 import ScreenshotSection from "../AddProject/sections/ScreenshotSection";
+import BigCover from "../../includes/BigCover";
 
 const Project = () => {
     const { projectId } = useParams();
@@ -34,13 +35,13 @@ const Project = () => {
         tools: [],
         screenshots: [],
     });
-    const [newScreenshots, setNewScreenshots] = useState<File[]>([]);
-    const [removedScreenshots, setRemovedScreenshots] = useState<string[]>([]);
     const [newIcons, setNewIcons] = useState<File[]>([]);
     const [removedIcons, setRemovedIcons] = useState<string[]>([]);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState(false);
     const [newMainImage, setNewMainImage] = useState<File | string>("");
+    const [newBigCover, setNewBigCover] = useState<File | string>("");
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if (!projectId) return;
@@ -51,15 +52,6 @@ const Project = () => {
 
             if (docSnap.exists()) {
                 let project = { id: docSnap.id, ...docSnap.data() } as IProject;
-                const screenshotsRef = ref(storage, `${projectId}/screenshots`);
-
-                const screenshotsList = await listAll(screenshotsRef);
-                const screenshots = await Promise.all(
-                    screenshotsList.items.map(async (itemRef) => {
-                        return `${projectId}/screenshots/${itemRef.name}`;
-                    })
-                );
-                project = { ...project, screenshots };
 
                 const iconsRef = ref(storage, `${projectId}/icons`);
 
@@ -71,7 +63,9 @@ const Project = () => {
                 );
                 project = { ...project, icons };
                 setProject(project);
+                setLoading(false);
             } else {
+                setLoading(false);
                 console.log("No such document!");
             }
         };
@@ -131,6 +125,14 @@ const Project = () => {
 
         if (file) {
             setNewMainImage(file);
+        }
+    };
+    const handleBigCoverChange = (e: any) => {
+        const { files } = e.target;
+        const file = files[0];
+
+        if (file) {
+            setNewBigCover(file);
         }
     };
     const handleTools = (keys: any) => {
@@ -284,23 +286,6 @@ const Project = () => {
             };
         });
     };
-    const onRemoveScreenshot = (index: number, name: string) => {
-        setRemovedScreenshots((prev) => [...prev, name]);
-        setProject((prev) => {
-            return {
-                ...prev,
-                screenshots: (prev.screenshots as string[]).filter(
-                    (screenshot) => screenshot !== name
-                ),
-            };
-        });
-        setNewScreenshots((prev) => prev.filter((_, i) => i !== index));
-    };
-    const onAddScreenshot = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { files } = e.target;
-        if (!files) return;
-        setNewScreenshots((prev) => [...prev, ...files]);
-    };
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
@@ -356,18 +341,7 @@ const Project = () => {
 
         try {
             // 'file' comes from the Blob or File API
-            if (newScreenshots.length) {
-                await Promise.all(
-                    newScreenshots.map(
-                        async (screenshot) =>
-                            await uploadFile(
-                                `screenshot_${Math.random() * 1000}`,
-                                projectId + "/screenshots",
-                                screenshot
-                            )
-                    )
-                );
-            }
+
             if (newIcons.length) {
                 await Promise.all(
                     newIcons.map(
@@ -380,13 +354,7 @@ const Project = () => {
                     )
                 );
             }
-            if (removedScreenshots.length) {
-                await Promise.all(
-                    removedScreenshots.map(async (screenshot) => {
-                        await deleteFile(screenshot, projectId as string);
-                    })
-                );
-            }
+
             if (removedIcons.length) {
                 await Promise.all(
                     removedIcons.map(async (icon) => {
@@ -394,7 +362,22 @@ const Project = () => {
                     })
                 );
             }
-            if (newMainImage) {
+            if (newBigCover) {
+                if (project.bigCover) {
+                    await deleteFile(project.bigCover as string, projectId as string);
+                }
+                await uploadFile("big_cover", projectId as string, newBigCover as File);
+                console.log(
+                    `(newBigCover as File).name.split(".").pop()`,
+                    (newBigCover as File).name.split(".").pop()
+                );
+
+                await updateDoc(doc(db, "projects", projectId as string), {
+                    ...project,
+                    bigCover:
+                        projectId + `/big_cover.` + (newBigCover as File).name.split(".").pop(),
+                });
+            } else if (newMainImage) {
                 await deleteFile(project.mainImage as string, projectId as string);
                 await uploadFile("main_image", projectId as string, newMainImage as File);
                 await updateDoc(doc(db, "projects", projectId as string), {
@@ -445,135 +428,144 @@ const Project = () => {
             console.error("Error adding document: ", e);
         }
     };
-    return (
-        <div
-            className={`rounded-xl gap-10 mt-10 mb-10 w-[62rem] p-1 ${project.gradient} flex flex-col`}
-        >
-            <form
-                onSubmit={handleSubmit}
-                className={`flex flex-col bg-white info p-10 rounded-lg gap-5`}
+    if (loading) {
+        return <div>loading...</div>;
+    } else {
+        return (
+            <div
+                className={`rounded-xl gap-10 mt-10 mb-10 w-[62rem] p-1 ${project.gradient} flex flex-col`}
             >
-                <div className="flex justify-between">
-                    <span className="text-2xl">{project.name}</span>
-                    <div className="flex gap-5">
-                        <Button as={Link} to="/" variant="solid" color="primary">
-                            Go home
-                        </Button>
-                        <Button color="danger" onClick={onDeleteProject}>
-                            Delete project
-                        </Button>
-                    </div>
-                </div>
-                <TypeAndName
-                    name={project.name}
-                    type={project.type}
-                    error={error}
-                    onChangeName={(e) => handleChangeWithWordCount(e, 5)}
-                    onChangeType={(e) =>
-                        setProject((prev) => ({
-                            ...prev,
-                            type: e.target.value as "software" | "frontend" | "noCode" | "uiDesign",
-                        }))
-                    }
-                />
-                <GithubAndDemo
-                    demo={project.demo}
-                    github={project.github}
-                    error={error}
-                    onChangeDemo={handleChange}
-                    onChangeGithub={handleChange}
-                />
-                <ImageAndGradient
-                    error={error}
-                    mainImage={newMainImage || (project.mainImage as string)}
-                    onChangeGradient={(e) =>
-                        setProject((prev) => ({
-                            ...prev,
-                            gradient: e.target.value as gradients,
-                        }))
-                    }
-                    gradient={project.gradient}
-                    onRemoveImage={() => setNewMainImage("")}
-                    onChangeMainImage={handleMainImageChange}
-                />
-                <ToolsAndSmallDesc
-                    error={error}
-                    onChangeSmallDescription={handleChange}
-                    onChangeTools={handleTools}
-                    smallDescription={project.smallDescription}
-                    tools={project.tools}
-                />
-                <Textarea
-                    labelPlacement="outside"
-                    classNames={
-                        error === "big_description"
-                            ? { base: "border-2 border-red-500" }
-                            : { base: "" }
-                    }
-                    label="Big Description"
-                    placeholder="Big Description"
-                    name="bigDescription"
-                    id="big_description"
-                    value={project.bigDescription}
-                    onChange={handleChange}
-                />
-                <hr />
-                <ColorSection
-                    colors={project.colors}
-                    onAddColorSection={onAddColorSection}
-                    error={error}
-                    onAddColor={onAddColor}
-                    onChangeColorTitle={onChangeTitle}
-                    onRemoveColorPalette={onRemoveColorPalette}
-                />
-                <hr />
-                <TypeSection
-                    onChangeFontFamily={onChangeFontFamily}
-                    onChangeFontSize={onChangeFontSize}
-                    onChangeTitle={onChangeFontTitle}
-                    onRemoveType={onRemoveType}
-                    error={error}
-                    onAddType={onAddTypeSection}
-                    types={project.types}
-                />
-                <hr />
-                <IconSection
-                    error={error}
-                    icons={[...newIcons, ...(project.icons as any)]}
-                    onAddIcon={onAddIcon}
-                    onRemoveIcon={onRemoveIcon}
-                />
-                <hr />
-                <HighlightSection
-                    error={error}
-                    onAddHighlight={addHighlight}
-                    highlights={project.highlights}
-                    onChangeTitle={onChangeHighlightTitle}
-                    onRemove={onRemoveHighlight}
-                />
-                <hr />
-                <ScreenshotSection
-                    error={error}
-                    onAddScreenshot={onAddScreenshot}
-                    screenshots={[...newScreenshots, ...(project.screenshots as any)]}
-                    onRemove={onRemoveScreenshot}
-                />
-                <Button
-                    className="rounded-full mt-10 font-medium"
-                    variant="solid"
-                    color="primary"
-                    type="submit"
+                <form
+                    onSubmit={handleSubmit}
+                    className={`flex flex-col bg-white info p-10 rounded-lg gap-5`}
                 >
-                    Submit
-                </Button>
-            </form>
-            {success && (
-                <div className="fixed bottom-10 left-10 bg-emerald-500 bg-opacity-90 text-white w-auto self-end font-semibold p-5 rounded-lg px-6">
-                    Successfully updated the project
-                </div>
-            )}
-        </div>
-    );
+                    <div className="flex justify-between">
+                        <span className="text-2xl">{project.name}</span>
+                        <div className="flex gap-5">
+                            <Button as={Link} to="/" variant="solid" color="primary">
+                                Go home
+                            </Button>
+                            <Button color="danger" onClick={onDeleteProject}>
+                                Delete project
+                            </Button>
+                        </div>
+                    </div>
+                    <TypeAndName
+                        name={project.name}
+                        type={project.type}
+                        error={error}
+                        onChangeName={(e) => handleChangeWithWordCount(e, 5)}
+                        onChangeType={(e) =>
+                            setProject((prev) => ({
+                                ...prev,
+                                type: e.target.value as
+                                    | "software"
+                                    | "frontend"
+                                    | "noCode"
+                                    | "uiDesign",
+                            }))
+                        }
+                    />
+                    <GithubAndDemo
+                        demo={project.demo}
+                        github={project.github}
+                        error={error}
+                        onChangeDemo={handleChange}
+                        onChangeGithub={handleChange}
+                    />
+                    <ImageAndGradient
+                        error={error}
+                        mainImage={newMainImage || (project.mainImage as string)}
+                        onChangeGradient={(e) =>
+                            setProject((prev) => ({
+                                ...prev,
+                                gradient: e.target.value as gradients,
+                            }))
+                        }
+                        gradient={project.gradient}
+                        onRemoveImage={() => setNewMainImage("")}
+                        onChangeMainImage={handleMainImageChange}
+                    />
+                    <ToolsAndSmallDesc
+                        error={error}
+                        onChangeSmallDescription={handleChange}
+                        onChangeTools={handleTools}
+                        smallDescription={project.smallDescription}
+                        tools={project.tools}
+                    />
+                    <Textarea
+                        labelPlacement="outside"
+                        classNames={
+                            error === "big_description"
+                                ? { base: "border-2 border-red-500" }
+                                : { base: "" }
+                        }
+                        label="Big Description"
+                        placeholder="Big Description"
+                        name="bigDescription"
+                        id="big_description"
+                        value={project.bigDescription}
+                        onChange={handleChange}
+                    />
+                    <hr />
+                    <ColorSection
+                        colors={project.colors}
+                        onAddColorSection={onAddColorSection}
+                        error={error}
+                        onAddColor={onAddColor}
+                        onChangeColorTitle={onChangeTitle}
+                        onRemoveColorPalette={onRemoveColorPalette}
+                    />
+                    <hr />
+                    <TypeSection
+                        onChangeFontFamily={onChangeFontFamily}
+                        onChangeFontSize={onChangeFontSize}
+                        onChangeTitle={onChangeFontTitle}
+                        onRemoveType={onRemoveType}
+                        error={error}
+                        onAddType={onAddTypeSection}
+                        types={project.types}
+                    />
+                    <hr />
+                    <IconSection
+                        error={error}
+                        icons={[...newIcons, ...(project.icons as any)]}
+                        onAddIcon={onAddIcon}
+                        onRemoveIcon={onRemoveIcon}
+                    />
+                    <hr />
+                    <HighlightSection
+                        error={error}
+                        onAddHighlight={addHighlight}
+                        highlights={project.highlights}
+                        onChangeTitle={onChangeHighlightTitle}
+                        onRemove={onRemoveHighlight}
+                    />
+                    <hr />
+
+                    <BigCover
+                        error={error}
+                        bigCover={newBigCover || (project.bigCover as string)}
+                        onChangeBigCover={handleBigCoverChange}
+                        onRemoveBigCover={() => setNewBigCover("")}
+                    />
+                    <Button
+                        className="rounded-full mt-10 font-medium"
+                        variant="solid"
+                        color="primary"
+                        type="submit"
+                    >
+                        Submit
+                    </Button>
+                </form>
+                {success && (
+                    <div className="fixed bottom-10 left-10 bg-emerald-500 bg-opacity-90 text-white w-auto self-end font-semibold p-5 rounded-lg px-6">
+                        Successfully updated the project
+                    </div>
+                )}
+            </div>
+        );
+    }
 };
 
 export default Project;

@@ -21,7 +21,7 @@ const Home = () => {
                         let project = { id: doc.id, ...doc.data() } as IProject;
                         const image = ref(
                             storage,
-                            `gs://portfolio-9601d.appspot.com/${project.id}/main_image.jpg`
+                            `gs://portfolio-9601d.appspot.com/${project.mainImage}`
                         );
                         const url = await getDownloadURL(image);
                         project = { ...project, mainImage: url };
@@ -45,7 +45,7 @@ const Home = () => {
                     Add project
                 </Button>
             </div>
-            <div className="flex flex-col">
+            <div className="flex gap-5 flex-col">
                 {projects.map((project) => (
                     <ProjectBox key={project.id} {...project} />
                 ))}

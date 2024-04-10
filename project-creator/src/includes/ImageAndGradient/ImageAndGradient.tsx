@@ -27,6 +27,21 @@ const ImageAndGradient = ({
             fileRef.current.click();
         }
     };
+    const gradients = [
+        "gradient-1",
+        "gradient-2",
+        "gradient-3",
+        "gradient-4",
+        "gradient-5",
+        "gradient-6",
+        "gradient-7",
+        "gradient-8",
+        "gradient-9",
+        "gradient-10",
+        "gradient-11",
+        "gradient-12",
+        "gradient-13",
+    ];
     return (
         <div className="flex gap-5 image-and-gradient">
             <div
@@ -64,49 +79,23 @@ const ImageAndGradient = ({
                         error === "gradient" ? { base: "border-2 border-red-500" } : { base: "" }
                     }
                     labelPlacement="outside"
-                    onChange={onChangeGradient}
+                    onChange={(e) => {
+                        console.log(e.target.value);
+                        onChangeGradient(e);
+                    }}
+                    selectionMode="single"
                 >
-                    <SelectItem key="gradient-1" value="gradient-1">
-                        gradient-1
-                    </SelectItem>
-                    <SelectItem key="gradient-2" value="gradient-2">
-                        gradient-2
-                    </SelectItem>
-                    <SelectItem key="gradient-3" value="gradient-3">
-                        gradient-3
-                    </SelectItem>
-                    <SelectItem key="gradient-4" value="gradient-4">
-                        gradient-4
-                    </SelectItem>
-                    <SelectItem key="gradient-5" value="gradient-5">
-                        gradient-5
-                    </SelectItem>
-                    <SelectItem key="gradient-6" value="gradient-6">
-                        gradient-6
-                    </SelectItem>
-                    <SelectItem key="gradient-7" value="gradient-7">
-                        gradient-7
-                    </SelectItem>
-                    <SelectItem key="gradient-8" value="gradient-8">
-                        gradient-8
-                    </SelectItem>
-                    <SelectItem key="gradient-9" value="gradient-9">
-                        gradient-9
-                    </SelectItem>
-                    <SelectItem key="gradient-10" value="gradient-10">
-                        gradient-10
-                    </SelectItem>
-                    <SelectItem key="gradient-11" value="gradient-11">
-                        gradient-11
-                    </SelectItem>
-                    <SelectItem key="gradient-12" value="gradient-12">
-                        gradient-12
-                    </SelectItem>
-                    <SelectItem key="gradient-13" value="gradient-13">
-                        gradient-13
-                    </SelectItem>
+                    {gradients.map((gradient) => (
+                        <SelectItem className="flex" key={gradient} value={gradient}>
+                            {/* <div className="flex"> */}
+                            {/* <div className={`${gradient} w-5 h-5`}></div> */}
+                            {/* <span>{gradient}</span> */}
+                            {/* </div> */}
+                            {gradient}
+                        </SelectItem>
+                    ))}
                 </Select>
-                <div className={`w-full h-40 rounded-lg ${gradient} bg-slate-400`}></div>
+                <div className={`w-full h-64 rounded-lg ${gradient} bg-slate-400`}></div>
             </div>
         </div>
     );

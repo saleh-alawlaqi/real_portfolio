@@ -1,12 +1,10 @@
 import { Route, Routes } from "react-router";
 import "./App.css";
 import Home from "./routes/Home";
-import Portfolio from "./routes/Portfolio";
 import About from "./routes/About";
 import Contact from "./routes/Contact";
 import Project from "./routes/Project";
 import ScrollToTop from "./components/ScrollToTop";
-import PortfolioProvider from "./routes/Portfolio/PortfolioContext";
 import { ProjectProvider } from "./routes/Project/ProjectContext";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -18,10 +16,12 @@ import { db } from "./firebase-config";
 import { IProject } from "./types";
 import Menu from "./components/Menu";
 import { storage } from "./firebase-config";
-import { getDownloadURL, ref } from "firebase/storage";
+import { getDownloadURL, listAll, ref } from "firebase/storage";
 import Lottie from "lottie-react";
 import loadingAnimation from "./assets/loading.json";
 import Footer from "./components/Footer";
+import PortfolioProvider from "./routes/Portfolio/PortfolioContext";
+import Portfolio from "./routes/Portfolio";
 
 interface IAppContext {
     projects: IProject[];
@@ -42,10 +42,34 @@ function App() {
                     let project = { id: doc.id, ...doc.data() } as IProject;
                     const image = ref(
                         storage,
-                        `gs://portfolio-9601d.appspot.com/${project.id}/main_image.png`
+                        `gs://portfolio-9601d.appspot.com/${project.mainImage}`
                     );
+
+                    const iconsFolder = ref(
+                        storage,
+                        `gs://portfolio-9601d.appspot.com/${doc.id}/icons`
+                    );
+                    const res = await listAll(iconsFolder);
+                    const icons: string[] = [];
+                    await Promise.all(
+                        res.items.map(async (icon) => {
+                            const url = await getDownloadURL(icon);
+                            icons.push(url);
+                        })
+                    );
+
+                    project = { ...project, icons };
                     const url = await getDownloadURL(image);
                     project = { ...project, mainImage: url };
+                    if (project.bigCover) {
+                        const bigCover = ref(
+                            storage,
+                            `gs://portfolio-9601d.appspot.com/${project.bigCover}`
+                        );
+                        const url = await getDownloadURL(bigCover);
+                        project = { ...project, bigCover: url };
+                    }
+
                     addedProjects.push(project);
                 });
                 setTimeout(() => {

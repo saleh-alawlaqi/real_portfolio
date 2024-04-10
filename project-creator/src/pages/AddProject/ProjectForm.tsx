@@ -13,6 +13,7 @@ import IconSection from "../../includes/IconSection";
 import HighlightSection from "../../includes/HighlightSection";
 import ScreenshotSection from "./sections/ScreenshotSection";
 import { Link } from "react-router-dom";
+import BigCover from "../../includes/BigCover";
 
 interface ProjectFormProps {
     project: IProject;
@@ -22,6 +23,7 @@ interface ProjectFormProps {
     setPreviewMainImage: React.Dispatch<React.SetStateAction<File | string>>;
     previewMainImage: File | string;
     handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+    handleBigCover: (e: any) => void;
     handleMainImageChange: (e: any) => void;
     icons: File[];
     error: string;
@@ -56,6 +58,7 @@ const ProjectForm = () => {
     const [success, setSuccess] = useState(false);
 
     const [previewMainImage, setPreviewMainImage] = useState<File | string>("");
+    const [previewBigCover, setPreviewBigCover] = useState<File | string>("");
     const [screenshots, setScreenshots] = useState<File[]>([]);
     const [icons, setIcons] = useState<File[]>([]);
 
@@ -85,6 +88,14 @@ const ProjectForm = () => {
 
         if (file) {
             setPreviewMainImage(file);
+        }
+    };
+    const handleBigCover = (e: any) => {
+        const { files } = e.target;
+        const file = files[0];
+
+        if (file) {
+            setPreviewBigCover(file);
         }
     };
 
@@ -407,6 +418,7 @@ const ProjectForm = () => {
                 previewMainImage,
                 handleChange,
                 handleMainImageChange,
+                handleBigCover,
                 icons,
                 setIcons,
                 error,
@@ -522,11 +534,11 @@ const ProjectForm = () => {
                     onRemove={onRemoveHighlight}
                 />
                 <hr />
-                <ScreenshotSection
+                <BigCover
                     error={error}
-                    onAddScreenshot={onAddScreenshot}
-                    screenshots={screenshots}
-                    onRemove={onRemoveScreenshot}
+                    bigCover={previewBigCover}
+                    onChangeBigCover={handleBigCover}
+                    onRemoveBigCover={() => setPreviewBigCover("")}
                 />
 
                 {success && (

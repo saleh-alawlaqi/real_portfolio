@@ -36,7 +36,6 @@ body {
     font-family: "InterTight-extrabold";
     src: url("./assets/fonts/InterTight-ExtraBold.ttf") format("truetype"); /* Safari, Android, iOS */
 }
-
 @font-face {
     font-family: "InterTight-black";
     src: url("./assets/fonts/InterTight-Black.ttf") format("truetype"); /* Safari, Android, iOS */
@@ -204,4 +203,12 @@ body {
     -ms-filter: blur(150px);
     filter: blur(150px);
     opacity: 0.3;
+}
+.big-cover {
+    background-position: top center;
+    background-size: cover;
+}
+.small-cover {
+    background-position: top center;
+    background-size: cover;
 }

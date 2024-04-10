@@ -10,15 +10,18 @@ const Typography = () => {
             <h3 className="font-gt_light text-slate-600 text-[32px]">Typography</h3>
             {types && (
                 <div className="flex flex-col color-sections gap-5">
-                    {types.map(({ fontFamily, fontSize, fontWeight, lineHeight, title }) => (
-                        <TypeBox
-                            fontFamily={fontFamily}
-                            fontSize={fontSize}
-                            fontWeight={fontWeight}
-                            lineHeight={lineHeight}
-                            title={title}
-                        />
-                    ))}
+                    {types
+                        .sort((a, b) => parseInt(b.fontSize) - parseInt(a.fontSize)) // Sort types from big to small based on fontSize
+                        .map(({ fontFamily, fontSize, fontWeight, lineHeight, title }, i) => (
+                            <TypeBox
+                                fontFamily={fontFamily}
+                                fontSize={fontSize}
+                                key={i}
+                                fontWeight={fontWeight}
+                                lineHeight={lineHeight}
+                                title={title}
+                            />
+                        ))}
                 </div>
             )}
         </div>

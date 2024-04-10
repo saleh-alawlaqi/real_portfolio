@@ -20,8 +20,8 @@ const Highlights = (props: HighlightsProps) => {
             <div className="info flex flex-col">
                 <h3 className="text-[32px] font-gt_light text-slate-700">Highlights</h3>
                 <ul className="mt-5 space-y-2 text-slate-700 custom-list !ml-0">
-                    {props.highlights.map((highlight) => (
-                        <li>{highlight}</li>
+                    {props.highlights.map((highlight, i) => (
+                        <li key={i}>{highlight}</li>
                     ))}
                 </ul>
             </div>

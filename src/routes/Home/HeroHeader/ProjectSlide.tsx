@@ -25,7 +25,7 @@ const ProjectSlide = ({ id, projectImage, gradient }: ProjectSlideProps) => {
             >
                 <div
                     style={{ backgroundImage: `url(${projectImage})` }}
-                    className="project-slide w-full h-full relative cursor-pointer rounded-2xl"
+                    className="project-slide small-cover w-full h-full relative cursor-pointer rounded-2xl"
                 ></div>
             </NavLink>
         </div>

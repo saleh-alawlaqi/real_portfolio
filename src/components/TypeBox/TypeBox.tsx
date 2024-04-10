@@ -19,9 +19,8 @@ const TypeBox = ({ fontWeight, fontFamily, lineHeight, fontSize, title }: TypeBo
             </span>
             <hr className="flex-1 border-dashed border-slate-700" />
             <div className="type-info flex gap-6">
-                <p className="text-slate-700">{fontWeight}</p>
                 <p className="text-slate-700">{fontFamily}</p>
-                <p className="text-slate-700">{lineHeight}</p>
+                <p className="text-slate-700">{fontSize}</p>
             </div>
         </div>
     );

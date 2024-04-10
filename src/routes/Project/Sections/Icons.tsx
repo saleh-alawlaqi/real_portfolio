@@ -10,8 +10,8 @@ const Icons = () => {
             <h3 className="font-gt_light text-slate-600 text-[32px]">Iconography</h3>
             {icons && (
                 <div className="flex flex-wrap color-sections gap-5">
-                    {icons.map((icon) => (
-                        <IconBox path={icon} />
+                    {icons.map((icon, i) => (
+                        <IconBox key={i} path={icon} />
                     ))}
                 </div>
             )}

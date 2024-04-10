@@ -38,6 +38,7 @@ const TypeSection = ({
         >
             <div className="colors-heading flex justify-between">
                 <span className="text-2xl">Typography</span>
+                ** Order does not matter as it will be displayed from big to small
                 <Button
                     onClick={onAdd}
                     className="rounded-full font-medium"

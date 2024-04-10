@@ -87,6 +87,39 @@ const ColorSection = ({
                         <SelectItem key={"Slate"} value={"Slate"}>
                             Slate
                         </SelectItem>
+                        <SelectItem key={"Rose"} value={"Rose"}>
+                            Rose
+                        </SelectItem>
+                        <SelectItem key={"Pink"} value={"Pink"}>
+                            Pink
+                        </SelectItem>
+                        <SelectItem key={"Amber"} value={"Amber"}>
+                            Amber
+                        </SelectItem>
+                        <SelectItem key={"Orange"} value={"Orange"}>
+                            Orange
+                        </SelectItem>
+                        <SelectItem key={"Lime"} value={"Lime"}>
+                            Lime
+                        </SelectItem>
+                        <SelectItem key={"Violet"} value={"Violet"}>
+                            Violet
+                        </SelectItem>
+                        <SelectItem key={"Indigo"} value={"Indigo"}>
+                            Indigo
+                        </SelectItem>
+                        <SelectItem key={"Sky"} value={"Sky"}>
+                            Sky
+                        </SelectItem>
+                        <SelectItem key={"Fuchsia"} value={"Fuchsia"}>
+                            Fuchsia
+                        </SelectItem>
+                        <SelectItem key={"Rose"} value={"Rose"}>
+                            Rose
+                        </SelectItem>
+                        <SelectItem key={"Teal"} value={"Teal"}>
+                            Teal
+                        </SelectItem>
                     </Select>
                     <Button
                         onClick={addTailwindColorSection}

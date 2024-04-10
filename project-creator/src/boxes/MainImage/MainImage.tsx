@@ -42,7 +42,7 @@ const MainImage = ({ image, onRemoveImage }: MainImageProps) => {
                     className="close absolute right-2 top-2"
                 />
             )}
-            <img src={preview} className={`w-full h-40 rounded-lg object-cover bg-slate-400`} />
+            <img src={preview} className={`w-full h-64 rounded-lg object-cover bg-slate-400`} />
         </div>
     );
 };

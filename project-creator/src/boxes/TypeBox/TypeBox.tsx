@@ -25,125 +25,133 @@ const TypeBox = ({
     onChangeTitle,
     onRemove,
 }: TypeBoxProps) => {
+    const fontSizes = [
+        "200px",
+        "196px",
+        "192px",
+        "188px",
+        "184px",
+        "180px",
+        "176px",
+        "172px",
+        "168px",
+        "164px",
+        "160px",
+        "156px",
+        "152px",
+        "148px",
+        "144px",
+        "140px",
+        "136px",
+        "132px",
+        "128px",
+        "124px",
+        "120px",
+        "116px",
+        "112px",
+        "108px",
+        "104px",
+        "100px",
+        "96px",
+        "92px",
+        "88px",
+        "84px",
+        "80px",
+        "76px",
+        "72px",
+        "68px",
+        "64px",
+        "60px",
+        "56px",
+        "52px",
+        "48px",
+        "44px",
+        "42px",
+        "40px",
+        "36px",
+        "34px",
+        "32px",
+        "28px",
+        "24px",
+        "20px",
+        "16px",
+        "14px",
+        "12px",
+        "8px",
+    ];
+
     return (
-        <div className="type-box border shadow-medium rounded-lg border-slate-200 p-5 items-center flex gap-2 justify-between w-full">
+        <div className="type-box border shadow-medium rounded-lg border-slate-200 p-5 items-center flex gap-6 justify-between w-full">
             <Input
                 value={title}
                 style={{ fontSize, fontFamily, fontWeight, lineHeight }}
-                className="w-[48%]"
+                className="flex-1"
                 onChange={(e) => onChangeTitle(e, index)}
                 placeholder="Line Height"
                 name="lineHeight"
             />
-            <div className="type-info items-center flex w-[48%] gap-2">
-                <Select
+            <div className="type-info ml-auto items-center flex  gap-2">
+                <select
                     value={fontSize}
                     onChange={(e) => onChangeFontSize(e, index)}
-                    size="sm"
-                    placeholder="Size"
-                    selectedKeys={[fontSize]}
                     name="fontSize"
+                    className="p-3 rounded-md bg-slate-200"
                 >
-                    <SelectItem key="10px" value="10px">
-                        10px
-                    </SelectItem>
-                    <SelectItem key="12px" value="12px">
-                        12px
-                    </SelectItem>
-                    <SelectItem key="14px" value="14px">
-                        14px
-                    </SelectItem>
-                    <SelectItem key="16px" value="16px">
-                        16px
-                    </SelectItem>
-                    <SelectItem key="18px" value="18px">
-                        18px
-                    </SelectItem>
-                    <SelectItem key="20px" value="20px">
-                        20px
-                    </SelectItem>
-                    <SelectItem key="22px" value="22px">
-                        22px
-                    </SelectItem>
-                    <SelectItem key="24px" value="24px">
-                        24px
-                    </SelectItem>
-                    <SelectItem key="26px" value="26px">
-                        26px
-                    </SelectItem>
-                    <SelectItem key="28px" value="28px">
-                        28px
-                    </SelectItem>
-                    <SelectItem key="30px" value="30px">
-                        30px
-                    </SelectItem>
-                    <SelectItem key="32px" value="32px">
-                        32px
-                    </SelectItem>
-                    <SelectItem key="34px" value="34px">
-                        34px
-                    </SelectItem>
-                    <SelectItem key="36px" value="36px">
-                        36px
-                    </SelectItem>
-                    <SelectItem key="38px" value="38px">
-                        38px
-                    </SelectItem>
-                    <SelectItem key="40px" value="40px">
-                        40px
-                    </SelectItem>
-                </Select>
-                <Select
+                    {fontSizes.map((size) => (
+                        <option key={`${size}`} value={`${size}`}>
+                            {size}
+                        </option>
+                    ))}
+                </select>
+                <select
                     value={fontFamily}
                     onChange={(e) => onChangeFontFamily(e, index)}
-                    size="sm"
-                    selectedKeys={[fontFamily]}
-                    placeholder="Font family"
                     name="fontFamily"
+                    className="p-3 rounded-md bg-slate-200"
                 >
-                    <SelectItem key="Arial" value="Arial">
+                    <option key="Arial" value="Arial">
                         Arial
-                    </SelectItem>
-                    <SelectItem key="Roboto" value="Roboto">
+                    </option>
+                    <option key="Roboto" value="Roboto">
                         Roboto
-                    </SelectItem>
-                    <SelectItem key="Open Sans" value="Open Sans">
+                    </option>
+                    <option key="Open Sans" value="Open Sans">
                         Open Sans
-                    </SelectItem>
-                    <SelectItem key="Lato" value="Lato">
+                    </option>
+                    <option key="Lato" value="Lato">
                         Lato
-                    </SelectItem>
-                    <SelectItem key="Montserrat" value="Montserrat">
+                    </option>
+                    <option key="Montserrat" value="Montserrat">
                         Montserrat
-                    </SelectItem>
-                    <SelectItem key="GT bold" value="GT bold">
+                    </option>
+                    <option key="GT bold" value="GT bold">
                         GT Bold
-                    </SelectItem>
-                    <SelectItem key="GT medium" value="GT medium">
+                    </option>
+                    <option key="GT medium" value="GT medium">
                         GT Medium
-                    </SelectItem>
-                    <SelectItem key="GT light" value="GT light">
+                    </option>
+                    <option key="GT light" value="GT light">
                         GT Light
-                    </SelectItem>
-                    <SelectItem key="Inter bold" value="Inter bold">
+                    </option>
+                    <option key="Inter bold" value="Inter bold">
                         Inter bold
-                    </SelectItem>
-                    <SelectItem key="Inter medium" value="Inter medium">
+                    </option>
+                    <option key="Inter medium" value="Inter medium">
                         Inter medium
-                    </SelectItem>
-                    <SelectItem key="Inter light" value="Inter light">
+                    </option>
+                    <option key="Inter light" value="Inter light">
                         Inter light
-                    </SelectItem>
-                    <SelectItem key="Inter regular" value="Inter regular">
+                    </option>
+                    <option key="Inter regular" value="Inter regular">
                         Inter regular
-                    </SelectItem>
-                    <SelectItem key="Inter semibold" value="Inter semibold">
+                    </option>
+                    <option key="Inter semibold" value="Inter semibold">
                         Inter semibold
-                    </SelectItem>
-                    <SelectItem key="Inter extrabold" value="Inter extrabold">
+                    </option>
+                    <option key="Inter extrabold" value="Inter extrabold">
                         Inter extrabold
-                    </SelectItem>
-                </Select>
+                    </option>
+                </select>
 
                 <Button onClick={() => onRemove(index)} variant="solid" color="danger">
                     Remove

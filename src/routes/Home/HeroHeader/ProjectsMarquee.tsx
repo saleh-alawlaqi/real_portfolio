@@ -16,7 +16,7 @@ const ProjectsMarquee = ({ direction, id }: ProjectsMarqueeProps) => {
         >
             <Marquee
                 autoFill
-                loop={1}
+                loop={0}
                 speed={60}
                 pauseOnHover
                 direction={direction}

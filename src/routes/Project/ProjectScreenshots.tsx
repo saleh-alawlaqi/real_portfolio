@@ -8,8 +8,12 @@ const ProjectScreenshots = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className={`image ${gradient} flex items-stretch justify-center relative w-full h-[20em] rounded-xl lg:w-full lg:h-[30em]  bg-no-repeat bg-cover bg-center`}
+            className={`image ${gradient} flex items-stretch justify-center p-5 relative w-full h-[20em] rounded-xl lg:w-full lg:h-[30em]  bg-no-repeat bg-cover bg-center`}
         >
+            <div
+                style={{ backgroundImage: `url(${project.mainImage})` }}
+                className="w-full h-full bg-top bg-cover bg-no-repeat rounded-xl"
+            />
             {/* <Swiper
                 // install Swiper modules
                 modules={[Navigation, Pagination, A11y, EffectCoverflow]}
