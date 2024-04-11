@@ -11,7 +11,7 @@ const Colors = () => {
             {colors && (
                 <div className="flex flex-col color-sections gap-5">
                     {colors
-                        .sort((a, b) => (b.title === "Primary" ? 1 : -1))
+                        .sort((_, b) => (b.title === "Primary" ? 1 : -1))
                         .map((color, i) => (
                             <ColorSection key={i} title={color.title} colors={color.shades} />
                         ))}

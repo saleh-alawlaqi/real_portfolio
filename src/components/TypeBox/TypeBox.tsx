@@ -1,13 +1,10 @@
 interface TypeBoxProps {
-    fontWeight: string;
     fontFamily: string;
-    lineHeight: string;
     fontSize: string;
-    title: string;
     index: number;
 }
 
-const TypeBox = ({ fontWeight, fontFamily, lineHeight, fontSize, title, index }: TypeBoxProps) => {
+const TypeBox = ({ fontFamily, fontSize, index }: TypeBoxProps) => {
     const typeNumber = index + 1;
     return (
         <div className="type-box items-center flex gap-10 justify-between w-full">

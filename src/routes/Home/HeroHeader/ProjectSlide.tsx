@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
 
 interface ProjectSlideProps {
@@ -9,12 +7,6 @@ interface ProjectSlideProps {
 }
 
 const ProjectSlide = ({ id, projectImage, gradient }: ProjectSlideProps) => {
-    // State to track the hover status
-    const [isHovered, setIsHovered] = useState(false);
-
-    const onMouseEnterHandler = () => setIsHovered(true);
-    const onMouseLeaveHandler = () => setIsHovered(false);
-
     return (
         <div
             className={`project-slide-container opacity-50 ml-3 !-z-10 rounded-2xl w-[220px] ${gradient} p-[3px] h-[130px] lg:w-[320px] lg:h-[200px] hover:opacity-100 hover:!z-10`}

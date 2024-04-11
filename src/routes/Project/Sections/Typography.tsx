@@ -12,15 +12,12 @@ const Typography = () => {
                 <div className="flex flex-col color-sections gap-5">
                     {types
                         .sort((a, b) => parseInt(b.fontSize) - parseInt(a.fontSize)) // Sort types from big to small based on fontSize
-                        .map(({ fontFamily, fontSize, fontWeight, lineHeight, title }, i) => (
+                        .map(({ fontFamily, fontSize }, i) => (
                             <TypeBox
                                 fontFamily={fontFamily}
                                 fontSize={fontSize}
                                 key={i}
                                 index={i}
-                                fontWeight={fontWeight}
-                                lineHeight={lineHeight}
-                                title={title}
                             />
                         ))}
                 </div>
