@@ -27,6 +27,7 @@ const HighlightSection = ({
                 <Button
                     onClick={onAddHighlight}
                     className="rounded-full font-medium"
+                    disableAnimation
                     variant="solid"
                     color="primary"
                 >

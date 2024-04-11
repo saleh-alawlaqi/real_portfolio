@@ -6,6 +6,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { db, storage } from "../../firebase-config";
 import { getDownloadURL, ref } from "firebase/storage";
 import ProjectBox from "../ProjectBox";
+import LoadingProjectBox from "./LoadingProjectBox/LoadingProjectBox";
 
 const Home = () => {
     const [projects, setProjects] = useState<IProject[]>([]);
@@ -30,6 +31,7 @@ const Home = () => {
                     })
                 );
                 setProjects(addedProjects);
+                setLoading(false);
             } catch (e) {
                 setLoading(false);
                 console.error("Error getting documents: ", e);
@@ -46,6 +48,13 @@ const Home = () => {
                 </Button>
             </div>
             <div className="flex gap-5 flex-col">
+                {loading && (
+                    <div className="flex flex-col gap-5">
+                        <LoadingProjectBox />
+                        <LoadingProjectBox />
+                        <LoadingProjectBox />
+                    </div>
+                )}
                 {projects.map((project) => (
                     <ProjectBox key={project.id} {...project} />
                 ))}

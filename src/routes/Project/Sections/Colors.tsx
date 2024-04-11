@@ -10,9 +10,11 @@ const Colors = () => {
             <h3 className="font-gt_light text-slate-600 text-[32px]">Colors</h3>
             {colors && (
                 <div className="flex flex-col color-sections gap-5">
-                    {colors.map((color, i) => (
-                        <ColorSection key={i} title={color.title} colors={color.shades} />
-                    ))}
+                    {colors
+                        .sort((a, b) => (b.title === "Primary" ? 1 : -1))
+                        .map((color, i) => (
+                            <ColorSection key={i} title={color.title} colors={color.shades} />
+                        ))}
                 </div>
             )}
         </div>

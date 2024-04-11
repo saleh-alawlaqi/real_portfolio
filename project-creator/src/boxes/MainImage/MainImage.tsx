@@ -36,13 +36,18 @@ const MainImage = ({ image, onRemoveImage }: MainImageProps) => {
                 <Button
                     isIconOnly
                     variant="solid"
+                    disableAnimation
                     size="sm"
                     onClick={() => onRemoveImage(image)}
                     color="danger"
                     className="close absolute right-2 top-2"
                 />
             )}
-            <img src={preview} className={`w-full h-64 rounded-lg object-cover bg-slate-400`} />
+            {preview ? (
+                <img src={preview} className={`w-full h-64 rounded-lg object-cover bg-slate-400`} />
+            ) : (
+                <div className="w-full h-64 rounded-lg bg-slate-400" />
+            )}
         </div>
     );
 };

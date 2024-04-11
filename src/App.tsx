@@ -11,7 +11,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import { createContext, useContext, useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "./firebase-config";
 import { IProject } from "./types";
 import Menu from "./components/Menu";
@@ -35,7 +35,10 @@ function App() {
     useEffect(() => {
         const getAllProjects = async () => {
             try {
-                const querySnapshot = await getDocs(collection(db, "projects"));
+                const querySnapshot = await getDocs(
+                    query(collection(db, "projects"), where("ready", "!=", false))
+                );
+
                 const addedProjects: IProject[] = [];
                 querySnapshot.forEach(async (doc) => {
                     // doc.data() is never undefined for query doc snapshots

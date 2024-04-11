@@ -43,6 +43,7 @@ const TypeSection = ({
                     onClick={onAdd}
                     className="rounded-full font-medium"
                     variant="solid"
+                    disableAnimation
                     color="primary"
                 >
                     Add type

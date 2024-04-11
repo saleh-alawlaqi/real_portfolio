@@ -29,6 +29,12 @@ const toolToTooltip: { [key in tools]: string } = {
     kotlin: "Kotlin",
     mysql: "MySQL",
     figma: "Figma",
+    adobexd: "Adobe XD",
+    android: "Android",
+    apple: "Apple",
+    linux: "Linux",
+    windows: "Windows",
+    sketch: "Sketch",
 };
 const ToolBox = ({ tool, bgColor }: ToolBoxProps) => {
     const [show, setShow] = useState(false);

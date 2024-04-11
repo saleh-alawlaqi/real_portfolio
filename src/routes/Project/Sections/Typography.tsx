@@ -17,6 +17,7 @@ const Typography = () => {
                                 fontFamily={fontFamily}
                                 fontSize={fontSize}
                                 key={i}
+                                index={i}
                                 fontWeight={fontWeight}
                                 lineHeight={lineHeight}
                                 title={title}

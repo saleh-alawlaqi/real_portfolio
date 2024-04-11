@@ -47,6 +47,7 @@ const IconBox = ({ path, index, onRemove }: IconBoxProps) => {
             <Button
                 onClick={() => onRemove(index, path instanceof File ? path.name : path)}
                 variant="solid"
+                disableAnimation
                 className="mt-5 w-full"
                 color="danger"
             >

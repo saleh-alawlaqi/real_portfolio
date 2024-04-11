@@ -20,6 +20,12 @@ export type tools =
     | "c"
     | "kotlin"
     | "mysql"
+    | "apple"
+    | "android"
+    | "windows"
+    | "linux"
+    | "sketch"
+    | "adobexd"
     | "express";
 
 export interface IProject {

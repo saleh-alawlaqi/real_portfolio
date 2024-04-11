@@ -98,12 +98,19 @@ const ColorBox = ({ index, sectionIndex, color, shade }: ColorBoxProp) => {
                 value={shade}
                 onChange={onEditShade}
                 size="sm"
+                disableAnimation
                 labelPlacement="outside"
                 className="w-28"
                 placeholder="Shade"
                 name="shade"
             />
-            <Button onClick={onRemove} variant="solid" className="w-full" color="danger">
+            <Button
+                onClick={onRemove}
+                disableAnimation
+                variant="solid"
+                className="w-full"
+                color="danger"
+            >
                 Remove
             </Button>
         </div>

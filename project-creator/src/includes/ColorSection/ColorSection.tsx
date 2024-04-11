@@ -52,9 +52,11 @@ const ColorSection = ({
 
                 <div className="quick-add-tailwind-colors w-[25rem] mr-10 gap-3 ml-auto flex">
                     <Select
+                        aria-label="Select type"
                         placeholder="Select Type"
                         name="type"
                         className="flex-1"
+                        disableAnimation
                         labelPlacement="outside"
                         value={"Green"}
                         selectedKeys={[selectedTailwindColor]}
@@ -86,9 +88,6 @@ const ColorSection = ({
                         </SelectItem>
                         <SelectItem key={"Slate"} value={"Slate"}>
                             Slate
-                        </SelectItem>
-                        <SelectItem key={"Rose"} value={"Rose"}>
-                            Rose
                         </SelectItem>
                         <SelectItem key={"Pink"} value={"Pink"}>
                             Pink
@@ -123,6 +122,7 @@ const ColorSection = ({
                     </Select>
                     <Button
                         onClick={addTailwindColorSection}
+                        disableAnimation
                         className="rounded-full font-medium"
                         variant="solid"
                         color="secondary"
@@ -134,6 +134,7 @@ const ColorSection = ({
                     onClick={onAdd}
                     className="rounded-full font-medium"
                     variant="solid"
+                    disableAnimation
                     color="primary"
                 >
                     Add color section

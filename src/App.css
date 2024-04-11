@@ -27,7 +27,7 @@
 .projects_grid2 {
     display: inline-grid;
     gap: 32px;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     justify-content: stretch;
 }
 .tooltip-text {
@@ -107,6 +107,21 @@
 }
 .figma {
     background-image: url(./assets/tools/figma.svg);
+}
+.sketch {
+    background-image: url(./assets/tools/sketch.svg);
+}
+.adobexd {
+    background-image: url(./assets/tools/adobexd.svg);
+}
+.windows {
+    background-image: url(./assets/tools/windows.svg);
+}
+.linux {
+    background-image: url(./assets/tools/linux.svg);
+}
+.apple {
+    background-image: url(./assets/tools/apple.svg);
 }
 .cta {
     background: linear-gradient(45deg, #6366f1, #0ea5e9);
@@ -320,4 +335,8 @@ a:hover::before {
 }
 .project-1 {
     background: url(./assets/project-1.png) center/cover no-repeat;
+}
+.big_description > span {
+    font-weight: bold;
+    font-size: 20px;
 }

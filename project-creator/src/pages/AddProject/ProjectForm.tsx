@@ -11,7 +11,6 @@ import ColorSection from "../../includes/ColorSection";
 import TypeSection from "../../includes/TypeSection";
 import IconSection from "../../includes/IconSection";
 import HighlightSection from "../../includes/HighlightSection";
-import ScreenshotSection from "./sections/ScreenshotSection";
 import { Link } from "react-router-dom";
 import BigCover from "../../includes/BigCover";
 
@@ -50,6 +49,7 @@ const ProjectForm = () => {
         ready: false,
         colors: [],
         types: [],
+        bigCover: "",
         icons: [],
         highlights: [],
         tools: [],
@@ -169,30 +169,23 @@ const ProjectForm = () => {
             setError("highlight_section");
             return;
         }
-
-        if (!screenshots.length) {
-            setError("screenshot_section");
-            return;
-        }
-
         try {
             // 'file' comes from the Blob or File API
+
             const docRef = await addDoc(collection(db, "projects"), project);
             await uploadFile("main_image", docRef.id, previewMainImage as File);
             await updateDoc(docRef, {
                 mainImage:
                     docRef.id + `/main_image.` + (previewMainImage as File).name.split(".").pop(),
             });
-            await Promise.all(
-                screenshots.map(
-                    async (screenshot) =>
-                        await uploadFile(
-                            `screenshot_${Math.random() * 1000}`,
-                            docRef.id + "/screenshots",
-                            screenshot
-                        )
-                )
-            );
+            if (project.bigCover) {
+            }
+            await uploadFile("big_cover", docRef.id as string, previewBigCover as File);
+
+            await updateDoc(docRef, {
+                mainImage:
+                    docRef.id + `/big_cover.` + (previewBigCover as File).name.split(".").pop(),
+            });
 
             await Promise.all(
                 icons.map(async (icon, index) => {
@@ -399,14 +392,7 @@ const ProjectForm = () => {
             };
         });
     };
-    const onRemoveScreenshot = (index: number) => {
-        setScreenshots((prev) => prev.filter((_, i) => i !== index));
-    };
-    const onAddScreenshot = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { files } = e.target;
-        if (!files) return;
-        setScreenshots((prev) => [...prev, ...files]);
-    };
+
     return (
         <ProjectFormContext.Provider
             value={{
@@ -426,10 +412,7 @@ const ProjectForm = () => {
                 handleChangeWithWordCount,
             }}
         >
-            <form
-                className="bg-white p-10 rounded-xl gap-10 mt-10 w-[62rem] flex flex-col"
-                onSubmit={handleSubmit}
-            >
+            <form className="bg-white p-10 rounded-xl gap-10 mt-10 w-[62rem] flex flex-col">
                 <div className="flex flex-col info gap-5">
                     <div className="colors-heading flex justify-between">
                         <span className="text-2xl">Add a new project</span>
@@ -550,6 +533,7 @@ const ProjectForm = () => {
                     className="rounded-full font-medium"
                     variant="solid"
                     color="primary"
+                    onClick={handleSubmit}
                     type="submit"
                 >
                     Submit

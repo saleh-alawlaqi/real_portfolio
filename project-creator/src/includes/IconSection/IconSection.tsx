@@ -38,6 +38,7 @@ const IconSection = ({ error, onAddIcon, icons, onRemoveIcon }: IconSectionProps
                     onClick={handleIconButton}
                     className="rounded-full font-medium"
                     variant="solid"
+                    disableAnimation
                     color="primary"
                 >
                     Add icon

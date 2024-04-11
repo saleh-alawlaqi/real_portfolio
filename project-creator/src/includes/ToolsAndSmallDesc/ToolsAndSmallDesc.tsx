@@ -1,6 +1,5 @@
 import { Listbox, ListboxItem, Textarea } from "@nextui-org/react";
 import { ListboxWrapper } from "../../ListBoxWrapper";
-import { useProjectForm } from "../../pages/AddProject/ProjectForm";
 import { tools } from "../../../../src/types";
 
 interface ToolsAndSmallDescProps {
@@ -24,6 +23,7 @@ const ToolsAndSmallDesc = ({
                 <Listbox
                     aria-label="Multiple selection example"
                     variant="flat"
+                    disableAnimation
                     disallowEmptySelection
                     selectionMode="multiple"
                     id="tools"
@@ -37,6 +37,12 @@ const ToolsAndSmallDesc = ({
                     <ListboxItem key="vue">Vue</ListboxItem>
                     <ListboxItem key="angular">Angular</ListboxItem>
                     <ListboxItem key="svelte">Svelte</ListboxItem>
+                    <ListboxItem key="apple">Apple</ListboxItem>
+                    <ListboxItem key="android">Android</ListboxItem>
+                    <ListboxItem key="windows">Windows</ListboxItem>
+                    <ListboxItem key="linux">Linux</ListboxItem>
+                    <ListboxItem key="sketch">Sketch</ListboxItem>
+                    <ListboxItem key="adobexd">Adobexd</ListboxItem>
                     <ListboxItem key="tailwind">Tailwind</ListboxItem>
                     <ListboxItem key="sass">Sass</ListboxItem>
                     <ListboxItem key="nodejs">Nodejs</ListboxItem>
@@ -60,6 +66,7 @@ const ToolsAndSmallDesc = ({
             <Textarea
                 labelPlacement="outside"
                 label="Small Description"
+                disableAnimation
                 className="flex-1"
                 placeholder="Small Description"
                 id="small_description"

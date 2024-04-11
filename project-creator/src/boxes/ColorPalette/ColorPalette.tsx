@@ -40,11 +40,13 @@ const ColorPalette = ({
                     onChange={(e) => onChangeColorTitle(e, index)}
                     size="sm"
                     placeholder="Project Name"
+                    disableAnimation
                     name="name"
                 />
                 <Button
                     onClick={(e) => onAddColor(e, index)}
                     className="rounded-full flex-1"
+                    disableAnimation
                     variant="solid"
                     color="secondary"
                 >
@@ -53,6 +55,7 @@ const ColorPalette = ({
                 <Button
                     variant="solid"
                     className="rounded-full flex-1"
+                    disableAnimation
                     color="danger"
                     onClick={() => onRemoveColorPalette(index)}
                 >

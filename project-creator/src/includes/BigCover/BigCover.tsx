@@ -54,18 +54,19 @@ const BigCover = ({ error, bigCover, onChangeBigCover, onRemoveBigCover }: BigCo
             />
             <div className="flex justify-between items-center">
                 <span className="text-xl">Big cover</span>
-                <Button onClick={onClickFile} className="mt-2">
+                <Button disableAnimation onClick={onClickFile} className="mt-2">
                     Upload big cover
                 </Button>
             </div>
             <div
                 style={{ backgroundImage: `url("${preview}")` }}
-                className="flex w-full bg-top bg-cover bg-slate-200 h-96 relative"
+                className="flex w-full bg-top bg-cover bg-slate-200 h-[30rem] relative"
             >
                 {bigCover && (
                     <Button
                         isIconOnly
                         variant="solid"
+                        disableAnimation
                         size="sm"
                         onClick={() => onRemoveBigCover()}
                         color="danger"

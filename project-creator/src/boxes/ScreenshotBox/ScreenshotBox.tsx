@@ -42,6 +42,7 @@ const ScreenshotBox = ({ index, screenshot, onRemove }: ScreenshotBoxProps) => {
                 onClick={() =>
                     onRemove(index, screenshot instanceof File ? screenshot.name : screenshot)
                 }
+                disableAnimation
                 className="w-full"
                 variant="solid"
                 color="danger"

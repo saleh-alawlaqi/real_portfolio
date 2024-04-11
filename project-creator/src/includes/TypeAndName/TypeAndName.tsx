@@ -14,6 +14,7 @@ const TypeAndName = ({ name, error, onChangeName, onChangeType, type }: TypeAndN
         <div className="flex gap-5 type-and-name items-start">
             <Select
                 placeholder="Select Type"
+                disableAnimation
                 name="type"
                 value={"software"}
                 selectedKeys={[type]}
@@ -41,6 +42,7 @@ const TypeAndName = ({ name, error, onChangeName, onChangeType, type }: TypeAndN
                 <Input
                     labelPlacement="outside"
                     label="Project Name"
+                    disableAnimation
                     id="project_name"
                     placeholder="Project Name"
                     value={name}

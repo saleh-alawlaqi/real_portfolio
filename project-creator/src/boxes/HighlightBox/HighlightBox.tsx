@@ -13,10 +13,11 @@ const HighlightBox = ({ index, title, onChangeTitle, onRemove }: HighlightBoxPro
             <Input
                 value={title}
                 labelPlacement="outside"
+                disableAnimation
                 className="flex-1"
                 onChange={(e) => onChangeTitle(e, index)}
             />
-            <Button variant="solid" color="danger" onClick={() => onRemove(index)}>
+            <Button variant="solid" disableAnimation color="danger" onClick={() => onRemove(index)}>
                 Remove
             </Button>
         </div>

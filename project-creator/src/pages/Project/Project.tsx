@@ -1,10 +1,10 @@
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { deleteDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { db, deleteFile, storage, uploadFile } from "../../firebase-config";
 import { IProject, gradients, tools } from "../../../../src/types";
-import { Button, Textarea } from "@nextui-org/react";
-import { listAll, ref } from "firebase/storage";
+import { Button, Checkbox, Textarea } from "@nextui-org/react";
+import { deleteObject, listAll, ref } from "firebase/storage";
 import TypeAndName from "../../includes/TypeAndName";
 import GithubAndDemo from "../../includes/GithubAndDemo";
 import ImageAndGradient from "../../includes/ImageAndGradient";
@@ -13,11 +13,12 @@ import ColorSection from "../../includes/ColorSection";
 import TypeSection from "../../includes/TypeSection";
 import IconSection from "../../includes/IconSection";
 import HighlightSection from "../../includes/HighlightSection";
-import ScreenshotSection from "../AddProject/sections/ScreenshotSection";
 import BigCover from "../../includes/BigCover";
 
 const Project = () => {
     const { projectId } = useParams();
+    const navigate = useNavigate();
+
     const [project, setProject] = useState<IProject>({
         name: "",
         mainImage: "",
@@ -98,7 +99,17 @@ const Project = () => {
                 Loading...
             </div>
         );
-    const onDeleteProject = () => {};
+    const onDeleteProject = async () => {
+        if (!projectId) return;
+        const docRef = doc(db, "projects", projectId);
+        await deleteDoc(docRef);
+        const folderRef = ref(storage, projectId);
+
+        const fileList = await listAll(folderRef);
+        const deletePromises = fileList.items.map((itemRef) => deleteObject(itemRef));
+        await Promise.all(deletePromises);
+        navigate("/");
+    };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -500,6 +511,7 @@ const Project = () => {
                                 ? { base: "border-2 border-red-500" }
                                 : { base: "" }
                         }
+                        maxRows={50}
                         label="Big Description"
                         placeholder="Big Description"
                         name="bigDescription"
@@ -549,14 +561,25 @@ const Project = () => {
                         onChangeBigCover={handleBigCoverChange}
                         onRemoveBigCover={() => setNewBigCover("")}
                     />
-                    <Button
-                        className="rounded-full mt-10 font-medium"
-                        variant="solid"
-                        color="primary"
-                        type="submit"
-                    >
-                        Submit
-                    </Button>
+                    <div className="flex justify-between">
+                        <Checkbox
+                            isSelected={project.ready}
+                            checked={project.ready}
+                            onChange={(e) =>
+                                setProject((prev) => ({ ...prev, ready: e.target.checked }))
+                            }
+                        >
+                            Project is ready to launch!
+                        </Checkbox>
+                        <Button
+                            className="rounded-full mt-10 font-medium"
+                            variant="solid"
+                            color="primary"
+                            type="submit"
+                        >
+                            Submit
+                        </Button>
+                    </div>
                 </form>
                 {success && (
                     <div className="fixed bottom-10 left-10 bg-emerald-500 bg-opacity-90 text-white w-auto self-end font-semibold p-5 rounded-lg px-6">

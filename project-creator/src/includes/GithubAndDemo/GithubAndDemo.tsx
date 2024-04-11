@@ -18,6 +18,7 @@ const GithubAndDemo = ({
             <Input
                 labelPlacement="outside"
                 label="Github"
+                disableAnimation
                 id="github"
                 placeholder="Github"
                 value={github}
@@ -28,6 +29,7 @@ const GithubAndDemo = ({
             <Input
                 labelPlacement="outside"
                 label="Demo"
+                disableAnimation
                 value={demo}
                 id="demo"
                 classNames={error === "demo" ? { base: "border-2 border-red-500" } : { base: "" }}

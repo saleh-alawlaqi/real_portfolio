@@ -1,7 +1,7 @@
 import CTA from "../../components/CTA";
 import PageHeader from "../../components/PageHeader";
 import PortfolioTabs from "./PortfolioTabs";
-import ProjectBox from "../../components/SmallProjectBox/SmallProjectBox";
+import SmallProjectBox from "../../components/SmallProjectBox/SmallProjectBox";
 import { usePortfolioContext } from "./PortfolioContext";
 import { projectTabsList } from "../../types";
 import { AnimatePresence } from "framer-motion";
@@ -30,7 +30,7 @@ const Portfolio = () => {
                             <>
                                 {projects.map((project, i) => (
                                     <AnimatePresence>
-                                        <ProjectBox index={i} key={project.id} {...project} />
+                                        <SmallProjectBox index={i} key={project.id} {...project} />
                                     </AnimatePresence>
                                 ))}
                             </>
@@ -40,7 +40,11 @@ const Portfolio = () => {
                                     .filter((p) => p.type === projectTabsList[activeTab].type)
                                     .map((project, i) => (
                                         <AnimatePresence>
-                                            <ProjectBox index={i} key={project.id} {...project} />
+                                            <SmallProjectBox
+                                                index={i}
+                                                key={project.id}
+                                                {...project}
+                                            />
                                         </AnimatePresence>
                                     ))}
                             </>
