@@ -1,63 +1,67 @@
-import { Input, Select, SelectItem } from "@nextui-org/react";
+import { Input, Listbox, ListboxItem } from "@nextui-org/react";
+import { ListboxWrapper } from "../../ListBoxWrapper";
 
 interface TypeAndNameProps {
-    type: "software" | "frontend" | "noCode" | "uiDesign";
     name: string;
     error: string;
     newProjectTypes?: ("software" | "frontend" | "noCode" | "uiDesign")[];
     onChangeName: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    onChangeType: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+    onChangeProjectTypes: (keys: any) => void;
 }
 
-const TypeAndName = ({ name, error, onChangeName, onChangeType, type }: TypeAndNameProps) => {
+const TypeAndName = ({
+    name,
+    error,
+    onChangeName,
+    onChangeProjectTypes,
+    newProjectTypes,
+}: TypeAndNameProps) => {
     const projectNameWords = name.split(" ").length;
     return (
-        <div className="flex gap-5 type-and-name items-start">
-            <Select
-                placeholder="Select Type"
-                disableAnimation
-                name="type"
-                value={"software"}
-                selectedKeys={[type]}
-                className="flex-1"
-                label="Type"
-                classNames={error === "type" ? { base: "border-2 border-red-500" } : { base: "" }}
-                id="type"
-                labelPlacement="outside"
-                onChange={onChangeType}
-            >
-                <SelectItem key="software" value="software">
-                    Software
-                </SelectItem>
-                <SelectItem key="frontend" value="frontend">
-                    Frontend
-                </SelectItem>
-                <SelectItem key="noCode" value="noCode">
-                    No Code
-                </SelectItem>
-                <SelectItem key="uiDesign" value="uiDesign">
-                    UI Design
-                </SelectItem>
-            </Select>
-            <div className="flex flex-col items-end flex-1">
-                <Input
-                    labelPlacement="outside"
-                    label="Project Name"
-                    disableAnimation
-                    id="project_name"
-                    placeholder="Project Name"
-                    value={name}
-                    name="name"
-                    classNames={
-                        error === "project_name"
-                            ? { base: "border-2 border-red-500" }
-                            : { base: "" }
-                    }
-                    onChange={onChangeName}
-                />
-                <span className="mt-2">Max words: {projectNameWords}/5</span>
+        <>
+            <div className="flex gap-5 type-and-name items-start">
+                <ListboxWrapper label="Project Types">
+                    <Listbox
+                        aria-label="Multiple selection example"
+                        variant="flat"
+                        disableAnimation
+                        disallowEmptySelection
+                        selectionMode="multiple"
+                        id="project_types"
+                        classNames={
+                            error === "project_types"
+                                ? { base: "border-2 border-red-500" }
+                                : { base: "" }
+                        }
+                        selectedKeys={newProjectTypes}
+                        onSelectionChange={onChangeProjectTypes}
+                    >
+                        <ListboxItem key="uiDesign">UI Design</ListboxItem>
+                        <ListboxItem key="software">Software</ListboxItem>
+                        <ListboxItem key="noCode">No code</ListboxItem>
+                        <ListboxItem key="frontend">Frontend</ListboxItem>
+                    </Listbox>
+                </ListboxWrapper>
+                <div className="flex flex-col items-end flex-1">
+                    <Input
+                        labelPlacement="outside"
+                        label="Project Name"
+                        disableAnimation
+                        id="project_name"
+                        placeholder="Project Name"
+                        value={name}
+                        name="name"
+                        classNames={
+                            error === "project_name"
+                                ? { base: "border-2 border-red-500" }
+                                : { base: "" }
+                        }
+                        onChange={onChangeName}
+                    />
+                    <span className="mt-2">Max words: {projectNameWords}/5</span>
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 

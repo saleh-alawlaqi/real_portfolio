@@ -37,7 +37,11 @@ const Portfolio = () => {
                         ) : (
                             <>
                                 {projects
-                                    .filter((p) => p.type === projectTabsList[activeTab].type)
+                                    .filter((p) =>
+                                        p.newProjectType?.includes(
+                                            projectTabsList[activeTab].type as any
+                                        )
+                                    )
                                     .map((project, i) => (
                                         <AnimatePresence>
                                             <SmallProjectBox

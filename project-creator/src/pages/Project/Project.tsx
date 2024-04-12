@@ -156,6 +156,11 @@ const Project = () => {
 
         setProject((prev) => ({ ...prev, tools: myArray }));
     };
+    const handleProjectTypes = (keys: any) => {
+        const myArray = Array.from(keys) as any[];
+
+        setProject((prev) => ({ ...prev, newProjectType: myArray }));
+    };
     const onAddColorSection = (colors: any) => {
         if (colors) {
             setProject((prev) => ({
@@ -415,19 +420,10 @@ const Project = () => {
                     </div>
                     <TypeAndName
                         name={project.name}
-                        type={project.type}
+                        newProjectTypes={project.newProjectType}
                         error={error}
+                        onChangeProjectTypes={handleProjectTypes}
                         onChangeName={(e) => handleChangeWithWordCount(e, 5)}
-                        onChangeType={(e) =>
-                            setProject((prev) => ({
-                                ...prev,
-                                type: e.target.value as
-                                    | "software"
-                                    | "frontend"
-                                    | "noCode"
-                                    | "uiDesign",
-                            }))
-                        }
                     />
                     <Links
                         demo={project.demo}
