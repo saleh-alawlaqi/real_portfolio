@@ -11,7 +11,6 @@ interface ProjectBoxProps {
 const ProjectBox = ({ project }: ProjectBoxProps) => {
     const boxRef = useRef(null);
     const showInView = useInView(boxRef, { margin: "-300px", once: true });
-    const fullInView = useInView(boxRef, { amount: "all", margin: "80px 0px 80px 0px" });
 
     const [showOverlay, setShowOverlay] = useState(false);
 
@@ -30,7 +29,7 @@ const ProjectBox = ({ project }: ProjectBoxProps) => {
             className="flex cursor-pointer big-cover w-full h-[90vh] rounded-[1rem] items-center flex-col"
         >
             <AnimatePresence>
-                {(fullInView || showOverlay) && (
+                {showOverlay && (
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}

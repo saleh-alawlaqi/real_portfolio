@@ -4,6 +4,7 @@ interface TypeAndNameProps {
     type: "software" | "frontend" | "noCode" | "uiDesign";
     name: string;
     error: string;
+    newProjectTypes?: ("software" | "frontend" | "noCode" | "uiDesign")[];
     onChangeName: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onChangeType: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }

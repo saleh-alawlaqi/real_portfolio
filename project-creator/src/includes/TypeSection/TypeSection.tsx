@@ -51,11 +51,10 @@ const TypeSection = ({
             </div>
             {types.length > 0 &&
                 types
-                    ?.slice()
-                    .reverse()
+                    .slice()
                     .map((type, index) => (
                         <TypeBox
-                            index={types.length - 1 - index} // Adjust index for descending order
+                            index={index}
                             key={index}
                             onChangeFontFamily={onChangeFontFamily}
                             onChangeFontSize={onChangeFontSize}

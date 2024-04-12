@@ -4,7 +4,7 @@ import { db, uploadFile } from "../../firebase-config";
 import { collection, addDoc, updateDoc } from "firebase/firestore";
 import { IProject, gradients, tools } from "../../../../src/types"; // Assume these are defined in types.ts
 import TypeAndName from "../../includes/TypeAndName";
-import GithubAndDemo from "../../includes/GithubAndDemo";
+import Links from "../../includes/Links";
 import ImageAndGradient from "../../includes/ImageAndGradient";
 import ToolsAndSmallDesc from "../../includes/ToolsAndSmallDesc";
 import ColorSection from "../../includes/ColorSection";
@@ -43,7 +43,12 @@ const ProjectForm = () => {
         bigDescription: "",
         gradient: "gradient-1",
         type: "software",
+        adobexdLink: "",
+        figmaLink: "",
+        sketchLink: "",
+        websiteLink: "",
         demo: "",
+        newProjectType: [],
         github: "",
         smallDescription: "",
         ready: false,
@@ -127,14 +132,6 @@ const ProjectForm = () => {
 
         if (!project.name) {
             setError("project_name");
-            return;
-        }
-        if (!project.github) {
-            setError("github");
-            return;
-        }
-        if (!project.demo) {
-            setError("demo");
             return;
         }
         if (!previewMainImage) {
@@ -440,9 +437,17 @@ const ProjectForm = () => {
                             }))
                         }
                     />
-                    <GithubAndDemo
+                    <Links
                         demo={project.demo}
                         github={project.github}
+                        onChangeAdobexdLink={handleChange}
+                        onChangeFigmaLink={handleChange}
+                        onChangeWebsiteLink={handleChange}
+                        adobexdLink={project.adobexdLink}
+                        figmaLink={project.figmaLink}
+                        sketchLink={project.sketchLink}
+                        websiteLink={project.websiteLink}
+                        onChangeSketchLink={handleChange}
                         error={error}
                         onChangeDemo={handleChange}
                         onChangeGithub={handleChange}

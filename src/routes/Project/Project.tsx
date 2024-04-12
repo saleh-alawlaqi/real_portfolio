@@ -16,8 +16,8 @@ const Project = () => {
             <Header />
             <div className="top_header mt-12 w-[90%] lg:max-w-[1300px] flex flex-col overflow-visible lg:justify-between rounded-lg items-start">
                 <ProjectHeader />
-                <div className="flex flex-col w-full lg:flex-row mt-6 lg:space-x-6 overflow-visible lg:items-start">
-                    <div className="images_and_project_description flex flex-col lg:w-[62%]">
+                <div className="flex flex-col w-full lg:flex-row mt-5 lg:gap-5 overflow-visible lg:items-start">
+                    <div className="images_and_project_description flex flex-col lg:flex-1">
                         <ProjectScreenshots />
                         <ProjectDescription />
                     </div>

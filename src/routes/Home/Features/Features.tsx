@@ -53,6 +53,30 @@ const Features = () => {
                     delay={0.6}
                     isInView={isInView}
                 />
+                <FeatureBox
+                    heading="Options Trading"
+                    description="Our app offers an insane level of security to protect all of your important
+                        information. And more maybe."
+                    icon="bg-trading"
+                    delay={0.8}
+                    isInView={isInView}
+                />
+                <FeatureBox
+                    heading="Options Trading"
+                    description="Our app offers an insane level of security to protect all of your important
+                        information. And more maybe."
+                    icon="bg-trading"
+                    delay={1}
+                    isInView={isInView}
+                />
+                <FeatureBox
+                    heading="Options Trading"
+                    description="Our app offers an insane level of security to protect all of your important
+                        information. And more maybe."
+                    icon="bg-trading"
+                    delay={1.2}
+                    isInView={isInView}
+                />
             </motion.div>
         </motion.div>
     );

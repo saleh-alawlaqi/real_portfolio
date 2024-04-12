@@ -37,8 +37,13 @@ export interface IProject {
     mainImage?: string;
     bigCover?: string;
     type: "software" | "frontend" | "noCode" | "uiDesign";
-    demo: string;
-    github: string;
+    newProjectType?: ("software" | "frontend" | "noCode" | "uiDesign")[];
+    demo?: string;
+    figmaLink?: string;
+    adobexdLink?: string;
+    sketchLink?: string;
+    websiteLink?: string;
+    github?: string;
     smallDescription: string;
     colors: { title: string; shades: { color: string; shade: string }[] }[];
     types: {

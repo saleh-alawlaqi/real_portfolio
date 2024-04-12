@@ -6,7 +6,7 @@ import { IProject, gradients, tools } from "../../../../src/types";
 import { Button, Checkbox, Textarea } from "@nextui-org/react";
 import { deleteObject, listAll, ref } from "firebase/storage";
 import TypeAndName from "../../includes/TypeAndName";
-import GithubAndDemo from "../../includes/GithubAndDemo";
+import Links from "../../includes/Links";
 import ImageAndGradient from "../../includes/ImageAndGradient";
 import ToolsAndSmallDesc from "../../includes/ToolsAndSmallDesc";
 import ColorSection from "../../includes/ColorSection";
@@ -14,6 +14,7 @@ import TypeSection from "../../includes/TypeSection";
 import IconSection from "../../includes/IconSection";
 import HighlightSection from "../../includes/HighlightSection";
 import BigCover from "../../includes/BigCover";
+import DeleteProject from "./DeleteProject";
 
 const Project = () => {
     const { projectId } = useParams();
@@ -34,6 +35,10 @@ const Project = () => {
         icons: [],
         highlights: [],
         tools: [],
+        adobexdLink: "",
+        figmaLink: "",
+        sketchLink: "",
+        websiteLink: "",
         screenshots: [],
     });
     const [newIcons, setNewIcons] = useState<File[]>([]);
@@ -304,14 +309,6 @@ const Project = () => {
             setError("project_name");
             return;
         }
-        if (!project.github) {
-            setError("github");
-            return;
-        }
-        if (!project.demo) {
-            setError("demo");
-            return;
-        }
         if (!newMainImage && !project.mainImage) {
             setError("main_image");
             return;
@@ -336,20 +333,10 @@ const Project = () => {
             setError("type_section");
             return;
         }
-        // if (!icons.length) {
-        //     setError("icon_section");
-        //     return;
-        // }
         if (!project.highlights.length) {
             setError("highlight_section");
             return;
         }
-
-        // if (!newScreenshots.length) {
-        //     setError("screenshot_section");
-        //     return;
-        // }
-
         try {
             // 'file' comes from the Blob or File API
 
@@ -401,39 +388,6 @@ const Project = () => {
                     ...project,
                 });
             }
-            // await Promise.all(
-            //     screenshots.map(
-            //         async (screenshot, index) =>
-            //             await uploadFile(
-            //                 `screenshot_${index}`,
-            //                 docRef.id + "/screenshots",
-            //                 screenshot
-            //             )
-            //     )
-            // );
-
-            // await Promise.all(
-            //     icons.map(async (icon, index) => {
-            //         return await uploadFile(`icon_${index}`, docRef.id + "/icons", icon);
-            //     })
-            // );
-
-            // setProject({
-            //     name: "",
-            //     bigDescription: "",
-            //     gradient: "gradient-1",
-            //     type: "software",
-            //     demo: "",
-            //     github: "",
-            //     smallDescription: "",
-            //     ready: false,
-            //     colors: [],
-            //     types: [],
-            //     icons: [],
-            //     highlights: [],
-            //     screenshots: [],
-            //     tools: [],
-            // });
             setSuccess(true);
         } catch (e) {
             console.error("Error adding document: ", e);
@@ -456,9 +410,7 @@ const Project = () => {
                             <Button as={Link} to="/" variant="solid" color="primary">
                                 Go home
                             </Button>
-                            <Button color="danger" onClick={onDeleteProject}>
-                                Delete project
-                            </Button>
+                            <DeleteProject onConfirm={onDeleteProject} />
                         </div>
                     </div>
                     <TypeAndName
@@ -477,12 +429,20 @@ const Project = () => {
                             }))
                         }
                     />
-                    <GithubAndDemo
+                    <Links
                         demo={project.demo}
                         github={project.github}
+                        adobexdLink={project.adobexdLink}
+                        figmaLink={project.figmaLink}
+                        websiteLink={project.websiteLink}
+                        sketchLink={project.sketchLink}
                         error={error}
                         onChangeDemo={handleChange}
                         onChangeGithub={handleChange}
+                        onChangeSketchLink={handleChange}
+                        onChangeAdobexdLink={handleChange}
+                        onChangeFigmaLink={handleChange}
+                        onChangeWebsiteLink={handleChange}
                     />
                     <ImageAndGradient
                         error={error}
