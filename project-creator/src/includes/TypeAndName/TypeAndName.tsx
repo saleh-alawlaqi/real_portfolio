@@ -4,18 +4,12 @@ import { ListboxWrapper } from "../../ListBoxWrapper";
 interface TypeAndNameProps {
     name: string;
     error: string;
-    newProjectTypes?: ("software" | "frontend" | "noCode" | "uiDesign")[];
+    type?: ("software" | "frontend" | "noCode" | "uiDesign")[];
     onChangeName: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    onChangeProjectTypes: (keys: any) => void;
+    onChangeType: (keys: any) => void;
 }
 
-const TypeAndName = ({
-    name,
-    error,
-    onChangeName,
-    onChangeProjectTypes,
-    newProjectTypes,
-}: TypeAndNameProps) => {
+const TypeAndName = ({ name, error, onChangeName, onChangeType, type }: TypeAndNameProps) => {
     const projectNameWords = name.split(" ").length;
     return (
         <>
@@ -33,8 +27,8 @@ const TypeAndName = ({
                                 ? { base: "border-2 border-red-500" }
                                 : { base: "" }
                         }
-                        selectedKeys={newProjectTypes}
-                        onSelectionChange={onChangeProjectTypes}
+                        selectedKeys={type}
+                        onSelectionChange={onChangeType}
                     >
                         <ListboxItem key="uiDesign">UI Design</ListboxItem>
                         <ListboxItem key="software">Software</ListboxItem>

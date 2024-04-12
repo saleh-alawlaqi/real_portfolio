@@ -25,7 +25,6 @@ const Project = () => {
         mainImage: "",
         bigDescription: "",
         gradient: "gradient-1",
-        type: "software",
         demo: "",
         github: "",
         smallDescription: "",
@@ -34,6 +33,7 @@ const Project = () => {
         types: [],
         icons: [],
         highlights: [],
+        type: [],
         tools: [],
         adobexdLink: "",
         figmaLink: "",
@@ -159,7 +159,7 @@ const Project = () => {
     const handleProjectTypes = (keys: any) => {
         const myArray = Array.from(keys) as any[];
 
-        setProject((prev) => ({ ...prev, newProjectType: myArray }));
+        setProject((prev) => ({ ...prev, type: myArray }));
     };
     const onAddColorSection = (colors: any) => {
         if (colors) {
@@ -420,9 +420,9 @@ const Project = () => {
                     </div>
                     <TypeAndName
                         name={project.name}
-                        newProjectTypes={project.newProjectType}
+                        type={project.type}
                         error={error}
-                        onChangeProjectTypes={handleProjectTypes}
+                        onChangeType={handleProjectTypes}
                         onChangeName={(e) => handleChangeWithWordCount(e, 5)}
                     />
                     <Links

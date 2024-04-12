@@ -42,13 +42,12 @@ const ProjectForm = () => {
         name: "",
         bigDescription: "",
         gradient: "gradient-1",
-        type: "software",
+        type: [],
         adobexdLink: "",
         figmaLink: "",
         sketchLink: "",
         websiteLink: "",
         demo: "",
-        newProjectType: [],
         github: "",
         smallDescription: "",
         ready: false,
@@ -194,7 +193,7 @@ const ProjectForm = () => {
                 name: "",
                 bigDescription: "",
                 gradient: "gradient-1",
-                type: "software",
+                type: [],
                 demo: "",
                 github: "",
                 smallDescription: "",
@@ -231,7 +230,7 @@ const ProjectForm = () => {
             name: "",
             bigDescription: "",
             gradient: "gradient-1",
-            type: "software",
+            type: [],
             demo: "",
             github: "",
             smallDescription: "",
@@ -253,7 +252,7 @@ const ProjectForm = () => {
     const handleProjectTypes = (keys: any) => {
         const myArray = Array.from(keys) as any[];
 
-        setProject((prev) => ({ ...prev, newProjectType: myArray }));
+        setProject((prev) => ({ ...prev, type: myArray }));
     };
     const onAddColorSection = (colors: any) => {
         if (colors) {
@@ -428,8 +427,8 @@ const ProjectForm = () => {
 
                     <TypeAndName
                         name={project.name}
-                        onChangeProjectTypes={handleProjectTypes}
-                        newProjectTypes={project.newProjectType}
+                        onChangeType={handleProjectTypes}
+                        type={project.type}
                         error={error}
                         onChangeName={(e) => handleChangeWithWordCount(e, 5)}
                     />

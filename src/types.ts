@@ -36,8 +36,7 @@ export interface IProject {
     gradient: gradients;
     mainImage?: string;
     bigCover?: string;
-    type: "software" | "frontend" | "noCode" | "uiDesign";
-    newProjectType?: ("software" | "frontend" | "noCode" | "uiDesign")[];
+    type?: ("software" | "frontend" | "noCode" | "uiDesign")[];
     demo?: string;
     figmaLink?: string;
     adobexdLink?: string;
