@@ -77,6 +77,7 @@ const Project = () => {
         };
         getProject();
     }, [projectId]);
+
     useEffect(() => {
         if (error === "") return;
         const errorElement = document.querySelector("#" + error);
@@ -91,6 +92,7 @@ const Project = () => {
         }, 2500);
         return () => clearInterval(interval);
     }, [error]);
+
     useEffect(() => {
         if (!success) return;
         const interval = setInterval(() => {
@@ -98,6 +100,7 @@ const Project = () => {
         }, 2500);
         return () => clearInterval(interval);
     }, [success]);
+
     if (!project)
         return (
             <div className="bg-white p-10 rounded-xl gap-10 mt-10 w-[62rem] flex flex-col">

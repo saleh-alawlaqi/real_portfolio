@@ -81,8 +81,6 @@ const ImageAndGradient = ({
                         error === "gradient" ? { base: "border-2 border-red-500" } : { base: "" }
                     }
                     renderValue={(items) => {
-                        console.log(items);
-
                         return items.map((item) => (
                             <div key={item.key} className="flex items-center gap-3">
                                 <div className={`${item.data?.data} w-5 h-5 rounded-full`}></div>
